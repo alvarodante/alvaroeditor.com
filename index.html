@@ -1082,92 +1082,80 @@
       padding-top: 16px; border-top: 1px solid var(--border);
     }
 
-    /* Modal flotante Social */
+    /* ── MODAL SOCIAL: pantalla completa siempre ── */
     .social-modal-overlay {
-      display: none; position: fixed; inset: 0; z-index: 1000;
-      background: rgba(5,5,5,0.92); backdrop-filter: blur(8px);
-      align-items: center; justify-content: center;
+      display: none;
+      position: fixed; inset: 0; z-index: 2000;
+      background: #000;
     }
-    .social-modal-overlay.open { display: flex; }
-    .social-modal {
-      position: relative; width: min(900px, 92vw);
-      background: #111; border: 1px solid #2a2a2a;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.9);
-    }
-    /* Ratio 16:9 con iframe absoluto dentro */
-    .social-modal-ratio {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      overflow: hidden;
-    }
-    .social-modal-ratio iframe {
-      position: absolute;
+    .social-modal-overlay.open { display: block; }
+
+    /* iframe ocupa todo */
+    #socialModalFrame {
+      position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100vw; height: 100vh;
       border: none;
+      background: #000;
+      /* desplazamos abajo para dejar espacio al botón cerrar en desktop */
+    }
+
+    /* Barra de cierre superior */
+    .social-modal-topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 2100;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 100%);
+      display: flex; align-items: center; justify-content: flex-end;
+      padding: 0 16px;
+      pointer-events: none;
     }
     .social-modal-close {
-      position: absolute; top: -40px; right: 0;
-      font-family: var(--ff); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--text-muted); background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+      pointer-events: all;
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(10,10,10,0.75);
+      border: 1px solid rgba(200,169,126,0.3);
+      color: var(--accent);
+      font-family: var(--ff); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 8px 16px; border-radius: 3px;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
     }
-    .social-modal-close:hover { color: var(--accent); }
-    .social-modal-close svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .social-modal-close:hover { background: rgba(200,169,126,0.15); border-color: var(--accent); }
+    .social-modal-close svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* Social móvil portrait */
+    /* En móvil el iframe empieza justo bajo la barra */
     @media (max-width: 960px) {
+      #socialModalFrame {
+        top: 48px;
+        height: calc(100vh - 48px);
+      }
       .social-stack-thumb { aspect-ratio: 16/9; min-height: 180px; }
       .social-stack-play { opacity: 1 !important; background: linear-gradient(to top, rgba(10,10,10,0.65) 0%, transparent 60%); }
       .social-stack-play span { width: 44px !important; height: 44px !important; }
       .social-stack-info { padding: 16px 18px 18px; }
       .social-stack-title { font-size: 15px; }
       .social-stack-synopsis { font-size: 11px; line-height: 1.75; }
-      .social-modal { width: 96vw; }
-      .social-modal-close { top: -36px; font-size: 9px; }
     }
 
-    /* Landscape móvil: pantalla completa */
+    /* Landscape: iframe a pantalla completa con barra encima */
     @media screen and (orientation: landscape) and (max-height: 500px) {
-      .social-modal-overlay { background: #000; backdrop-filter: none; }
-      .social-modal {
-        width: 100vw; height: 100vh;
-        border: none; background: #000;
-        display: flex; flex-direction: column;
-      }
-      .social-modal-ratio {
-        padding-bottom: 0;
-        flex: 1;
-        height: 100%;
-      }
-      .social-modal-ratio iframe {
-        position: absolute;
-        width: 100%; height: 100%;
-        top: 0; left: 0;
-      }
-      .social-modal-close {
-        position: fixed; top: 10px; right: 10px; z-index: 1100;
-        background: rgba(0,0,0,0.75); padding: 6px 12px; border-radius: 4px;
-        top: 10px;
-      }
+      .social-modal-topbar { height: 40px; }
+      #socialModalFrame { top: 40px; height: calc(100vh - 40px); }
     }
   </style>
 
-  <!-- Modal flotante Social -->
-  <div class="social-modal-overlay" id="socialModal" onclick="closeSocialModal(event)">
-    <div class="social-modal" id="socialModalBox">
+  <!-- Modal Social pantalla completa -->
+  <div class="social-modal-overlay" id="socialModal">
+    <div class="social-modal-topbar">
       <button class="social-modal-close" onclick="closeSocialModalBtn()">
         <svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
         Cerrar
       </button>
-      <div class="social-modal-ratio">
-        <iframe id="socialModalFrame" src="" allowfullscreen
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      </div>
     </div>
+    <iframe id="socialModalFrame" src="" allowfullscreen
+      allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+      referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
   <script>
     function openSocialModal(type, src) {
