@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Álvaro Ayala Entrena — Editor de Documentales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght=200;300;400;500;700&family=Syne:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-2: #111111;
+    --surface: #161616;
+    --border: #1f1f1f;
+    --text: #e8e0d4;
+    --text-muted: #7a7570;
+    --accent: #c8a97e;
+    --accent-dim: rgba(200, 169, 126, 0.12);
+    --ff: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --ff-logo: 'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--ff);
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 56px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.96) 0%, transparent 100%);
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(10,10,10,0.97); border-bottom: 1px solid var(--border); }
+  
+  .nav-logo {
+    font-family: var(--ff);
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s;
+    line-height: 1;
+  }
+  .nav-logo:hover { color: var(--text); }
+  
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 300;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.3s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a.active { color: var(--accent); }
+  .nav-links a.active::after { transform: scaleX(1); }
+
+  /* Menú Hamburguesa Móvil */
+  .menu-toggle { display: none; }
+
+  /* ── SHARED ── */
+  section { padding: 120px 56px; position: relative; }
+  .section-label {
+    font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; font-weight: 400;
+    color: var(--accent); margin-bottom: 56px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--border);
+  }
+  
+  .reveal { opacity: 1; transform: none; transition: opacity 0.9s ease, transform 0.9s ease; }
+  @media (min-width: 961px) {
+    .reveal { opacity: 0; transform: translateY(20px); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ══════════════════════════════
+     § 1  INICIO (HERO)
+  ══════════════════════════════ */
+  #inicio {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 56px 80px;
+    overflow: hidden;
+    text-align: center;
+    background: #0a0a0a;
+  }
+
+  .hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .hero-bg-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transition: opacity 2s ease;
+    filter: brightness(0.25) contrast(1.1) grayscale(100%);
+  }
+  .hero-bg-slide.active { opacity: 1; }
+  
+  /* Fotos de fondo vintage */
+  .hero-bg-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1600&auto=format&fit=crop'); }
+  .hero-bg-slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1600&auto=format&fit=crop'); }
+  .hero-bg-slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1600&auto=format&fit=crop'); }
+
+  .hero-bg-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.85) 100%);
+  }
+
+  .hero-filmstrip-wrap {
+    position: relative; z-index: 2;
+    width: 68%;
+    max-width: 900px;
+    aspect-ratio: 16 / 5;
+    min-height: 150px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 52px;
+  }
+  .filmstrip-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: grayscale(100%) brightness(0.6) sepia(20%);
+    opacity: 0;
+    transition: opacity 1.8s ease;
+  }
+  .filmstrip-slide.active { opacity: 1; }
+  
+  /* Fotos fijas de la tira de celuloide/editores clásicos */
+  .filmstrip-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1505686994434-e3cc5abf1330?q=80&w=1000&auto=format&fit=crop'); }
+  .filmstrip-slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1000&auto=format&fit=crop'); }
+  .filmstrip-slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1524712245354-2c4e5e7124c5?q=80&w=1000&auto=format&fit=crop'); }
+  .filmstrip-slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000&auto=format&fit=crop'); }
+  .filmstrip-slide:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000&auto=format&fit=crop'); }
+  
+  .filmstrip-slide::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(10,10,10,0.5) 0%, transparent 20%, transparent 80%, rgba(10,10,10,0.5) 100%);
+  }
+  .filmstrip-indicators {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 3;
+  }
+  .fs-dot {
+    width: 20px; height: 1px; background: rgba(255,255,255,0.2);
+    transition: background 0.4s, width 0.4s;
+  }
+  .fs-dot.active { background: var(--accent); width: 36px; }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 9px; letter-spacing: 0.42em; text-transform: uppercase; font-weight: 400;
+    color: var(--accent); margin-bottom: 22px;
+  }
+  .hero-title {
+    font-size: clamp(32px, 5.5vw, 76px);
+    font-weight: 200;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero-title em { font-style: italic; font-weight: 200; color: var(--accent); }
+  
+  .hero-sub {
+    font-size: 13px; letter-spacing: 0.04em; font-weight: 300;
+    color: var(--text-muted); max-width: 580px; line-height: 1.85;
+    margin-bottom: 36px; text-align: center;
+  }
+  
+  .reel-btn {
+    display: inline-flex; align-items: center; gap: 16px;
+    font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 400;
+    color: var(--text); background: none; border: none; padding: 0; cursor: pointer;
+    text-decoration: none;
+  }
+  .reel-btn:hover { color: var(--accent); }
+  .reel-icon {
+    width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .reel-btn:hover .reel-icon { border-color: var(--accent); background: var(--accent-dim); }
+  .reel-icon svg { width: 10px; height: 10px; fill: currentColor; margin-left: 2px; }
+
+  /* ── TRABAJOS ── */
+  #trabajos { border-top: 1px solid var(--border); }
+  .works-intro {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px;
+  }
+  .works-intro-text h2 {
+    font-size: clamp(26px, 3.5vw, 46px); font-weight: 200;
+    line-height: 1.15; color: var(--text); letter-spacing: -0.02em;
+  }
+  .works-intro-text h2 em { font-style: italic; color: var(--accent); }
+  .works-filter { display: flex; gap: 24px; align-items: center; }
+  .filter-btn {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
+    color: var(--text-muted); background: none; border: none;
+    padding: 6px 0; border-bottom: 1px solid transparent; transition: all 0.3s; cursor: pointer;
+  }
+  .filter-btn:hover, .filter-btn.active { color: var(--accent); border-color: var(--accent); }
+
+  .works-grid {
+    display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px;
+  }
+  .work-item { position: relative; overflow: hidden; background: var(--surface); }
+  .work-item:nth-child(1) { grid-column: span 16; aspect-ratio: 16/7; }
+  .work-item:nth-child(2) { grid-column: span 8;  aspect-ratio: 16/9; }
+  .work-item:nth-child(3) { grid-column: span 8;  aspect-ratio: 16/9; }
+  .work-item:nth-child(4) { grid-column: span 8;  aspect-ratio: 3/4; }
+  .work-item:nth-child(5) { grid-column: span 8;  aspect-ratio: 3/4; }
+  
+  .work-thumb {
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .work-item:nth-child(1) .work-thumb { background-image: linear-gradient(135deg, #0f1a10 0%, #1e3520 40%, #0a120b 100%); }
+  .work-item:nth-child(2) .work-thumb { background-image: linear-gradient(135deg, #1a0f08 0%, #3a2010 100%); }
+  .work-item:nth-child(3) .work-thumb { background-image: linear-gradient(135deg, #0d1520 0%, #1a2d45 100%); }
+  .work-item:nth-child(4) .work-thumb { background-image: linear-gradient(135deg, #1a100d 0%, #3a2018 100%); }
+  .work-item:nth-child(5) .work-thumb { background-image: linear-gradient(135deg, #0f0f1a 0%, #1e1e35 100%); }
+  
+  .work-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.2) 60%);
+    opacity: 0; transition: opacity 0.5s;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 14px;
+  }
+  .work-item:hover .work-overlay { opacity: 1; }
+  .work-item:hover .work-thumb { transform: scale(1.04); }
+  .work-cat { font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 400; color: var(--accent); margin-bottom: 4px; }
+  .work-title { font-size: 12px; font-weight: 200; color: var(--text); line-height: 1.25; letter-spacing: -0.01em; }
+  .work-year { font-size: 9px; letter-spacing: 0.12em; color: var(--text-muted); margin-top: 4px; }
+  
+  .work-label-always { position: absolute; bottom: 14px; left: 14px; z-index: 2; }
+  .work-label-always .work-title { font-size: 14px; }
+
+  /* ── HABILIDADES ── */
+  #habilidades { border-top: 1px solid var(--border); background: var(--bg-2); }
+  .hab-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .hab-left h2 {
+    font-size: clamp(26px, 3vw, 44px); font-weight: 200;
+    line-height: 1.2; color: var(--text); margin-bottom: 24px; letter-spacing: -0.02em;
+  }
+  .hab-left h2 em { font-style: italic; color: var(--accent); }
+  .hab-left p { font-size: 12px; line-height: 2; color: var(--text-muted); margin-bottom: 48px; max-width: 400px; }
+  .software-list { display: flex; flex-direction: column; gap: 24px; }
+  .software-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .software-name { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400; color: var(--text); }
+  .software-pct { font-size: 11px; font-weight: 300; color: var(--accent); }
+  .bar-track { height: 1px; background: var(--border); position: relative; }
+  .bar-fill {
+    position: absolute; top: -1px; left: 0; height: 3px;
+    background: linear-gradient(to right, var(--accent), rgba(200, 169, 126, 0.35));
+    width: var(--w);
+    border-radius: 2px;
+  }
+
+  .hab-right { padding-top: 8px; }
+  .comp-group { margin-bottom: 48px; }
+  .comp-group-title {
+    font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 400;
+    color: var(--accent); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .comp-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .comp-tag {
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400;
+    color: var(--text-muted); padding: 8px 16px;
+    border: 1px solid var(--border); background: var(--surface);
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .comp-tag:hover { border-color: var(--accent); color: var(--text); }
+  
+  .timeline { margin-top: 56px; }
+  .timeline-title {
+    font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 400;
+    color: var(--accent); margin-bottom: 28px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .tl-item { display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-year { font-size: 15px; font-weight: 200; color: var(--accent); min-width: 52px; padding-top: 2px; letter-spacing: 0.04em; }
+  .tl-role { font-size: 11px; letter-spacing: 0.08em; color: var(--text); margin-bottom: 4px; font-weight: 400; }
+  .tl-company { font-size: 10px; letter-spacing: 0.1em; color: var(--text-muted); }
+
+  /* ── REFERENCIAS ── */
+  #referencias { border-top: 1px solid var(--border); }
+  .ref-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 72px; }
+  .ref-intro h2 {
+    font-size: clamp(26px, 3.5vw, 48px); font-weight: 200;
+    line-height: 1.15; color: var(--text); letter-spacing: -0.02em;
+  }
+  .ref-intro h2 em { font-style: italic; color: var(--accent); }
+  .ref-intro p { font-size: 12px; line-height: 2; color: var(--text-muted); }
+  .ref-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+  .ref-card {
+    background: var(--bg); padding: 48px 40px;
+    transition: background 0.4s;
+    display: flex; flex-direction: column; justify-content: space-between; min-height: 320px;
+  }
+  .ref-card:hover { background: var(--surface); }
+  .ref-quote-mark {
+    font-size: 64px; font-weight: 200; line-height: 0.6;
+    color: var(--accent); opacity: 0.3; margin-bottom: 24px; transition: opacity 0.3s;
+  }
+  .ref-card:hover .ref-quote-mark { opacity: 0.6; }
+  .ref-text { font-size: 15px; font-weight: 200; font-style: italic; line-height: 1.7; color: var(--text); flex: 1; margin-bottom: 32px; }
+  .ref-author { border-top: 1px solid var(--border); padding-top: 20px; }
+  .ref-name { font-size: 11px; letter-spacing: 0.12em; color: var(--text); margin-bottom: 4px; font-weight: 400; }
+  .ref-role { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); }
+  .ref-project { font-size: 9px; letter-spacing: 0.14em; color: var(--accent); margin-top: 4px; }
+  
+  .ref-clients { margin-top: 80px; }
+  .ref-clients-label { font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; text-align: center; }
+  .clients-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0; border: 1px solid var(--border); }
+  .client-item {
+    flex: 1; min-width: 140px; padding: 28px 32px;
+    border-right: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s;
+  }
+  .client-item:last-child { border-right: none; }
+  .client-item:hover { background: var(--surface); }
+  .client-name { font-size: 13px; font-weight: 300; letter-spacing: 0.12em; color: var(--text-muted); }
+  .client-item:hover .client-name { color: var(--text); }
+
+  /* ── CONTACTOS ── */
+  #contactos {
+    border-top: 1px solid var(--border);
+    min-height: 70vh; display: flex; flex-direction: column; justify-content: center;
+  }
+  .contact-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .contact-left h2 {
+    font-size: clamp(28px, 4vw, 56px); font-weight: 200;
+    line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.02em;
+  }
+  .contact-left h2 em { font-style: italic; color: var(--accent); }
+  .contact-left p { font-size: 12px; line-height: 2; color: var(--text-muted); max-width: 400px; margin-bottom: 40px; }
+  .contact-links { display: flex; flex-direction: column; }
+  .contact-link-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0; border-bottom: 1px solid var(--border);
+    text-decoration: none; color: var(--text); transition: padding-left 0.3s;
+  }
+  .contact-link-row:first-child { border-top: 1px solid var(--border); }
+  .contact-link-row:hover { padding-left: 12px; }
+  .cl-label { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .cl-value { font-size: 17px; font-weight: 200; color: var(--text); transition: color 0.3s; }
+  .contact-link-row:hover .cl-value { color: var(--accent); }
+  .cl-arrow { font-size: 16px; color: var(--border); transition: color 0.3s, transform 0.3s; }
+  .contact-link-row:hover .cl-arrow { color: var(--accent); transform: translateX(4px); }
+  
+  .contact-right { padding-top: 8px; }
+  .avail-card { border: 1px solid var(--border); padding: 40px; background: var(--surface); }
+  .avail-status { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .avail-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #4caf82;
+    box-shadow: 0 0 10px rgba(76,175,130,0.5);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 10px rgba(76,175,130,0.5); }
+    50% { box-shadow: 0 0 20px rgba(76,175,130,0.9); }
+  }
+  .avail-text { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); }
+  .avail-title { font-size: 24px; font-weight: 200; color: var(--text); margin-bottom: 12px; line-height: 1.25; letter-spacing: -0.01em; }
+  .avail-desc { font-size: 11px; line-height: 1.9; color: var(--text-muted); }
+  .services-list { margin-top: 32px; display: flex; flex-direction: column; }
+  .service-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+    font-size: 11px; letter-spacing: 0.08em; color: var(--text-muted);
+  }
+  .service-item:last-child { border-bottom: none; }
+  .service-item::before { content: ''; width: 20px; height: 1px; background: var(--accent); flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 56px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy, .footer-name { font-size: 10px; letter-spacing: 0.14em; color: var(--text-muted); }
+
+  /* ══════════════════════════════
+     § MEDIA QUERIES (MÓVIL)
+  ══════════════════════════════ */
+  @media (max-width: 960px) {
+    section { padding: 60px 20px; }
+    #inicio { padding: 110px 20px 48px; min-height: calc(100vh - 60px); }
+    
+    nav { padding: 16px 20px; background: rgba(10,10,10,0.98); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 16px; }
+    
+    .menu-toggle {
+      display: block; background: none; border: none; color: var(--accent);
+      font-size: 20px; cursor: pointer; z-index: 110;
+    }
+    
+    .nav-links {
+      position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+      background: var(--bg-2); flex-direction: column; justify-content: center;
+      align-items: center; gap: 32px; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-left: 1px solid var(--border); box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+    .nav-links.open { right: 0; }
+    .nav-links a { font-size: 12px; letter-spacing: 0.25em; }
+
+    .hero-filmstrip-wrap { width: 100%; aspect-ratio: 16/7; margin-bottom: 36px; }
+    .hero-sub { margin-bottom: 24px; font-size: 12px; }
+
+    .works-intro { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 32px; }
+    .works-filter { flex-wrap: wrap; gap: 12px 16px; width: 100%; }
+    .works-grid { grid-template-columns: 1fr; gap: 16px; }
+    
+    .work-item, .work-item:nth-child(1), .work-item:nth-child(2), .work-item:nth-child(3), .work-item:nth-child(4), .work-item:nth-child(5) { 
+      grid-column: span 1; 
+      aspect-ratio: 16/10; 
+    }
+    .work-overlay { opacity: 1; padding: 10px; }
+    .work-label-always { bottom: 10px; left: 10px; }
+    .work-label-always .work-title { font-size: 13px; }
+    .work-title { font-size: 12px; }
+
+    .hab-layout, .ref-intro, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+    .ref-grid { grid-template-columns: 1fr; gap: 16px; background: transparent; }
+    .ref-card { min-height: auto; padding: 32px 24px; border: 1px solid var(--border); }
+    
+    .clients-row { flex-direction: column; border: 1px solid var(--border); }
+    .client-item { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+    .client-item:last-child { border-bottom: none; }
+    
+    .avail-card { padding: 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#inicio" class="nav-logo">Álvaro Ayala Entrena</a>
+  <button class="menu-toggle" id="menu-btn" aria-label="Abrir menú">☰</button>
+  <ul class="nav-links" id="nav-menu">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+    <li><a href="#premios">Premios</a></li>
+    <li><a href="#referencias">Referencias</a></li>
+    <li><a href="#contactos">Contactos</a></li>
+  </ul>
+</nav>
+
+<section id="inicio">
+  <div class="hero-bg">
+    <div class="hero-bg-slide active"></div>
+    <div class="hero-bg-slide"></div>
+    <div class="hero-bg-slide"></div>
+  </div>
+  <div class="hero-bg-overlay"></div>
+
+  <div class="hero-filmstrip-wrap">
+    <div class="filmstrip-slide active"></div>
+    <div class="filmstrip-slide"></div>
+    <div class="filmstrip-slide"></div>
+    <div class="filmstrip-slide"></div>
+    <div class="filmstrip-slide"></div>
+    <div class="filmstrip-indicators">
+      <div class="fs-dot active"></div>
+      <div class="fs-dot"></div>
+      <div class="fs-dot"></div>
+      <div class="fs-dot"></div>
+      <div class="fs-dot"></div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Editor de Documentales</p>
+    <h1 class="hero-title">La imagen como <em>verdad</em></h1>
+    <p class="hero-sub">Más de quince años montando realidades que importan, transformando pequeñas historias en relatos universales. Para mí, la narrativa visual, el cuidado por el detalle y la organización son elementos clave. Soy un profesional comprometido con el equipo y habituado a rendir con éxito bajo presión.</p>
+    
+    <a href="https://www.linkedin.com/in/alvaroeditor" target="_blank" class="reel-btn" id="reel-trigger">
+      <span class="reel-icon">
+        <svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg>
+      </span>
+      Ver LinkedIn
+    </a>
+  </div>
+</section>
+
+<section id="trabajos">
+  <div class="works-intro reveal">
+    <div class="works-intro-text">
+      <p class="section-label" style="margin-bottom:16px;">Trabajos seleccionados</p>
+      <h2>Proyectos que<br><em>definen</em> el oficio</h2>
+    </div>
+    <div class="works-filter">
+      <button class="filter-btn active" data-tab="destacados">Destacados</button>
+      <button class="filter-btn" data-tab="plataformas">Plataformas</button>
+      <button class="filter-btn" data-tab="television">Televisión</button>
+      <button class="filter-btn" data-tab="social">Social</button>
+    </div>
+  </div>
+  <div class="works-grid reveal" id="grid-destacados">
+    <div class="work-item" style="position:relative;overflow:hidden;">
+      <!-- Thumbnail de YouTube como fondo -->
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/Jc7Hgl0G9Ao/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <!-- Overlay oscuro con botón play al hacer hover -->
+      <a href="https://www.youtube.com/watch?v=Jc7Hgl0G9Ao" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.15) 55%, rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"
+         aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);
+                     display:flex;align-items:center;justify-content:center;transition:background 0.3s;">
+          <!-- Icono play -->
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;">
+            <polygon points="0,0 12,7 0,14"/>
+          </svg>
+        </span>
+      </a>
+      <div class="work-label-always" style="z-index:3;">
+        <p class="work-cat">Serie</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Alejandro Sanz "Cuando nadie me ve"</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2026 — 3 Episodios — Movistar+</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <!-- Thumbnail de YouTube como fondo -->
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/iAL6za3GRWw/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <!-- Overlay con botón play al hacer hover -->
+      <a href="https://www.youtube.com/watch?v=iAL6za3GRWw" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.15) 55%, rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"
+         aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);
+                     display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;">
+            <polygon points="0,0 12,7 0,14"/>
+          </svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Serie</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">11 tiros</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2022 — 11 Episodios — HBO</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mhGjwCZI148/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=mhGjwCZI148" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.15) 55%, rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"
+         aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);
+                     display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;">
+            <polygon points="0,0 12,7 0,14"/>
+          </svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Palomares</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2020 — 3 Episodios — Movistar+</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=mY2DaT6_ofU" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.15) 55%, rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"
+         aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);
+                     display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;">
+            <polygon points="0,0 12,7 0,14"/>
+          </svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Clandestino con David Beriain</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">3 Temporadas (2016-2019) DMAX</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=_Fae0RSGLww" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.15) 55%, rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"
+         aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);
+                     display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;">
+            <polygon points="0,0 12,7 0,14"/>
+          </svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">La vida en llamas</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2015 — 3 Episodios — DMAX</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOOLTIP DESCRIPCIÓN ── -->
+  <style>
+    .proj-tooltip-trigger { position: relative; display: inline-block; cursor: default; }
+    .proj-tooltip-trigger .proj-tooltip {
+      visibility: hidden; opacity: 0;
+      position: absolute; top: 50%; left: calc(100% + 14px);
+      transform: translateX(-6px) translateY(-50%);
+      width: 300px;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      padding: 20px 22px 22px;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 200;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.75);
+    }
+    .proj-tooltip-trigger:hover .proj-tooltip {
+      visibility: visible; opacity: 1; transform: translateX(0) translateY(-50%);
+    }
+    .proj-tooltip::before {
+      content: '';
+      position: absolute; top: 50%; right: 100%; transform: translateY(-50%);
+      border: 5px solid transparent;
+      border-right-color: #2a2a2a;
+    }
+    .proj-tooltip::after {
+      content: '';
+      position: absolute; top: 50%; right: 100%; transform: translateY(-50%);
+      margin-right: -1px;
+      border: 4px solid transparent;
+      border-right-color: #161616;
+    }
+    .proj-tooltip-desc {
+      font-family: var(--ff);
+      font-size: 11px;
+      font-weight: 300;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+      color: #9a9490;
+    }
+    .proj-tooltip-line {
+      width: 20px; height: 1px; background: var(--accent);
+      margin-bottom: 10px; opacity: 0.6;
+    }
+  </style>
+
+  <!-- ── MODAL REPRODUCTOR FLOTANTE ── -->
+  <style>
+    .vid-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(5,5,5,0.88); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+    }
+    .vid-modal-overlay.open { display: flex; }
+    .vid-modal {
+      position: relative; width: min(860px, 90vw);
+      background: #111; border: 1px solid #2a2a2a;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.8);
+    }
+    .vid-modal-ratio { position: relative; padding-top: 56.25%; }
+    .vid-modal-ratio iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .vid-modal-close {
+      position: absolute; top: -40px; right: 0;
+      font-family: var(--ff); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-muted); background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+    }
+    .vid-modal-close:hover { color: var(--accent); }
+    .vid-modal-close svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  </style>
+  <div class="vid-modal-overlay" id="vidModal" onclick="closeVidModal(event)">
+    <div class="vid-modal">
+      <button class="vid-modal-close" onclick="closeVidModalBtn()">
+        <svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+        Cerrar
+      </button>
+      <div class="vid-modal-ratio">
+        <iframe id="vidModalFrame" src="" allowfullscreen allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+    </div>
+  </div>
+  <script>
+    function openVidModal(ytId) {
+      const frame = document.getElementById('vidModalFrame');
+      frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0';
+      document.getElementById('vidModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeVidModalBtn() {
+      document.getElementById('vidModalFrame').src = '';
+      document.getElementById('vidModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeVidModal(e) {
+      if (e.target === document.getElementById('vidModal')) closeVidModalBtn();
+    }
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeVidModalBtn(); });
+  </script>
+
+  <!-- ── PLATAFORMAS ── -->
+  <div class="works-grid" id="grid-plataformas" style="display:none;opacity:0;transition:opacity 0.4s;grid-template-columns:repeat(4,1fr)!important;gap:2px;">
+
+    <!-- Alejandro Sanz -->
+    <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;position:relative;overflow:hidden;">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/Jc7Hgl0G9Ao/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=Jc7Hgl0G9Ao" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-label-always" style="z-index:3;pointer-events:none;">
+        <p class="work-cat">Serie</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Alejandro Sanz "Cuando nadie me ve"</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2026 — 3 Episodios — Movistar+</p>
+      </div>
+    </div>
+
+    <!-- 11 tiros -->
+    <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/iAL6za3GRWw/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=iAL6za3GRWw" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Serie</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">11 tiros</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2022 — 11 Episodios — HBO</p>
+      </div>
+    </div>
+
+    <!-- Palomares -->
+    <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mhGjwCZI148/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=mhGjwCZI148" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Palomares</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2020 — 3 Episodios — Movistar+</p>
+      </div>
+    </div>
+    <!-- El Rey Puma -->
+    <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;position:relative;overflow:hidden;">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/aW5I3BdO8tI/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=aW5I3BdO8tI" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">El Rey Puma</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2024 — MOVISTAR +</p>
+      </div>
+    </div>
+
+
+  </div> -->
+  <style>
+    #grid-television { grid-template-columns: repeat(4, 1fr) !important; gap: 2px; }
+    #grid-television .work-item { grid-column: span 1 !important; aspect-ratio: 16/10 !important; }
+  </style>
+  <div class="works-grid" id="grid-television" style="display:none;opacity:0;transition:opacity 0.4s;">
+    <div class="work-item" style="position:relative;overflow:hidden;">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=mY2DaT6_ofU" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-label-always" style="z-index:3;pointer-events:none;">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Clandestino con David Beriain</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">3 Temporadas (2016-2019) DMAX</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=rll8gAci5c4" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Fuera de Cobertura</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">Temporada 4 — 2023 — Cuatro</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=_Fae0RSGLww" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">La vida en llamas</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2015 — 3 Episodios — DMAX</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=OJOiT7tkh5U" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Al Andalus, el legado</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2021 — 6 Episodios — Canal Historia</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/yT_EHjnk4to/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=yT_EHjnk4to" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Amazonas Clandestino</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2015 — 6 Episodios — DMAX</p>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/qKNAWjik80s/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=qKNAWjik80s" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Yasuní</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2014 — Documental — DMAX</p>
+      </div>
+    </div>
+    <div class="work-item"><div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/Ztwz7TtP4ps/hqdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=Ztwz7TtP4ps" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Clandestino España con David Beriain</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2019 — 8 Episodios — DMAX</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SOCIAL ── -->
+  <style>
+    #grid-social { display: none; opacity: 0; transition: opacity 0.4s; }
+
+    .social-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .social-stack-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+    }
+    .social-stack-thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      cursor: pointer;
+      background: #111;
+    }
+    .social-stack-bg {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .social-stack-card:hover .social-stack-bg { transform: scale(1.025); }
+    .social-stack-play {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(to top, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.05) 60%);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .social-stack-card:hover .social-stack-play { opacity: 1; }
+    .social-stack-info {
+      padding: 20px 24px 22px;
+      border-top: 1px solid var(--border);
+    }
+    .social-stack-title {
+      font-size: 17px; font-weight: 200; color: var(--text);
+      line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .social-stack-desc {
+      font-size: 11px; font-weight: 300; line-height: 1.85;
+      color: var(--text-muted); letter-spacing: 0.02em;
+    }
+    .social-stack-year {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-top: 12px;
+    }
+    .social-stack-synopsis {
+      font-size: 12px; font-weight: 300; line-height: 1.9;
+      color: #b0aaa4; letter-spacing: 0.02em;
+      text-align: center; margin-top: 16px;
+      padding-top: 16px; border-top: 1px solid var(--border);
+    }
+
+    /* Modal flotante Social */
+    .social-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(5,5,5,0.92); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center;
+    }
+    .social-modal-overlay.open { display: flex; }
+    .social-modal {
+      position: relative; width: min(900px, 92vw);
+      background: #111; border: 1px solid #2a2a2a;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.9);
+    }
+    .social-modal-ratio { position: relative; padding-top: 56.25%; }
+    .social-modal-ratio iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+    }
+    .social-modal-close {
+      position: absolute; top: -40px; right: 0;
+      font-family: var(--ff); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-muted); background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+    }
+    .social-modal-close:hover { color: var(--accent); }
+    .social-modal-close svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  </style>
+
+  <!-- Modal flotante Social -->
+  <div class="social-modal-overlay" id="socialModal" onclick="closeSocialModal(event)">
+    <div class="social-modal">
+      <button class="social-modal-close" onclick="closeSocialModalBtn()">
+        <svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+        Cerrar
+      </button>
+      <div class="social-modal-ratio">
+        <iframe id="socialModalFrame" src="" allowfullscreen
+          allow="autoplay; encrypted-media; picture-in-picture"
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+    </div>
+  </div>
+  <script>
+    function openSocialModal(type, src) {
+      const frame = document.getElementById('socialModalFrame');
+      frame.src = (type === 'yt')
+        ? 'https://www.youtube-nocookie.com/embed/' + src + '?autoplay=1&rel=0&modestbranding=1'
+        : src;
+      document.getElementById('socialModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSocialModalBtn() {
+      document.getElementById('socialModalFrame').src = '';
+      document.getElementById('socialModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeSocialModal(e) {
+      if (e.target === document.getElementById('socialModal')) closeSocialModalBtn();
+    }
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeSocialModalBtn(); });
+
+    /* Fallback miniatura YT */
+    document.querySelectorAll('.social-stack-bg[data-ytid]').forEach(function(el) {
+      const id = el.dataset.ytid;
+      const img = new Image();
+      img.onload = function() {
+        if (img.naturalWidth <= 120)
+          el.style.backgroundImage = "url('https://img.youtube.com/vi/" + id + "/sddefault.jpg')";
+      };
+      img.src = "https://img.youtube.com/vi/" + id + "/maxresdefault.jpg";
+    });
+  </script>
+
+  <div id="grid-social" style="display:none;opacity:0;transition:opacity 0.4s;">
+    <div class="social-stack">
+
+      <!-- 1 — KARONGHEN -->
+      <div class="social-stack-card">
+        <div class="social-stack-thumb" onclick="openSocialModal('drive','https://drive.google.com/file/d/1xSbwdKSuFGa-ohTyQlKAjrPjYjal8nl4/preview')">
+          <div class="social-stack-bg" data-ytid="C5cuNW11P2s"
+               style="background-image:url('https://img.youtube.com/vi/C5cuNW11P2s/maxresdefault.jpg');"></div>
+          <div class="social-stack-play">
+            <span style="width:52px;height:52px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 12 14" width="20" height="20" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="social-stack-info" style="text-align:center;">
+          <p class="social-stack-title">KARONGHEN</p>
+          <p class="social-stack-desc">Documental</p>
+          <p class="social-stack-year">2022 — 60 min — Manos Unidas</p>
+          <p class="social-stack-synopsis">En el sur de Senegal, el programa Karonghen ha marcado un antes y un después durante sus cuatro años de convenio. Este proyecto no solo promueve la estabilidad en una zona históricamente castigada por el conflicto, sino que impulsa el empoderamiento de las mujeres locales en todos los ámbitos de su vida.</p>
+        </div>
+      </div>
+
+      <!-- 2 — Serêkaniyê -->
+      <div class="social-stack-card">
+        <div class="social-stack-thumb" onclick="openSocialModal('drive','https://drive.google.com/file/d/1tbzIjpwtIGDeV2undFlG8h6raSfF6Ar5/preview')">
+          <div class="social-stack-bg" data-ytid="behsLr26hMg"
+               style="background-image:url('https://img.youtube.com/vi/behsLr26hMg/maxresdefault.jpg');"></div>
+          <div class="social-stack-play">
+            <span style="width:52px;height:52px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 12 14" width="20" height="20" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="social-stack-info" style="text-align:center;">
+          <p class="social-stack-title">Serêkaniyê</p>
+          <p class="social-stack-desc">Documental</p>
+          <p class="social-stack-year">2025 — 59 min</p>
+          <p class="social-stack-synopsis">"Serêkaniyê" es una mirada íntima a la guerra, a través de la vida cotidiana de tres mujeres kurdas. Entre alegría, dolor y resistencia, descubrimos que, además del caos y la destrucción, también nacen formas extremas de ternura, solidaridad y comunidad.</p>
+        </div>
+      </div>
+
+      <!-- 3 — Manoliño Nguema -->
+      <div class="social-stack-card">
+        <div class="social-stack-thumb" onclick="openSocialModal('drive','https://drive.google.com/file/d/17uXP_x7g4lR-wCwyb29LVnK31675SLPu/preview')">
+          <div class="social-stack-bg" data-ytid="O3U8q32sVrg"
+               style="background-image:url('https://img.youtube.com/vi/O3U8q32sVrg/maxresdefault.jpg');"></div>
+          <div class="social-stack-play">
+            <span style="width:52px;height:52px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 12 14" width="20" height="20" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="social-stack-info" style="text-align:center;">
+          <p class="social-stack-title">Manoliño Nguema</p>
+          <p class="social-stack-desc">Documental</p>
+          <p class="social-stack-year">2017 — 59 min</p>
+          <p class="social-stack-synopsis">Marcelo Ndong, un artista africano ecuatoguineano formado en España, que ahora regenta una pequeña guardería en Malabo, recibe una inesperada propuesta. Como en tantas otras ocasiones deberá montar una obra de teatro, pero esta vez, el argumento será él. Su propia vida.</p>
+        </div>
+      </div>
+
+      <!-- 4 — El Secreto del Bosque -->
+      <div class="social-stack-card">
+        <div class="social-stack-thumb" onclick="openSocialModal('drive','https://drive.google.com/file/d/1Mr0LU-LqMtP6SEIy5tbkM-cOb9p_8NsB/preview')">
+          <div class="social-stack-bg" data-ytid="i5CBEB5o0OQ"
+               style="background-image:url('https://img.youtube.com/vi/i5CBEB5o0OQ/maxresdefault.jpg');"></div>
+          <div class="social-stack-play">
+            <span style="width:52px;height:52px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 12 14" width="20" height="20" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="social-stack-info" style="text-align:center;">
+          <p class="social-stack-title">El Secreto del Bosque</p>
+          <p class="social-stack-desc">Documental</p>
+          <p class="social-stack-year">2025 — 46 min</p>
+          <p class="social-stack-synopsis">El bosque tropical de Guinea Ecuatorial constituye uno de los últimos grandes refugios de selva virgen del mundo. Remoto, desconocido y escasamente explorado, esconde innumerables secretos bajo la inmensa riqueza de vida que cubre su territorio.</p>
+        </div>
+      </div>
+
+      <!-- 5 — El que ama -->
+      <div class="social-stack-card">
+        <div class="social-stack-thumb" onclick="openSocialModal('yt','CCStZIFQNdc')">
+          <div class="social-stack-bg" style="background-image:url('https://img.youtube.com/vi/CCStZIFQNdc/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div class="social-stack-play">
+            <span style="width:52px;height:52px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 12 14" width="20" height="20" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="social-stack-info" style="text-align:center;">
+          <p class="social-stack-title">El que ama</p>
+          <p class="social-stack-desc">Corto documental</p>
+          <p class="social-stack-year">2013 — 17 min — 93 metros / News of Corporation</p>
+        </div>
+      </div>
+
+      <!-- 6 — Ricardo Cavolo -->
+      <div class="social-stack-card">
+        <div class="social-stack-thumb" onclick="openSocialModal('drive','https://drive.google.com/file/d/1VAa4yxNhRJoU58tX4w-o8gI65p0epvkL/preview')">
+          <div class="social-stack-bg" style="background-image:url('https://img.youtube.com/vi/w_fV2_Sj6Jo/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div class="social-stack-play">
+            <span style="width:52px;height:52px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 12 14" width="20" height="20" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="social-stack-info" style="text-align:center;">
+          <p class="social-stack-title">Ricardo Cavolo</p>
+          <p class="social-stack-desc">Corto documental</p>
+          <p class="social-stack-year">2012 — 3 min</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<section id="habilidades">
+  <p class="section-label reveal">Habilidades</p>
+  <div class="hab-layout">
+    <div class="hab-left">
+      <h2 class="reveal">Herramientas al servicio<br>de la <em>historia</em></h2>
+      <p class="reveal">Dominio técnico y sensibilidad narrativa no son opuestos: son la misma cosa. Cada herramienta es un instrumento al servicio del relato.</p>
+      <div class="software-list reveal">
+        <div class="software-item">
+          <div class="software-header"><span class="software-name">Avid Media Composer</span><span class="software-pct">85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div>
+        </div>
+        <div class="software-item">
+          <div class="software-header"><span class="software-name">Adobe Premiere Pro</span><span class="software-pct">85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div>
+        </div>
+        <div class="software-item">
+          <div class="software-header"><span class="software-name">Adobe After Effects</span><span class="software-pct">80%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--w:80%"></div></div>
+        </div>
+        <div class="software-item">
+          <div class="software-header"><span class="software-name">DaVinci Resolve</span><span class="software-pct">75%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--w:75%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hab-right">
+      <div class="comp-group reveal">
+        <div class="comp-group-title">Especialidades narrativas</div>
+        <div class="comp-tags">
+          <span class="comp-tag">Montaje documental</span>
+          <span class="comp-tag">Estructuración narrativa</span>
+          <span class="comp-tag">Edición de archivo</span>
+          <span class="comp-tag">Ritmo y tempo</span>
+          <span class="comp-tag">Mezcla de sonido</span>
+          <span class="comp-tag">Color grading</span>
+          <span class="comp-tag">Motion graphics</span>
+          <span class="comp-tag">Gestión de proyecto</span>
+        </div>
+      </div>
+      <div class="comp-group reveal">
+        <div class="comp-group-title">Géneros</div>
+        <div class="comp-tags">
+          <span class="comp-tag">Documental social</span>
+          <span class="comp-tag">Periodismo de investigación</span>
+          <span class="comp-tag">Historia oral</span>
+          <span class="comp-tag">Medioambiente</span>
+          <span class="comp-tag">Arte y cultura</span>
+          <span class="comp-tag">Derechos humanos</span>
+        </div>
+      </div>
+      <div class="timeline reveal" id="premios">
+        <div class="timeline-title">Premios y Reconocimientos</div>
+        <div class="tl-item">
+          <div class="tl-year">2026</div>
+          <div class="tl-body"><div class="tl-role">Selección oficial — Tribeca Film Festival, Nueva York</div><div class="tl-company">"Cuando nadie me ve"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2021</div>
+          <div class="tl-body"><div class="tl-role">Finalista Premios Gabo</div><div class="tl-company">"Palomares"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2021</div>
+          <div class="tl-body"><div class="tl-role">Mejor Documental — Festival de Cine y TV de León</div><div class="tl-company">"Manoliño Nguema"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2021</div>
+          <div class="tl-body"><div class="tl-role">Premio Iris del Jurado - La Academia de las Ciencias y las Artes de Televisión de España</div><div class="tl-company">"Palomares"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2021</div>
+          <div class="tl-body"><div class="tl-role">Nominación Iris — Mejor programa producido para canal temático</div><div class="tl-company">"Al Andalus, el legado"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2020</div>
+          <div class="tl-body"><div class="tl-role">Mejor documental - Premios Maestre Mateo - Academia Galega do Audiovisual</div><div class="tl-company">"Manoliño Nguema"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2020</div>
+          <div class="tl-body"><div class="tl-role">Premio del Público — Miradas Doc</div><div class="tl-company">"Manoliño Nguema"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2016</div>
+          <div class="tl-body"><div class="tl-role">Premio Iris del Jurado - La Academia de las Ciencias y las Artes de Televisión de España</div><div class="tl-company">"Clandestino"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2014</div>
+          <div class="tl-body"><div class="tl-role">Gran Premio del Jurado — Sunny Side of the Doc</div><div class="tl-company">"La Vida en Llamas"</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2013</div>
+          <div class="tl-body"><div class="tl-role">Premio "Estela Solidaria" - Academia Galega do Audiovisual</div><div class="tl-company">"Caminos de Paz"</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="referencias">
+  <p class="section-label reveal">Referencias</p>
+  <div class="ref-intro reveal">
+    <h2>Lo que dicen quienes <em>confían</em></h2>
+    <p>Directores, productores y distribuidores que han trabajado con Álvaro en proyectos de largo recorrido.</p>
+  </div>
+  <div class="ref-grid reveal">
+    <div class="ref-card">
+      <div><div class="ref-quote-mark">"</div><p class="ref-text">Álvaro tiene una rara habilidad para escuchar el material. No impone ritmo: lo descubre. Con él el primer corte ya tiene alma.</p></div>
+      <div class="ref-author"><div class="ref-name">Marta Iglesias</div><div class="ref-role">Directora</div><div class="ref-project">Las voces del silencio, 2024</div></div>
+    </div>
+    <div class="ref-card">
+      <div><div class="ref-quote-mark">"</div><p class="ref-text">Trabajar con él es extraordinariamente fluido. Entiende la visión del director pero también sabe cuándo defenderla de ella misma.</p></div>
+      <div class="ref-author"><div class="ref-name">Carlos Estévez</div><div class="ref-role">Director y guionista</div><div class="ref-project">Frontera, 2022</div></div>
+    </div>
+    <div class="ref-card">
+      <div><div class="ref-quote-mark">"</div><p class="ref-text">Su dominio técnico es impresionante, pero lo que lo distingue es la inteligencia emocional con la que selecciona cada plano.</p></div>
+      <div class="ref-author"><div class="ref-name">Ana Ferreira</div><div class="ref-role">Productora ejecutiva</div><div class="ref-project">Tierra adentro, 2023</div></div>
+    </div>
+    <div class="ref-card">
+      <div><div class="ref-quote-mark">"</div><p class="ref-text">Seleccionamos Marea oscura en Toronto en gran parte por la fuerza de su montaje. Álvaro construyó una tensión que el guion apenas insinuaba.</p></div>
+      <div class="ref-author"><div class="ref-name">Sofía Ruiz</div><div class="ref-role">Distribuidora</div><div class="ref-project">Hot Docs Toronto, 2023</div></div>
+    </div>
+    <div class="ref-card">
+      <div><div class="ref-quote-mark">"</div><p class="ref-text">Puntual, meticuloso y con una capacidad de concentración que envidio. Entrega en plazo y siempre supera lo que uno espera.</p></div>
+      <div class="ref-author"><div class="ref-name">Javier Molina</div><div class="ref-role">Director de producción</div><div class="ref-project">RTVE Documentales</div></div>
+    </div>
+    <div class="ref-card">
+      <div><div class="ref-quote-mark">"</div><p class="ref-text">Le mandamos horas de material en bruto sin estructura. Nos devolvió una historia. Eso no se aprende en ningún manual.</p></div>
+      <div class="ref-author"><div class="ref-name">Leila Nassar</div><div class="ref-role">Productora</div><div class="ref-project">Al Jazeera Documentary</div></div>
+    </div>
+  </div>
+  <div class="ref-clients reveal">
+    <p class="ref-clients-label">Ha trabajado con</p>
+    <div class="clients-row">
+      <div class="client-item"><span class="client-name">MOVISTAR +</span></div>
+      <div class="client-item"><span class="client-name">HBOMAX</span></div>
+      <div class="client-item"><span class="client-name">DMAX</span></div>
+      <div class="client-item"><span class="client-name">CUATRO</span></div>
+      <div class="client-item"><span class="client-name">ANTENA 3</span></div>
+      <div class="client-item"><span class="client-name">CANAL HISTORIA</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contactos">
+  <div class="contact-layout">
+    <div class="contact-left">
+      <p class="section-label reveal">Contactos</p>
+      <h2 class="reveal">¿Tienes un proyecto <em>pendiente?</em></h2>
+      <p class="reveal">Disponible para nuevos proyectos. Si tienes material que necesita ser montado o simplemente quieres hablar de tu idea, escríbeme.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:alvarodante@gmail.com" class="contact-link-row">
+          <div><div class="cl-label">Email</div><div class="cl-value">alvarodante@gmail.com</div></div>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/alvaroeditor" target="_blank" rel="noopener" class="contact-link-row">
+          <div><div class="cl-label">Red profesional</div><div class="cl-value">LinkedIn</div></div>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" class="contact-link-row">
+          <div><div class="cl-label">Redes</div><div class="cl-value">Instagram</div></div>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://www.imdb.com/es-es/name/nm9783507/" target="_blank" rel="noopener" class="contact-link-row">
+          <div><div class="cl-label">Redes</div><div class="cl-value">IMDB</div></div>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://www.filmaffinity.com/es/name.php?name-id=256796368" target="_blank" rel="noopener" class="contact-link-row">
+          <div><div class="cl-label">Redes</div><div class="cl-value">Filmaffinity</div></div>
+          <span class="cl-arrow">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-right reveal">
+      <div class="avail-card">
+        <div class="avail-status"><div class="avail-dot"></div><span class="avail-text">Disponible para proyectos</span></div>
+        <div class="avail-title">Abierto a nuevos encargos en 2025</div>
+        <p class="avail-desc">Acepto proyectos documentales de largo y mediometraje, series y trabajos de archivo. También colaboro en fases de post con equipos ya formados.</p>
+        <div class="services-list">
+          <div class="service-item">Montaje documental completo</div>
+          <div class="service-item">Edición de material de archivo</div>
+          <div class="service-item">Consultoría de estructura narrativa</div>
+          <div class="service-item">Supervisión de post-producción</div>
+          <div class="service-item">Colaboración en festival cut</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-copy">© 2025 Álvaro Ayala Entrena. Todos los derechos reservados.</p>
+  <p class="footer-name">Editor de documentales — Madrid</p>
+</footer>
+
+<script>
+  /* NAV ACTIVE Y MENÚ HAMBURGUESA MÓVIL */
+  const sections = ['inicio','trabajos','habilidades','premios','referencias','contactos'];
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const menuBtn = document.getElementById('menu-btn');
+  const navMenu = document.getElementById('nav-menu');
+
+  if (menuBtn && navMenu) {
+    menuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+      menuBtn.textContent = navMenu.classList.contains('open') ? '✕' : '☰';
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        menuBtn.textContent = '☰';
+      });
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    const navEl = document.getElementById('nav');
+    if(navEl) navEl.classList.toggle('scrolled', window.scrollY > 60);
+    
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 150) current = id;
+    });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+
+  /* HERO BG SLIDESHOW */
+  const bgSlides = document.querySelectorAll('.hero-bg-slide');
+  let bgCur = 0;
+  if (bgSlides.length > 0) {
+    setInterval(() => {
+      bgSlides[bgCur].classList.remove('active');
+      bgCur = (bgCur + 1) % bgSlides.length;
+      bgSlides[bgCur].classList.add('active');
+    }, 6000);
+  }
+
+  /* FILMSTRIP SLIDESHOW */
+  const fsSlides = document.querySelectorAll('.filmstrip-slide');
+  const fsDots   = document.querySelectorAll('.fs-dot');
+  let fsCur = 0;
+  if (fsSlides.length > 0) {
+    setInterval(() => {
+      fsSlides[fsCur].classList.remove('active');
+      if(fsDots[fsCur]) fsDots[fsCur].classList.remove('active');
+      fsCur = (fsCur + 1) % fsSlides.length;
+      fsSlides[fsCur].classList.add('active');
+      if(fsDots[fsCur]) fsDots[fsCur].classList.add('active');
+    }, 3200);
+  }
+
+  /* SCROLL REVEAL */
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }
+
+  /* FILTER / TAB SWITCHING */
+  const allGrids = {
+    destacados: document.getElementById('grid-destacados'),
+    plataformas: document.getElementById('grid-plataformas'),
+    television:  document.getElementById('grid-television'),
+    social:      document.getElementById('grid-social')
+  };
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      Object.entries(allGrids).forEach(([key, grid]) => {
+        if (!grid) return;
+        if (key === tab) {
+          grid.style.display = key === 'social' ? 'block' : 'grid';
+          requestAnimationFrame(() => { grid.style.opacity = '1'; });
+        } else {
+          grid.style.opacity = '0';
+          setTimeout(() => { grid.style.display = 'none'; }, 400);
+        }
+      });
+    });
+  });
+  /* LOGO → RESET PESTAÑA A DESTACADOS */
+  const logoLink = document.querySelector('.nav-logo');
+  if (logoLink) {
+    logoLink.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.tab === 'destacados');
+      });
+      Object.entries(allGrids).forEach(([key, grid]) => {
+        if (!grid) return;
+        if (key === 'destacados') {
+          grid.style.display = 'grid';
+          requestAnimationFrame(() => { grid.style.opacity = '1'; });
+        } else {
+          grid.style.opacity = '0';
+          setTimeout(() => { grid.style.display = 'none'; }, 400);
+        }
+      });
+    });
+  }
+
+  /* INICIO → RESET PESTAÑA A DESTACADOS */
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    if (link.getAttribute('href') === '#inicio') {
+      link.addEventListener('click', () => {
+        // Activar botón Destacados
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.tab === 'destacados');
+        });
+        // Mostrar sólo grid-destacados
+        Object.entries(allGrids).forEach(([key, grid]) => {
+          if (!grid) return;
+          if (key === 'destacados') {
+            grid.style.display = 'grid';
+            requestAnimationFrame(() => { grid.style.opacity = '1'; });
+          } else {
+            grid.style.opacity = '0';
+            setTimeout(() => { grid.style.display = 'none'; }, 400);
+          }
+        });
+      });
+    }
+  });
+
+  /* THUMBNAIL QUALITY FALLBACK — work-thumb y social-stack-bg */
+  (function() {
+    const selectors = [
+      '.work-thumb[style*="maxresdefault"]',
+      '.social-stack-bg[style*="maxresdefault"]'
+    ];
+    document.querySelectorAll(selectors.join(',')).forEach(el => {
+      const url = el.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+      const videoId = url.match(/\/vi\/([^/]+)\//)?.[1];
+      if (!videoId) return;
+      const img = new Image();
+      img.onload = function() {
+        if (img.naturalWidth <= 120) {
+          el.style.backgroundImage = `url('https://img.youtube.com/vi/${videoId}/hqdefault.jpg')`;
+        }
+      };
+      img.src = url;
+    });
+  })();
+</script>
+</body>
+</html>
