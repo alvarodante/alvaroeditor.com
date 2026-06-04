@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="screen-orientation" content="any" />
 <title>Álvaro Ayala Entrena — Editor de Documentales</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -418,7 +419,7 @@
     #inicio { padding: 110px 20px 48px; min-height: calc(100vh - 60px); }
     
     nav { padding: 16px 20px; background: rgba(10,10,10,0.98); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-size: 16px; }
+    .nav-logo { font-size: 11px; letter-spacing: 0.28em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100vw - 80px); }
     
     .menu-toggle {
       display: block; background: none; border: none; color: var(--accent);
@@ -438,12 +439,23 @@
     .hero-sub { margin-bottom: 24px; font-size: 12px; }
 
     .works-intro { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 32px; }
-    .works-filter { flex-wrap: wrap; gap: 12px 16px; width: 100%; }
+    .works-filter { flex-wrap: nowrap; gap: 8px; width: 100%; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .works-filter::-webkit-scrollbar { display: none; }
+    .filter-btn { white-space: nowrap; flex-shrink: 0; }
     .works-grid { grid-template-columns: 1fr; gap: 16px; }
     
+    /* Destacados, Plataformas y Televisión: misma disposición en móvil */
     .work-item, .work-item:nth-child(1), .work-item:nth-child(2), .work-item:nth-child(3), .work-item:nth-child(4), .work-item:nth-child(5) { 
       grid-column: span 1; 
       aspect-ratio: 16/10; 
+    }
+    #grid-plataformas, #grid-television {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+    }
+    #grid-plataformas .work-item, #grid-television .work-item {
+      grid-column: span 1 !important;
+      aspect-ratio: 16/10 !important;
     }
     .work-overlay { opacity: 1; padding: 10px; }
     .work-label-always { bottom: 10px; left: 10px; }
@@ -548,7 +560,7 @@
         </span>
       </a>
       <div class="work-label-always" style="z-index:3;">
-        <p class="work-cat">Serie</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Alejandro Sanz "Cuando nadie me ve"</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -574,7 +586,7 @@
         </span>
       </a>
       <div class="work-overlay">
-        <p class="work-cat">Serie</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">11 tiros</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -733,7 +745,7 @@
         Cerrar
       </button>
       <div class="vid-modal-ratio">
-        <iframe id="vidModalFrame" src="" allowfullscreen allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe id="vidModalFrame" src="" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture; fullscreen; gyroscope; accelerometer" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
   </div>
@@ -772,7 +784,7 @@
         </span>
       </a>
       <div class="work-label-always" style="z-index:3;pointer-events:none;">
-        <p class="work-cat">Serie</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Alejandro Sanz "Cuando nadie me ve"</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -781,49 +793,6 @@
       </div>
     </div>
 
-    <!-- 11 tiros -->
-    <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;">
-      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/iAL6za3GRWw/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-      <a href="https://www.youtube.com/watch?v=iAL6za3GRWw" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
-         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
-                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
-                opacity:0;transition:opacity 0.4s;text-decoration:none;"
-         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
-        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
-          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
-        </span>
-      </a>
-      <div class="work-overlay">
-        <p class="work-cat">Serie</p>
-        <span class="proj-tooltip-trigger">
-          <p class="work-title">11 tiros</p>
-          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
-        </span>
-        <p class="work-year">2022 — 11 Episodios — HBO</p>
-      </div>
-    </div>
-
-    <!-- Palomares -->
-    <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;">
-      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mhGjwCZI148/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-      <a href="https://www.youtube.com/watch?v=mhGjwCZI148" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
-         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
-                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
-                opacity:0;transition:opacity 0.4s;text-decoration:none;"
-         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
-        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
-          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
-        </span>
-      </a>
-      <div class="work-overlay">
-        <p class="work-cat">Documental</p>
-        <span class="proj-tooltip-trigger">
-          <p class="work-title">Palomares</p>
-          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
-        </span>
-        <p class="work-year">2020 — 3 Episodios — Movistar+</p>
-      </div>
-    </div>
     <!-- El Rey Puma -->
     <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;position:relative;overflow:hidden;">
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/aW5I3BdO8tI/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
@@ -846,6 +815,50 @@
       </div>
     </div>
 
+    <!-- 11 tiros -->
+    <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/iAL6za3GRWw/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=iAL6za3GRWw" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Serie Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">11 tiros</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2022 — 11 Episodios — HBO</p>
+      </div>
+    </div>
+
+    <!-- Palomares -->
+    <div class="work-item" style="grid-column:span 1!important;aspect-ratio:16/10!important;">
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mhGjwCZI148/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <a href="https://www.youtube.com/watch?v=mhGjwCZI148" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin"
+         style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+                background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);
+                opacity:0;transition:opacity 0.4s;text-decoration:none;"
+         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'" aria-label="Ver en YouTube">
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg>
+        </span>
+      </a>
+      <div class="work-overlay">
+        <p class="work-cat">Serie Documental</p>
+        <span class="proj-tooltip-trigger">
+          <p class="work-title">Palomares</p>
+          <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
+        </span>
+        <p class="work-year">2020 — 3 Episodios — Movistar+</p>
+      </div>
+    </div>
+
 
   </div> -->
   <style>
@@ -865,7 +878,7 @@
         </span>
       </a>
       <div class="work-label-always" style="z-index:3;pointer-events:none;">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Clandestino con David Beriain</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -885,7 +898,7 @@
         </span>
       </a>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Fuera de Cobertura</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -905,7 +918,7 @@
         </span>
       </a>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">La vida en llamas</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -925,7 +938,7 @@
         </span>
       </a>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Al Andalus, el legado</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -945,7 +958,7 @@
         </span>
       </a>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Amazonas Clandestino</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -965,7 +978,7 @@
         </span>
       </a>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Yasuní</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -984,7 +997,7 @@
         </span>
       </a>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Clandestino España con David Beriain</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -1078,6 +1091,32 @@
     }
     .social-modal-close:hover { color: var(--accent); }
     .social-modal-close svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    /* Social móvil */
+    @media (max-width: 960px) {
+      .social-stack-thumb { aspect-ratio: 16/9; min-height: 200px; }
+      .social-stack-play { opacity: 1 !important; background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.1) 60%); }
+      .social-stack-play span { width: 44px; height: 44px; }
+      .social-stack-info { padding: 16px 18px 18px; }
+      .social-stack-title { font-size: 15px; }
+      .social-stack-synopsis { font-size: 11px; line-height: 1.75; }
+      .social-modal { width: 96vw; }
+      .social-modal-close { top: -36px; font-size: 9px; }
+    }
+
+    /* Landscape móvil: vídeo ocupa toda la pantalla */
+    @media (max-width: 960px) and (orientation: landscape) {
+      .social-modal-overlay { align-items: stretch; padding: 0; }
+      .social-modal { width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; border: none; background: #000; }
+      .social-modal-ratio { padding-top: 0; flex: 1; }
+      .social-modal-ratio iframe { position: relative; width: 100%; height: 100%; }
+      .social-modal-close { position: fixed; top: 12px; right: 12px; z-index: 10; background: rgba(0,0,0,0.6); padding: 6px 10px; border-radius: 4px; }
+    }
+    @media (max-width: 960px) and (orientation: landscape) {
+      .vid-modal { width: 100vw; height: 100vh; border: none; background: #000; }
+      .vid-modal-ratio { padding-top: 0; height: 100vh; }
+      .vid-modal-ratio iframe { position: relative; height: 100vh; }
+    }
   </style>
 
   <!-- Modal flotante Social -->
@@ -1089,7 +1128,7 @@
       </button>
       <div class="social-modal-ratio">
         <iframe id="socialModalFrame" src="" allowfullscreen
-          allow="autoplay; encrypted-media; picture-in-picture"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen; gyroscope; accelerometer"
           referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
@@ -1206,7 +1245,7 @@
 
       <!-- 5 — El que ama -->
       <div class="social-stack-card">
-        <div class="social-stack-thumb" onclick="openSocialModal('yt','CCStZIFQNdc')">
+        <div class="social-stack-thumb" onclick="openSocialModal('drive','https://drive.google.com/file/d/16krZC_Nr-r-ONvTnxYsfSc-3zNhi20Hx/preview')">
           <div class="social-stack-bg" style="background-image:url('https://img.youtube.com/vi/CCStZIFQNdc/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
           <div class="social-stack-play">
             <span style="width:52px;height:52px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;">
@@ -1235,6 +1274,18 @@
           <p class="social-stack-title">Ricardo Cavolo</p>
           <p class="social-stack-desc">Corto documental</p>
           <p class="social-stack-year">2012 — 3 min</p>
+        </div>
+      </div>
+
+      <!-- 7 — (nuevo proyecto) -->
+      <div class="social-stack-card">
+        <div class="social-stack-thumb" style="cursor:default;">
+          <div class="social-stack-bg" style="background:linear-gradient(135deg,#0d1520,#1a2d45);"></div>
+        </div>
+        <div class="social-stack-info" style="text-align:center;">
+          <p class="social-stack-title">Título del proyecto</p>
+          <p class="social-stack-desc">Género</p>
+          <p class="social-stack-year">Año — Duración / Canal</p>
         </div>
       </div>
 
@@ -1432,7 +1483,7 @@
 </section>
 
 <footer>
-  <p class="footer-copy">© 2025 Álvaro Ayala Entrena. Todos los derechos reservados.</p>
+  <p class="footer-copy">© 2026 Álvaro Ayala Entrena. Todos los derechos reservados.</p>
   <p class="footer-name">Editor de documentales — Madrid</p>
 </footer>
 
