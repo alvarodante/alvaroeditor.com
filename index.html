@@ -1111,15 +1111,14 @@
     .social-modal-close:hover { background: rgba(200,169,126,0.15); border-color: var(--accent); }
     .social-modal-close svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* Iframe ocupa exactamente el espacio restante bajo la barra */
+    /* Iframe y video nativo comparten el mismo espacio */
     #socialModalFrame {
       flex: 1 1 0;
       width: 100%;
       border: none;
       background: #000;
-      display: block;
+      display: none;
     }
-    /* Video nativo HTML5 para archivos Drive */
     #socialModalVideo {
       flex: 1 1 0;
       width: 100%;
@@ -1127,8 +1126,8 @@
       display: none;
       outline: none;
     }
-    #socialModalVideo.active { display: block; }
     #socialModalFrame.active { display: block; }
+    #socialModalVideo.active { display: block; }
 
     /* Landscape móvil: barra más fina */
     @media screen and (orientation: landscape) and (max-height: 500px) {
@@ -1162,25 +1161,22 @@
   </div>
   <script>
     function openSocialModal(type, src) {
-      const frame  = document.getElementById('socialModalFrame');
-      const vid    = document.getElementById('socialModalVideo');
+      const frame = document.getElementById('socialModalFrame');
+      const vid   = document.getElementById('socialModalVideo');
+      const bar   = document.querySelector('.social-modal-topbar');
 
       if (type === 'yt') {
-        // YouTube: usar iframe con youtube-nocookie
         vid.pause(); vid.src = ''; vid.classList.remove('active');
         frame.src = 'https://www.youtube-nocookie.com/embed/' + src + '?autoplay=1&rel=0&modestbranding=1';
-        frame.style.display = 'block';
+        frame.classList.add('active');
       } else {
-        // Google Drive: extraer file ID y usar reproductor nativo
-        frame.src = ''; frame.style.display = 'none';
-        // Soporta formatos /file/d/ID/view y /file/d/ID/preview
-        const match = src.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        const fileId = match ? match[1] : '';
-        vid.src = fileId
-          ? 'https://drive.google.com/uc?export=download&id=' + fileId
-          : src;
-        vid.classList.add('active');
-        vid.play().catch(function(){});
+        // Drive: iframe /preview con altura explícita para que sus controles queden abajo
+        vid.pause(); vid.src = ''; vid.classList.remove('active');
+        // Calcular altura disponible = viewport - barra
+        const barH = bar ? bar.offsetHeight : 44;
+        frame.style.height = (window.innerHeight - barH) + 'px';
+        frame.src = src;
+        frame.classList.add('active');
       }
 
       document.getElementById('socialModal').classList.add('open');
@@ -1189,7 +1185,7 @@
     function closeSocialModalBtn() {
       const frame = document.getElementById('socialModalFrame');
       const vid   = document.getElementById('socialModalVideo');
-      frame.src = ''; frame.style.display = 'none';
+      frame.src = ''; frame.classList.remove('active'); frame.style.height = '';
       vid.pause(); vid.src = ''; vid.classList.remove('active');
       document.getElementById('socialModal').classList.remove('open');
       document.body.style.overflow = '';
@@ -1197,6 +1193,15 @@
     function closeSocialModal(e) {
       if (e.target === document.getElementById('socialModal')) closeSocialModalBtn();
     }
+    // Recalcular altura si se rota el móvil
+    window.addEventListener('resize', function() {
+      const frame = document.getElementById('socialModalFrame');
+      const bar   = document.querySelector('.social-modal-topbar');
+      if (frame.classList.contains('active') && frame.src.includes('drive.google')) {
+        const barH = bar ? bar.offsetHeight : 44;
+        frame.style.height = (window.innerHeight - barH) + 'px';
+      }
+    });
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeSocialModalBtn(); });
 
     /* Fallback miniatura YT */
