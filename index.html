@@ -1119,6 +1119,16 @@
       background: #000;
       display: block;
     }
+    /* Video nativo HTML5 para archivos Drive */
+    #socialModalVideo {
+      flex: 1 1 0;
+      width: 100%;
+      background: #000;
+      display: none;
+      outline: none;
+    }
+    #socialModalVideo.active { display: block; }
+    #socialModalFrame.active { display: block; }
 
     /* Landscape móvil: barra más fina */
     @media screen and (orientation: landscape) and (max-height: 500px) {
@@ -1147,18 +1157,40 @@
     <iframe id="socialModalFrame" src="" allowfullscreen
       allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
       referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <video id="socialModalVideo" controls playsinline controlsList="nodownload"
+      preload="none" webkit-playsinline></video>
   </div>
   <script>
     function openSocialModal(type, src) {
-      const frame = document.getElementById('socialModalFrame');
-      frame.src = (type === 'yt')
-        ? 'https://www.youtube-nocookie.com/embed/' + src + '?autoplay=1&rel=0&modestbranding=1'
-        : src;
+      const frame  = document.getElementById('socialModalFrame');
+      const vid    = document.getElementById('socialModalVideo');
+
+      if (type === 'yt') {
+        // YouTube: usar iframe con youtube-nocookie
+        vid.pause(); vid.src = ''; vid.classList.remove('active');
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + src + '?autoplay=1&rel=0&modestbranding=1';
+        frame.style.display = 'block';
+      } else {
+        // Google Drive: extraer file ID y usar reproductor nativo
+        frame.src = ''; frame.style.display = 'none';
+        // Soporta formatos /file/d/ID/view y /file/d/ID/preview
+        const match = src.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        const fileId = match ? match[1] : '';
+        vid.src = fileId
+          ? 'https://drive.google.com/uc?export=download&id=' + fileId
+          : src;
+        vid.classList.add('active');
+        vid.play().catch(function(){});
+      }
+
       document.getElementById('socialModal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
     function closeSocialModalBtn() {
-      document.getElementById('socialModalFrame').src = '';
+      const frame = document.getElementById('socialModalFrame');
+      const vid   = document.getElementById('socialModalVideo');
+      frame.src = ''; frame.style.display = 'none';
+      vid.pause(); vid.src = ''; vid.classList.remove('active');
       document.getElementById('socialModal').classList.remove('open');
       document.body.style.overflow = '';
     }
