@@ -375,7 +375,7 @@
   .contact-link-row:first-child { border-top: 1px solid var(--border); }
   .contact-link-row:hover { padding-left: 12px; }
   .cl-label { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
-  .cl-value { font-size: 17px; font-weight: 200; color: var(--text); transition: color 0.3s; }
+  .cl-value { font-size: 13px; font-weight: 200; color: var(--text); transition: color 0.3s; }
   .contact-link-row:hover .cl-value { color: var(--accent); }
   .cl-arrow { font-size: 16px; color: var(--border); transition: color 0.3s, transform 0.3s; }
   .contact-link-row:hover .cl-arrow { color: var(--accent); transform: translateX(4px); }
@@ -483,6 +483,7 @@
   <ul class="nav-links" id="nav-menu">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#generos">Géneros</a></li>
     <li><a href="#habilidades">Habilidades</a></li>
     <li><a href="#premios">Premios</a></li>
     <li><a href="#referencias">Referencias</a></li>
@@ -1259,21 +1260,380 @@
       </div>
 
       <!-- 7 — (nuevo proyecto) -->
-      <div class="social-stack-card">
-        <div class="social-stack-thumb" style="cursor:default;">
-          <div class="social-stack-bg" style="background:linear-gradient(135deg,#0d1520,#1a2d45);"></div>
-        </div>
-        <div class="social-stack-info" style="text-align:center;">
-          <p class="social-stack-title">Título del proyecto</p>
-          <p class="social-stack-desc">Género</p>
-          <p class="social-stack-year">Año — Duración / Canal</p>
-        </div>
-      </div>
-
     </div>
   </div>
 
 </section>
+
+<section id="generos">
+  <p class="section-label reveal">Géneros desarrollados</p>
+  <div class="generos-intro reveal">
+    <h2>Distintas formas<br>de <em>contar</em></h2>
+  </div>
+  <div class="generos-tabs reveal">
+    <button class="genero-btn active" data-genero="truecrime">True Crime</button>
+    <button class="genero-btn" data-genero="periodismo">Periodismo de Investigación</button>
+    <button class="genero-btn" data-genero="deportes">Deportes</button>
+    <button class="genero-btn" data-genero="arte">Arte y Cultura</button>
+    <button class="genero-btn" data-genero="ddhh">Derechos Humanos</button>
+    <button class="genero-btn" data-genero="medioambiente">Medio Ambiente</button>
+  </div>
+  <div class="generos-content">
+    <div class="genero-panel active" id="gp-truecrime">
+      <div class="generos-grid">
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/vLho6fgwNQQ/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('drive','https://drive.google.com/file/d/1gtc_QcUF_EvxNvtEZ2uLGNONJktW-xst/preview')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Un día en Sinaloa</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 2</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('MINI_MARAS__BANANA_01.png');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('drive','https://drive.google.com/file/d/1Sh4iyqLPWvQZEGK9vtVJoJtiHrwHGbsj/preview')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 4</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 4</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 5</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="genero-panel" id="gp-periodismo">
+      <div class="generos-grid">
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('MINI_MARAS__BANANA_01.png');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('drive','https://drive.google.com/file/d/1Sh4iyqLPWvQZEGK9vtVJoJtiHrwHGbsj/preview')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Objetivo: Las Maras</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 2</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','_Fae0RSGLww')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 3</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 4</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 5</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="genero-panel" id="gp-deportes">
+      <div class="generos-grid">
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/2-R5_mCOwlI/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','2-R5_mCOwlI')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 1</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 2</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','_Fae0RSGLww')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 3</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 4</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 5</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="genero-panel" id="gp-arte">
+      <div class="generos-grid">
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/2-R5_mCOwlI/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','2-R5_mCOwlI')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 1</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 2</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','_Fae0RSGLww')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 3</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 4</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 5</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="genero-panel" id="gp-ddhh">
+      <div class="generos-grid">
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/2-R5_mCOwlI/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','2-R5_mCOwlI')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 1</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 2</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','_Fae0RSGLww')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 3</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 4</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 5</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="genero-panel" id="gp-medioambiente">
+      <div class="generos-grid">
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('MINI_CLAN_RINO_000.png');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('drive','https://drive.google.com/file/d/1WHyoTWoX30_K55eN2-mbKyzAeXjIpukz/preview')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Una muerte al amanecer</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 2</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','_Fae0RSGLww')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 3</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 4</p>
+          </div>
+        </div>
+        <div class="genero-item">
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-label">
+            <p class="genero-title">Título del Proyecto 5</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #generos {
+    padding: var(--section-pad) var(--gutter);
+    border-top: 1px solid var(--border);
+  }
+  .generos-intro { margin-bottom: 48px; }
+  .generos-intro h2 { font-size: clamp(28px,4vw,52px); font-weight: 200; line-height: 1.15; text-align: justify; }
+
+  /* Pestañas */
+  .generos-tabs {
+    display: flex; flex-wrap: wrap; gap: 2px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+  .genero-btn {
+    font-family: var(--ff); font-size: 11px; font-weight: 300;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); background: none; border: none;
+    padding: 14px 24px; cursor: pointer;
+    position: relative; transition: color 0.25s;
+  }
+  .genero-btn::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transition: transform 0.25s;
+  }
+  .genero-btn:hover { color: var(--text); }
+  .genero-btn.active { color: var(--accent); }
+  .genero-btn.active::after { transform: scaleX(1); }
+
+  /* Paneles */
+  .generos-content { min-height: 220px; }
+  .genero-panel {
+    display: none;
+    padding: 48px 0 24px;
+    animation: fadeInUp 0.35s ease;
+  }
+  .genero-panel.active { display: block; }
+  .genero-panel-inner { max-width: 640px; }
+  .genero-panel-text {
+    font-size: 14px; font-weight: 300; line-height: 1.85;
+    color: var(--text-muted); letter-spacing: 0.02em;
+  }
+
+  /* Genre Gallery */
+  .generos-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+  }
+  .genero-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+  }
+  .genero-thumb {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .genero-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 100%);
+    pointer-events: none;
+  }
+  .genero-cat {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .genero-title {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .genero-year {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 960px) {
+    .generos-tabs { gap: 0; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; padding-bottom: 0; -webkit-overflow-scrolling: touch; }
+    .generos-tabs::-webkit-scrollbar { display: none; }
+    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 12px 18px; font-size: 10px; }
+    .genero-panel { padding: 32px 0 16px; }
+    .generos-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .genero-item {
+      aspect-ratio: 16/9;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.genero-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.genero-btn').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.genero-panel').forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('gp-' + btn.dataset.genero).classList.add('active');
+    });
+  });
+</script>
 
 <section id="habilidades">
   <p class="section-label reveal">Habilidades</p>
@@ -1299,9 +1659,7 @@
           <div class="bar-track"><div class="bar-fill" style="--w:75%"></div></div>
         </div>
       </div>
-    </div>
-    <div class="hab-right">
-      <div class="comp-group reveal">
+      <div class="comp-group reveal" style="margin-top:40px;">
         <div class="comp-group-title">Especialidades narrativas</div>
         <div class="comp-tags">
           <span class="comp-tag">Montaje documental</span>
@@ -1314,17 +1672,8 @@
           <span class="comp-tag">Gestión de proyecto</span>
         </div>
       </div>
-      <div class="comp-group reveal">
-        <div class="comp-group-title">Géneros</div>
-        <div class="comp-tags">
-          <span class="comp-tag">Documental social</span>
-          <span class="comp-tag">Periodismo de investigación</span>
-          <span class="comp-tag">Historia oral</span>
-          <span class="comp-tag">Medioambiente</span>
-          <span class="comp-tag">Arte y cultura</span>
-          <span class="comp-tag">Derechos humanos</span>
-        </div>
-      </div>
+    </div>
+    <div class="hab-right">
       <div class="timeline reveal" id="premios">
         <div class="timeline-title">Premios y Reconocimientos</div>
         <div class="tl-item">
@@ -1470,7 +1819,7 @@
 
 <script>
   /* NAV ACTIVE Y MENÚ HAMBURGUESA MÓVIL */
-  const sections = ['inicio','trabajos','habilidades','premios','referencias','contactos'];
+  const sections = ['inicio','trabajos','generos','habilidades','premios','referencias','contactos'];
   const navLinks = document.querySelectorAll('.nav-links a');
   const menuBtn = document.getElementById('menu-btn');
   const navMenu = document.getElementById('nav-menu');
@@ -1496,7 +1845,7 @@
     let current = '';
     sections.forEach(id => {
       const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 150) current = id;
+      if (el && window.scrollY >= el.offsetTop - 350) current = id;
     });
     navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
   });
