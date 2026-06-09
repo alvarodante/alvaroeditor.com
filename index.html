@@ -324,16 +324,22 @@
   .ref-card {
     background: var(--bg); padding: 48px 40px;
     transition: background 0.4s;
-    display: flex; flex-direction: column; justify-content: space-between; min-height: 320px;
+    display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px;
+    position: relative; overflow: hidden; cursor: default;
   }
   .ref-card:hover { background: var(--surface); }
-  .ref-quote-mark {
-    font-size: 64px; font-weight: 200; line-height: 0.6;
-    color: var(--accent); opacity: 0.3; margin-bottom: 24px; transition: opacity 0.3s;
+  .ref-text-wrap {
+    position: absolute; inset: 0; padding: 32px 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface);
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none; text-align: center;
   }
-  .ref-card:hover .ref-quote-mark { opacity: 0.6; }
-  .ref-text { font-size: 15px; font-weight: 200; font-style: italic; line-height: 1.7; color: var(--text); flex: 1; margin-bottom: 32px; }
-  .ref-author { border-top: 1px solid var(--border); padding-top: 20px; }
+  .ref-card:hover .ref-text-wrap { opacity: 1; transform: translateY(0); }
+  .ref-text { font-size: 13px; font-weight: 200; font-style: italic; line-height: 1.75; color: var(--text); }
+  .ref-author { border-top: 1px solid var(--border); padding-top: 20px; transition: border-color 0.4s; }
+  .ref-card:hover .ref-author { border-color: var(--accent); }
   .ref-name { font-size: 11px; letter-spacing: 0.12em; color: var(--text); margin-bottom: 4px; font-weight: 400; }
   .ref-role { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); }
   .ref-project { font-size: 9px; letter-spacing: 0.14em; color: var(--accent); margin-top: 4px; }
@@ -1266,17 +1272,19 @@
 </section>
 
 <section id="generos">
-  <p class="section-label reveal">Géneros desarrollados</p>
   <div class="generos-intro reveal">
-    <h2>Distintas formas<br>de <em>contar</em></h2>
-  </div>
-  <div class="generos-tabs reveal">
-    <button class="genero-btn active" data-genero="truecrime">True Crime</button>
-    <button class="genero-btn" data-genero="periodismo">Periodismo de Investigación</button>
-    <button class="genero-btn" data-genero="deportes">Deportes</button>
-    <button class="genero-btn" data-genero="arte">Arte y Cultura</button>
-    <button class="genero-btn" data-genero="ddhh">Social</button>
-    <button class="genero-btn" data-genero="medioambiente">Medio Ambiente</button>
+    <div class="generos-intro-text">
+      <p class="section-label" style="margin-bottom:16px;">Géneros desarrollados</p>
+      <h2>Distintas formas<br>de <em>contar</em></h2>
+    </div>
+    <div class="generos-tabs">
+      <button class="genero-btn active" data-genero="truecrime">True Crime</button>
+      <button class="genero-btn" data-genero="periodismo">Periodismo de Investigación</button>
+      <button class="genero-btn" data-genero="deportes">Deportes</button>
+      <button class="genero-btn" data-genero="arte">Arte y Cultura</button>
+      <button class="genero-btn" data-genero="ddhh">Social</button>
+      <button class="genero-btn" data-genero="medioambiente">Medio Ambiente</button>
+    </div>
   </div>
   <div class="generos-content">
     <div class="genero-panel active" id="gp-truecrime">
@@ -1289,33 +1297,20 @@
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/eC6Z4gUzwLU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','eC6Z4gUzwLU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 2</p>
+            <p class="genero-title">Muerte en Sao Paulo</p>
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('MINI_MARAS__BANANA_01.png');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('drive','https://drive.google.com/file/d/1Sh4iyqLPWvQZEGK9vtVJoJtiHrwHGbsj/preview')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/kAsoXjh68D0/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','kAsoXjh68D0')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 4</p>
+            <p class="genero-title">Forense en El Salvador</p>
           </div>
         </div>
-        <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
-          <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 4</p>
-          </div>
-        </div>
-        <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
-          <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 5</p>
-          </div>
-        </div>
+
       </div>
     </div>
     <div class="genero-panel" id="gp-periodismo">
@@ -1328,31 +1323,24 @@
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/2VUXBNDxQ8s/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','2VUXBNDxQ8s')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 2</p>
+            <p class="genero-title">Infravivir en España</p>
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','_Fae0RSGLww')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/jMGZdaylm50/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','jMGZdaylm50')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 3</p>
+            <p class="genero-title">La maldición de la Huaca</p>
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/J71RLJ6U7bo/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','J71RLJ6U7bo')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 4</p>
-          </div>
-        </div>
-        <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
-          <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 5</p>
+            <p class="genero-title">Caso Castroverde</p>
           </div>
         </div>
       </div>
@@ -1381,10 +1369,10 @@
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/dykbSy3t3tw/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','dykbSy3t3tw')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 4</p>
+            <p class="genero-title">El que ama</p>
           </div>
         </div>
         <div class="genero-item">
@@ -1406,10 +1394,10 @@
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/Zw5FowSrBBA/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','Zw5FowSrBBA')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 2</p>
+            <p class="genero-title">El primer vuelo</p>
           </div>
         </div>
         <div class="genero-item">
@@ -1445,31 +1433,31 @@
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/yh30DzsFRK4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','yh30DzsFRK4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 2</p>
+            <p class="genero-title">Vida y muerte en el Mediterraneo</p>
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','_Fae0RSGLww')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/TCumQJxgD_g/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','TCumQJxgD_g')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 3</p>
+            <p class="genero-title">Karonghen</p>
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/qVT-5RRnAg0/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','qVT-5RRnAg0')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 4</p>
+            <p class="genero-title">Victimas del Rino</p>
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','mY2DaT6_ofU')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/ApgCTcM-HuI/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','ApgCTcM-HuI')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 5</p>
+            <p class="genero-title">Amas de Casa</p>
           </div>
         </div>
       </div>
@@ -1491,17 +1479,10 @@
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','_Fae0RSGLww')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/z5T3ZZj_L6E/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+          <div onclick="openSocialModal('yt','z5T3ZZj_L6E')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 3</p>
-          </div>
-        </div>
-        <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','OJOiT7tkh5U')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
-          <div class="genero-label">
-            <p class="genero-title">Título del Proyecto 4</p>
+            <p class="genero-title">El lamento de la jungla</p>
           </div>
         </div>
         <div class="genero-item">
@@ -1518,36 +1499,32 @@
 
 <style>
   #generos {
-    padding: var(--section-pad) var(--gutter);
+    padding: 120px 56px;
     border-top: 1px solid var(--border);
   }
-  .generos-intro { margin-bottom: 48px; }
-  .generos-intro h2 { font-size: clamp(28px,4vw,52px); font-weight: 200; line-height: 1.15; text-align: justify; }
+  .generos-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+  .generos-intro-text h2 { font-size: clamp(26px, 3.5vw, 46px); font-weight: 200; line-height: 1.15; color: var(--text); letter-spacing: -0.02em; }
+  .generos-intro-text h2 em { font-style: italic; color: var(--accent); }
 
   /* Pestañas */
   .generos-tabs {
-    display: flex; flex-wrap: wrap; gap: 2px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 0;
+    display: flex; gap: 24px; align-items: center;
   }
   .genero-btn {
-    font-family: var(--ff); font-size: 11px; font-weight: 300;
-    letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
     color: var(--text-muted); background: none; border: none;
-    padding: 14px 24px; cursor: pointer;
-    position: relative; transition: color 0.25s;
+    padding: 6px 0; border-bottom: 1px solid transparent; transition: all 0.3s; cursor: pointer;
   }
+  .genero-btn:hover, .genero-btn.active { color: var(--accent); border-color: var(--accent); }
   .genero-btn::after {
     content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
     height: 1px; background: var(--accent);
     transform: scaleX(0); transition: transform 0.25s;
   }
-  .genero-btn:hover { color: var(--text); }
-  .genero-btn.active { color: var(--accent); }
   .genero-btn.active::after { transform: scaleX(1); }
 
   /* Paneles */
-  .generos-content { min-height: 220px; }
+  .generos-content { min-height: 220px; border-top: 1px solid var(--border); padding-top: 48px; }
   .genero-panel {
     display: none;
     padding: 48px 0 24px;
@@ -1725,32 +1702,31 @@
   <p class="section-label reveal">Referencias</p>
   <div class="ref-intro reveal">
     <h2>Lo que dicen quienes <em>confían</em></h2>
-    <p>Directores, productores y distribuidores que han trabajado con Álvaro en proyectos de largo recorrido.</p>
   </div>
   <div class="ref-grid reveal">
     <div class="ref-card">
-      <div><div class="ref-quote-mark">"</div><p class="ref-text">Álvaro tiene una rara habilidad para escuchar el material. No impone ritmo: lo descubre. Con él el primer corte ya tiene alma.</p></div>
-      <div class="ref-author"><div class="ref-name">Marta Iglesias</div><div class="ref-role">Directora</div><div class="ref-project">Las voces del silencio, 2024</div></div>
+      <div class="ref-text-wrap"><p class="ref-text">«Álvaro demostró una evolución profesional excepcional en muy poco tiempo, destacando por su creatividad, sensibilidad visual y capacidad de aprendizaje. Su actitud entusiasta contribuyó al crecimiento y mejora del proyecto. Volvería a trabajar con él, incluso con los ojos cerrados, para cualquier proyecto audiovisual al máximo nivel de exigencia.»</p></div>
+      <div class="ref-author"><div class="ref-name">Alain Uceda</div><div class="ref-role">Director</div><div class="ref-project">Fahrenheit · Canal 9</div></div>
     </div>
     <div class="ref-card">
-      <div><div class="ref-quote-mark">"</div><p class="ref-text">Trabajar con él es extraordinariamente fluido. Entiende la visión del director pero también sabe cuándo defenderla de ella misma.</p></div>
-      <div class="ref-author"><div class="ref-name">Carlos Estévez</div><div class="ref-role">Director y guionista</div><div class="ref-project">Frontera, 2022</div></div>
+      <div class="ref-text-wrap"><p class="ref-text">«Álvaro es un profesional talentoso y apasionado por su trabajo, con un nivel de dedicación difícil de superar. Destaca por su gran sentido de la narrativa, su gusto por la poesía visual. Su desempeño es impecable y garantiza un trabajo de la más alta calidad. Trabajar con él fue extraordinario.»</p></div>
+      <div class="ref-author"><div class="ref-name">David Beriain</div><div class="ref-role">Director</div><div class="ref-project">Clandestino · DMAX</div></div>
     </div>
     <div class="ref-card">
-      <div><div class="ref-quote-mark">"</div><p class="ref-text">Su dominio técnico es impresionante, pero lo que lo distingue es la inteligencia emocional con la que selecciona cada plano.</p></div>
-      <div class="ref-author"><div class="ref-name">Ana Ferreira</div><div class="ref-role">Productora ejecutiva</div><div class="ref-project">Tierra adentro, 2023</div></div>
+      <div class="ref-text-wrap"><p class="ref-text">«Álvaro es un editor con gran creatividad, criterio visual y una sólida capacidad técnica, capaz de aportar calidad y personalidad a cualquier proyecto. Su profesionalidad, compromiso y responsabilidad lo convierten en un colaborador de total confianza. Seguirá aportando valor e inspiración en cada reto audiovisual que emprenda.»</p></div>
+      <div class="ref-author"><div class="ref-name">Antonio Grunfeld</div><div class="ref-role">Director</div><div class="ref-project">MANOLIÑO NGUEMA</div></div>
     </div>
     <div class="ref-card">
-      <div><div class="ref-quote-mark">"</div><p class="ref-text">Seleccionamos Marea oscura en Toronto en gran parte por la fuerza de su montaje. Álvaro construyó una tensión que el guion apenas insinuaba.</p></div>
-      <div class="ref-author"><div class="ref-name">Sofía Ruiz</div><div class="ref-role">Distribuidora</div><div class="ref-project">Hot Docs Toronto, 2023</div></div>
+      <div class="ref-text-wrap"><p class="ref-text">«La edición documental exige mucho más que técnica: requiere encontrar una narrativa clara entre horas de material, perspectivas diversas y decisiones complejas. Álvaro destaca precisamente en ese desafío, comprendiendo la visión del director mientras aporta el criterio necesario para fortalecer la historia. Su sensibilidad narrativa, capacidad de análisis y talento creativo lo convierten en un editor excepcional para proyectos documentales de alta exigencia.»</p></div>
+      <div class="ref-author"><div class="ref-name">Fernando Ureña</div><div class="ref-role">Director</div><div class="ref-project">11 Tiros · HBO</div></div>
     </div>
     <div class="ref-card">
-      <div><div class="ref-quote-mark">"</div><p class="ref-text">Puntual, meticuloso y con una capacidad de concentración que envidio. Entrega en plazo y siempre supera lo que uno espera.</p></div>
-      <div class="ref-author"><div class="ref-name">Javier Molina</div><div class="ref-role">Director de producción</div><div class="ref-project">RTVE Documentales</div></div>
+      <div class="ref-text-wrap"><p class="ref-text">«Como guionista, pocas veces he encontrado un editor con la capacidad de Álvaro para descubrir y potenciar la esencia de una historia. Su sensibilidad narrativa transforma el material documental en un relato coherente, emocionante y auténtico. Es un colaborador imprescindible para convertir una buena idea en una gran película.»</p></div>
+      <div class="ref-author"><div class="ref-name">Jorge Arroyo</div><div class="ref-role">Guionista</div><div class="ref-project">La vida en llamas · DMAX</div></div>
     </div>
     <div class="ref-card">
-      <div><div class="ref-quote-mark">"</div><p class="ref-text">Le mandamos horas de material en bruto sin estructura. Nos devolvió una historia. Eso no se aprende en ningún manual.</p></div>
-      <div class="ref-author"><div class="ref-name">Leila Nassar</div><div class="ref-role">Productora</div><div class="ref-project">Al Jazeera Documentary</div></div>
+      <div class="ref-text-wrap"><p class="ref-text">«Como editor, valoro especialmente en Álvaro una cualidad poco común: su capacidad para encontrar la historia dentro del material y darle ritmo, claridad y emoción sin perder autenticidad. Su criterio narrativo y su sensibilidad para el documental elevan cada proyecto más allá de lo esperado. Es un profesional con el que cualquier editor desearía compartir sala de montaje.»</p></div>
+      <div class="ref-author"><div class="ref-name">José Garrido</div><div class="ref-role">Editor</div><div class="ref-project">Cuando Nadie me ve · Movistar +</div></div>
     </div>
   </div>
   <div class="ref-clients reveal">
@@ -1819,7 +1795,7 @@
 
 <script>
   /* NAV ACTIVE Y MENÚ HAMBURGUESA MÓVIL */
-  const sections = ['inicio','trabajos','generos','habilidades','premios','referencias','contactos'];
+  const sections = ['inicio','trabajos','generos','habilidades','referencias','contactos'];
   const navLinks = document.querySelectorAll('.nav-links a');
   const menuBtn = document.getElementById('menu-btn');
   const navMenu = document.getElementById('nav-menu');
