@@ -1279,7 +1279,7 @@
     </div>
     <div class="generos-tabs">
       <button class="genero-btn active" data-genero="truecrime">True Crime</button>
-      <button class="genero-btn" data-genero="periodismo">Periodismo de Investigación</button>
+      <button class="genero-btn" data-genero="periodismo">Investigación</button>
       <button class="genero-btn" data-genero="deportes">Deportes</button>
       <button class="genero-btn" data-genero="arte">Arte y Cultura</button>
       <button class="genero-btn" data-genero="ddhh">Social</button>
@@ -1613,9 +1613,9 @@
   }
 
   @media (max-width: 960px) {
-    .generos-tabs { gap: 8px; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; padding-bottom: 12px; -webkit-overflow-scrolling: touch; }
+    .generos-tabs { gap: 8px; flex-wrap: wrap; overflow-x: visible; scrollbar-width: none; padding-bottom: 12px; -webkit-overflow-scrolling: auto; }
     .generos-tabs::-webkit-scrollbar { display: none; }
-    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 12px; font-size: 9px; border-bottom: 1px solid transparent; }
+    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 12px; font-size: 9px; border-bottom: 1px solid transparent; flex: 0 1 calc(50% - 4px); text-align: center; }
     .genero-btn.active { border-bottom: 1px solid var(--accent); }
     .genero-panel { padding: 24px 0 12px; }
     .generos-grid {
