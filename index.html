@@ -1502,9 +1502,21 @@
     padding: 120px 56px;
     border-top: 1px solid var(--border);
   }
+
+  @media (max-width: 960px) {
+    #generos {
+      padding: 80px 16px;
+    }
+  }
   .generos-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
   .generos-intro-text h2 { font-size: clamp(26px, 3.5vw, 46px); font-weight: 200; line-height: 1.15; color: var(--text); letter-spacing: -0.02em; }
   .generos-intro-text h2 em { font-style: italic; color: var(--accent); }
+
+  @media (max-width: 960px) {
+    .generos-intro { flex-direction: column; align-items: flex-start; margin-bottom: 32px; gap: 24px; }
+    .generos-intro-text { width: 100%; }
+    .generos-intro-text h2 { font-size: clamp(22px, 5.5vw, 32px); line-height: 1.2; max-width: 100%; }
+  }
 
   /* Pestañas */
   .generos-tabs {
@@ -1535,6 +1547,11 @@
   .genero-panel-text {
     font-size: 14px; font-weight: 300; line-height: 1.85;
     color: var(--text-muted); letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 960px) {
+    .generos-content { min-height: auto; padding-top: 24px; }
+    .genero-panel { padding: 20px 0 12px; }
   }
 
   /* Genre Gallery */
@@ -1587,13 +1604,23 @@
   }
 
   @media (max-width: 960px) {
-    .generos-tabs { gap: 0; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; padding-bottom: 0; -webkit-overflow-scrolling: touch; }
+    .genero-label {
+      padding: 12px;
+    }
+    .genero-title {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .generos-tabs { gap: 8px; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; padding-bottom: 12px; -webkit-overflow-scrolling: touch; }
     .generos-tabs::-webkit-scrollbar { display: none; }
-    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 12px 18px; font-size: 10px; }
-    .genero-panel { padding: 32px 0 16px; }
+    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 12px; font-size: 9px; border-bottom: 1px solid transparent; }
+    .genero-btn.active { border-bottom: 1px solid var(--accent); }
+    .genero-panel { padding: 24px 0 12px; }
     .generos-grid {
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 12px;
     }
     .genero-item {
       aspect-ratio: 16/9;
