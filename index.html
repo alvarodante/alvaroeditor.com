@@ -1510,6 +1510,7 @@
   }
   .generos-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
   .generos-intro-text h2 { font-size: clamp(26px, 3.5vw, 46px); font-weight: 200; line-height: 1.15; color: var(--text); letter-spacing: -0.02em; }
+  /* Tamaño igualado al de .works-intro-text h2 ↑ */
   .generos-intro-text h2 em { font-style: italic; color: var(--accent); }
 
   @media (max-width: 960px) {
@@ -1520,20 +1521,21 @@
 
   /* Pestañas */
   .generos-tabs {
-    display: flex; gap: 24px; align-items: center;
+    display: flex; gap: 24px; align-items: center; flex-wrap: nowrap;
   }
   .genero-btn {
     font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
     color: var(--text-muted); background: none; border: none;
-    padding: 6px 0; border-bottom: 1px solid transparent; transition: all 0.3s; cursor: pointer;
+    padding: 6px 0; border-bottom: none; transition: all 0.3s; cursor: pointer;
+    position: relative; display: inline-block;
   }
-  .genero-btn:hover, .genero-btn.active { color: var(--accent); border-color: var(--accent); }
+  .genero-btn:hover, .genero-btn.active { color: var(--accent); }
   .genero-btn::after {
-    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
-    height: 1px; background: var(--accent);
-    transform: scaleX(0); transition: transform 0.25s;
+    content: ''; position: absolute; bottom: -1px; left: 0;
+    width: 100%; height: 1px; background: var(--accent);
+    transform: scaleX(0); transition: transform 0.25s; transform-origin: left;
   }
-  .genero-btn.active::after { transform: scaleX(1); }
+  .genero-btn:hover::after, .genero-btn.active::after { transform: scaleX(1); }
 
   /* Paneles */
   .generos-content { min-height: 220px; border-top: 1px solid var(--border); padding-top: 48px; }
@@ -1615,7 +1617,7 @@
   @media (max-width: 960px) {
     .generos-tabs { gap: 8px; flex-wrap: wrap; overflow-x: visible; scrollbar-width: none; padding-bottom: 12px; -webkit-overflow-scrolling: auto; }
     .generos-tabs::-webkit-scrollbar { display: none; }
-    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 12px; font-size: 9px; border-bottom: 1px solid transparent; flex: 0 1 calc(50% - 4px); text-align: center; }
+    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 0; font-size: 9px; border-bottom: 1px solid transparent; flex: 0 1 calc(33.333% - 6px); text-align: left; }
     .genero-btn.active { border-bottom: 1px solid var(--accent); }
     .genero-panel { padding: 24px 0 12px; }
     .generos-grid {
