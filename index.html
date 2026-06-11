@@ -324,20 +324,20 @@
   .ref-card {
     background: var(--bg); padding: 48px 40px;
     transition: background 0.4s;
-    display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px;
+    display: flex; flex-direction: column; justify-content: flex-end; min-height: 220px;
     position: relative; overflow: hidden; cursor: default;
   }
   .ref-card:hover { background: var(--surface); }
   .ref-text-wrap {
-    position: absolute; inset: 0; padding: 32px 36px;
+    position: absolute; inset: 0; padding: 24px 28px;
     display: flex; align-items: center; justify-content: center;
     background: var(--surface);
     opacity: 0; transform: translateY(6px);
     transition: opacity 0.4s ease, transform 0.4s ease;
-    pointer-events: none; text-align: center;
+    pointer-events: none; text-align: center; overflow-y: auto;
   }
   .ref-card:hover .ref-text-wrap { opacity: 1; transform: translateY(0); }
-  .ref-text { font-size: 13px; font-weight: 200; font-style: italic; line-height: 1.75; color: var(--text); }
+  .ref-text { font-size: clamp(10px, 1.1vw, 12px); font-weight: 200; font-style: italic; line-height: 1.7; color: var(--text); }
   .ref-author { border-top: 1px solid var(--border); padding-top: 20px; transition: border-color 0.4s; }
   .ref-card:hover .ref-author { border-color: var(--accent); }
   .ref-name { font-size: 11px; letter-spacing: 0.12em; color: var(--text); margin-bottom: 4px; font-weight: 400; }
@@ -765,6 +765,13 @@
       document.getElementById('vidModal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+    function openWistiaModal(mediaId) {
+      const frame = document.getElementById('vidModalFrame');
+      frame.removeAttribute('referrerpolicy');
+      frame.src = 'https://fast.wistia.net/embed/iframe/' + mediaId + '?autoPlay=true&fitStrategy=fill';
+      document.getElementById('vidModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
     function closeVidModalBtn() {
       document.getElementById('vidModalFrame').src = '';
       document.getElementById('vidModal').classList.remove('open');
@@ -878,8 +885,8 @@
       </div>
     </div>
     <div class="work-item">
-      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/1B93pKptctY/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-      <div onclick="openSocialModal('yt','1B93pKptctY')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+      <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
+      <div onclick="openSocialModal('yt','rll8gAci5c4')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
         <p class="work-cat">Serie Documental</p>
         <span class="proj-tooltip-trigger">
@@ -1281,7 +1288,7 @@
       <button class="genero-btn active" data-genero="truecrime">True Crime</button>
       <button class="genero-btn" data-genero="periodismo">Investigación</button>
       <button class="genero-btn" data-genero="deportes">Deportes</button>
-      <button class="genero-btn" data-genero="arte">Arte y Cultura</button>
+      <button class="genero-btn" data-genero="arte">Cultura</button>
       <button class="genero-btn" data-genero="ddhh">Social</button>
       <button class="genero-btn" data-genero="medioambiente">Medio Ambiente</button>
     </div>
@@ -1321,7 +1328,7 @@
 
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/PrHrn6RDz6k/maxresdefault.jpg');background-size:cover;background-position:center;"></div>
-          <div onclick="openSocialModal('yt','PrHrn6RDz6k')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
+          <div onclick="openWistiaModal('l20q4wkjmg9ucc6')" style="position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.15) 55%,rgba(10,10,10,0.35) 100%);opacity:0;transition:opacity 0.4s;cursor:pointer;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'"><span style="width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,0.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
             <p class="genero-title">Objetivo: Las Maras</p>
           </div>
@@ -1559,7 +1566,7 @@
     font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
     color: var(--text-muted); background: none; border: none;
     padding: 6px 0; border-bottom: none; transition: all 0.3s; cursor: pointer;
-    position: relative; display: inline-block;
+    position: relative; display: inline-flex; flex-direction: column; align-items: center;
   }
   .genero-btn:hover, .genero-btn.active { color: var(--accent); }
   .genero-btn::after {
@@ -1649,8 +1656,10 @@
   @media (max-width: 960px) {
     .generos-tabs { gap: 8px; flex-wrap: wrap; overflow-x: visible; scrollbar-width: none; padding-bottom: 12px; -webkit-overflow-scrolling: auto; }
     .generos-tabs::-webkit-scrollbar { display: none; }
-    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 0; font-size: 9px; border-bottom: 1px solid transparent; flex: 0 1 calc(33.333% - 6px); text-align: left; }
-    .genero-btn.active { border-bottom: 1px solid var(--accent); }
+    .genero-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 0; font-size: 9px; border-bottom: none; flex: 0 1 calc(33.333% - 6px); text-align: center; justify-content: center; display: inline-flex; flex-direction: column; align-items: center; }
+    .genero-btn::after { width: 100%; transform-origin: center; }
+    .genero-btn.active::after { transform: scaleX(1); }
+    .generos-tabs { justify-content: center; }
     .genero-panel { padding: 24px 0 12px; }
     .generos-grid {
       grid-template-columns: 1fr;
