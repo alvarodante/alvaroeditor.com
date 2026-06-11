@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="screen-orientation" content="any" />
-<title>Álvaro Ayala Entrena — Editor de Documentales</title>
+<title>Álvaro Ayala Entrena — Documentary Editor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght=200;300;400;500;700&display=swap" rel="stylesheet" />
@@ -464,21 +464,33 @@
 .play-ol{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:linear-gradient(to top,rgba(10,10,10,.88) 0%,rgba(10,10,10,.15) 55%,rgba(10,10,10,.35) 100%);opacity:0;transition:opacity .4s;cursor:pointer;}
 .play-ol:hover,.play-ol:focus{opacity:1;}
 .play-ic{width:40px;height:40px;border-radius:50%;background:rgba(200,169,126,.18);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;}
+
+.nav-brand { display: flex; align-items: center; gap: 20px; }
+.lang-btn {
+  font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
+  color: var(--text-muted); background: none; border: none;
+  padding: 4px 0; border-bottom: 1px solid transparent;
+  cursor: pointer; transition: color 0.3s, border-color 0.3s;
+}
+.lang-btn:hover, .lang-btn.active { color: var(--accent); border-color: var(--accent); }
+[data-lang="en"] .lang-btn { color: var(--accent); border-color: var(--accent); }
+[data-lang="es"] .lang-btn { color: var(--text-muted); border-color: transparent; }
+[data-lang="en"] [data-es], [data-lang="es"] [data-en] { display: none !important; }
 </style>
 </head>
 <body>
 
 <nav id="nav">
-  <a href="#inicio" class="nav-logo">Álvaro Ayala Entrena</a>
+  <div class="nav-brand"><a href="#inicio" class="nav-logo">Álvaro Ayala Entrena</a><button class="lang-btn" id="lang-btn" onclick="switchLang()" aria-label="Switch to English">English</button></div>
   <button class="menu-toggle" id="menu-btn" aria-label="Abrir menú">☰</button>
   <ul class="nav-links" id="nav-menu">
-    <li><a href="#inicio">Inicio</a></li>
-    <li><a href="#trabajos">Trabajos</a></li>
-    <li><a href="#generos">Géneros</a></li>
-    <li><a href="#habilidades">Habilidades</a></li>
-    <li><a href="#premios">Premios</a></li>
-    <li><a href="#referencias">Referencias</a></li>
-    <li><a href="#contactos">Contactos</a></li>
+    <li><a href="#inicio"><span data-es>Inicio</span><span data-en>Home</span></a></li>
+    <li><a href="#trabajos"><span data-es>Trabajos</span><span data-en>Works</span></a></li>
+    <li><a href="#generos"><span data-es>Géneros</span><span data-en>Genres</span></a></li>
+    <li><a href="#habilidades"><span data-es>Habilidades</span><span data-en>Skills</span></a></li>
+    <li><a href="#premios"><span data-es>Premios</span><span data-en>Awards</span></a></li>
+    <li><a href="#referencias"><span data-es>Referencias</span><span data-en>References</span></a></li>
+    <li><a href="#contactos"><span data-es>Contactos</span><span data-en>Contact</span></a></li>
   </ul>
 </nav>
 
@@ -506,9 +518,9 @@
   </div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">Editor de Documentales</p>
-    <h1 class="hero-title">La imagen como <em>verdad</em></h1>
-    <p class="hero-sub">Más de quince años montando realidades que importan, transformando pequeñas historias en relatos universales. Para mí, la narrativa visual, el cuidado por el detalle y la organización son elementos clave. Soy un profesional comprometido con el equipo y habituado a rendir con éxito bajo presión.</p>
+    <p class="hero-eyebrow"><span data-es>Editor de Documentales</span><span data-en>Documentary Editor</span></p>
+    <h1 class="hero-title"><span data-es>La imagen como</span><span data-en>The image as</span> <em><span data-es>verdad</span><span data-en>truth</span></em></h1>
+    <p class="hero-sub"><span data-es>Más de quince años montando realidades que importan, transformando pequeñas historias en relatos universales. Para mí, la narrativa visual, el cuidado por el detalle y la organización son elementos clave. Soy un profesional comprometido con el equipo y habituado a rendir con éxito bajo presión.</span><span data-en>Over fifteen years editing realities that matter, transforming small stories into universal narratives. For me, visual storytelling, attention to detail and organisation are key. I am a committed team player, consistently delivering under pressure.</span></p>
     
     <a href="https://www.linkedin.com/in/alvaroeditor" target="_blank" class="reel-btn" id="reel-trigger">
       <span class="reel-icon">
@@ -522,13 +534,13 @@
 <section id="trabajos">
   <div class="works-intro reveal">
     <div class="works-intro-text">
-      <p class="section-label" style="margin-bottom:16px;">Trabajos seleccionados</p>
-      <h2>Proyectos que<br><em>definen</em> el oficio</h2>
+      <p class="section-label" style="margin-bottom:16px;"><span data-es>Trabajos seleccionados</span><span data-en>Selected Works</span></p>
+      <h2><span data-es>Proyectos que</span><span data-en>Projects that</span> <br><em><span data-es>definen</span><span data-en>define</span></em> <span data-es>el oficio</span><span data-en>the craft</span></h2>
     </div>
     <div class="works-filter">
-      <button class="filter-btn active" data-tab="destacados">Destacados</button>
-      <button class="filter-btn" data-tab="plataformas">Plataformas</button>
-      <button class="filter-btn" data-tab="television">Televisión</button>
+      <button class="filter-btn active" data-tab="destacados"><span data-es>Destacados</span><span data-en>Featured</span></button>
+      <button class="filter-btn" data-tab="plataformas"><span data-es>Plataformas</span><span data-en>Platforms</span></button>
+      <button class="filter-btn" data-tab="television"><span data-es>Televisión</span><span data-en>Television</span></button>
       <button class="filter-btn" data-tab="social">Social</button>
     </div>
   </div>
@@ -539,7 +551,7 @@
       
       <div onclick="openSocialModal('yt','Jc7Hgl0G9Ao')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-label-always" style="z-index:3;">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Alejandro Sanz "Cuando nadie me ve"</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -553,7 +565,7 @@
       
       <div onclick="openSocialModal('yt','iAL6za3GRWw')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">11 tiros</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -565,7 +577,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mhGjwCZI148/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','mhGjwCZI148')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Palomares</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -577,7 +589,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','32TAZrD0wnc')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Clandestino con David Beriain</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -589,7 +601,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','_Fae0RSGLww')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">La vida en llamas</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -721,7 +733,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/Jc7Hgl0G9Ao/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','Jc7Hgl0G9Ao')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-label-always" style="z-index:3;pointer-events:none;">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Alejandro Sanz "Cuando nadie me ve"</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -735,7 +747,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/aW5I3BdO8tI/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','aW5I3BdO8tI')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Documental</p>
+        <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">El Rey Puma</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -749,7 +761,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/iAL6za3GRWw/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','iAL6za3GRWw')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">11 tiros</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -763,7 +775,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mhGjwCZI148/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','mhGjwCZI148')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Palomares</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -804,7 +816,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','32TAZrD0wnc')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-label-always" style="z-index:3;pointer-events:none;">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Clandestino con David Beriain</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -816,7 +828,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/rll8gAci5c4/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','rll8gAci5c4')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Fuera de Cobertura</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -828,7 +840,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/_Fae0RSGLww/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','_Fae0RSGLww')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">La vida en llamas</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -840,7 +852,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/OJOiT7tkh5U/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','OJOiT7tkh5U')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Al Andalus, el legado</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -852,7 +864,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/yT_EHjnk4to/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','yT_EHjnk4to')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Amazonas Clandestino</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -864,7 +876,7 @@
       <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/qKNAWjik80s/maxresdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','qKNAWjik80s')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Yasuní</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -875,7 +887,7 @@
     <div class="work-item"><div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/Ztwz7TtP4ps/hqdefault.jpg')"></div>
       <div onclick="openSocialModal('yt','Ztwz7TtP4ps')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
       <div class="work-overlay">
-        <p class="work-cat">Serie Documental</p>
+        <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
           <p class="work-title">Clandestino España con David Beriain</p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
@@ -1101,9 +1113,9 @@
         </div>
         <div class="social-stack-info" style="text-align:center;">
           <p class="social-stack-title">KARONGHEN</p>
-          <p class="social-stack-desc">Documental</p>
+          <p class="social-stack-desc"><span data-es>Documental</span><span data-en>Documentary</span></p>
           <p class="social-stack-year">2022 — 60 min — Manos Unidas</p>
-          <p class="social-stack-synopsis">En el sur de Senegal, el programa Karonghen ha marcado un antes y un después durante sus cuatro años de convenio. Este proyecto no solo promueve la estabilidad en una zona históricamente castigada por el conflicto, sino que impulsa el empoderamiento de las mujeres locales en todos los ámbitos de su vida.</p>
+          <p class="social-stack-synopsis"><span data-es>En el sur de Senegal, el programa Karonghen ha marcado un antes y un después durante sus cuatro años de convenio. Este proyecto no solo promueve la estabilidad en una zona históricamente castigada por el conflicto, sino que impulsa el empoderamiento de las mujeres locales en todos los ámbitos de su vida.</span><span data-en>In southern Senegal, the Karonghen programme has been a turning point over its four years of operation. This project not only promotes stability in a region historically scarred by conflict, but drives the empowerment of local women across all areas of their lives.</span></p>
         </div>
       </div>
 
@@ -1120,9 +1132,9 @@
         </div>
         <div class="social-stack-info" style="text-align:center;">
           <p class="social-stack-title">Serêkaniyê</p>
-          <p class="social-stack-desc">Documental</p>
+          <p class="social-stack-desc"><span data-es>Documental</span><span data-en>Documentary</span></p>
           <p class="social-stack-year">2025 — 59 min</p>
-          <p class="social-stack-synopsis">"Serêkaniyê" es una mirada íntima a la guerra, a través de la vida cotidiana de tres mujeres kurdas. Entre alegría, dolor y resistencia, descubrimos que, además del caos y la destrucción, también nacen formas extremas de ternura, solidaridad y comunidad.</p>
+          <p class="social-stack-synopsis"><span data-es>"Serêkaniyê" es una mirada íntima a la guerra, a través de la vida cotidiana de tres mujeres kurdas. Entre alegría, dolor y resistencia, descubrimos que, además del caos y la destrucción, también nacen formas extremas de ternura, solidaridad y comunidad.</span><span data-en>"Serêkaniyê" is an intimate look at war through the daily lives of three Kurdish women. Amid joy, pain and resistance, we discover that alongside chaos and destruction, extreme forms of tenderness, solidarity and community also emerge.</span></p>
         </div>
       </div>
 
@@ -1139,9 +1151,9 @@
         </div>
         <div class="social-stack-info" style="text-align:center;">
           <p class="social-stack-title">Manoliño Nguema</p>
-          <p class="social-stack-desc">Documental</p>
+          <p class="social-stack-desc"><span data-es>Documental</span><span data-en>Documentary</span></p>
           <p class="social-stack-year">2017 — 59 min</p>
-          <p class="social-stack-synopsis">Marcelo Ndong, un artista africano ecuatoguineano formado en España, que ahora regenta una pequeña guardería en Malabo, recibe una inesperada propuesta. Como en tantas otras ocasiones deberá montar una obra de teatro, pero esta vez, el argumento será él. Su propia vida.</p>
+          <p class="social-stack-synopsis"><span data-es>Marcelo Ndong, un artista africano ecuatoguineano formado en España, que ahora regenta una pequeña guardería en Malabo, recibe una inesperada propuesta. Como en tantas otras ocasiones deberá montar una obra de teatro, pero esta vez, el argumento será él. Su propia vida.</span><span data-en>Marcelo Ndong, an Equatoguinean African artist trained in Spain, now running a small nursery in Malabo, receives an unexpected proposal. As on so many other occasions, he must stage a play — but this time, the subject will be himself. His own life.</span></p>
         </div>
       </div>
 
@@ -1158,9 +1170,9 @@
         </div>
         <div class="social-stack-info" style="text-align:center;">
           <p class="social-stack-title">El Secreto del Bosque</p>
-          <p class="social-stack-desc">Documental</p>
+          <p class="social-stack-desc"><span data-es>Documental</span><span data-en>Documentary</span></p>
           <p class="social-stack-year">2025 — 46 min</p>
-          <p class="social-stack-synopsis">El bosque tropical de Guinea Ecuatorial constituye uno de los últimos grandes refugios de selva virgen del mundo. Remoto, desconocido y escasamente explorado, esconde innumerables secretos bajo la inmensa riqueza de vida que cubre su territorio.</p>
+          <p class="social-stack-synopsis"><span data-es>El bosque tropical de Guinea Ecuatorial constituye uno de los últimos grandes refugios de selva virgen del mundo. Remoto, desconocido y escasamente explorado, esconde innumerables secretos bajo la inmensa riqueza de vida que cubre su territorio.</span><span data-en>The tropical forest of Equatorial Guinea is one of the last great refuges of virgin rainforest in the world. Remote, unknown and barely explored, it hides countless secrets beneath the immense richness of life that covers its territory.</span></p>
         </div>
       </div>
 
@@ -1176,7 +1188,7 @@
         </div>
         <div class="social-stack-info" style="text-align:center;">
           <p class="social-stack-title">El que ama</p>
-          <p class="social-stack-desc">Corto documental</p>
+          <p class="social-stack-desc"><span data-es>Corto documental</span><span data-en>Short documentary</span></p>
           <p class="social-stack-year">2013 — 17 min — 93 metros / News of Corporation</p>
         </div>
       </div>
@@ -1193,7 +1205,7 @@
         </div>
         <div class="social-stack-info" style="text-align:center;">
           <p class="social-stack-title">Ricardo Cavolo</p>
-          <p class="social-stack-desc">Corto documental</p>
+          <p class="social-stack-desc"><span data-es>Corto documental</span><span data-en>Short documentary</span></p>
           <p class="social-stack-year">2012 — 3 min</p>
         </div>
       </div>
@@ -1207,16 +1219,16 @@
 <section id="generos">
   <div class="generos-intro reveal">
     <div class="generos-intro-text">
-      <p class="section-label" style="margin-bottom:16px;">Géneros desarrollados</p>
-      <h2>Distintas formas<br>de <em>contar</em></h2>
+      <p class="section-label" style="margin-bottom:16px;"><span data-es>Géneros desarrollados</span><span data-en>Developed Genres</span></p>
+      <h2><span data-es>Distintas formas</span><span data-en>Different ways</span> <br><span data-es>de</span><span data-en>of</span> <em><span data-es>contar</span><span data-en>telling</span></em></h2>
     </div>
     <div class="generos-tabs">
       <button class="genero-btn active" data-genero="truecrime">True Crime</button>
-      <button class="genero-btn" data-genero="periodismo">Investigación</button>
-      <button class="genero-btn" data-genero="deportes">Deportes</button>
-      <button class="genero-btn" data-genero="arte">Cultura</button>
+      <button class="genero-btn" data-genero="periodismo"><span data-es>Investigación</span><span data-en>Investigation</span></button>
+      <button class="genero-btn" data-genero="deportes"><span data-es>Deportes</span><span data-en>Sports</span></button>
+      <button class="genero-btn" data-genero="arte"><span data-es>Cultura</span><span data-en>Culture</span></button>
       <button class="genero-btn" data-genero="ddhh">Social</button>
-      <button class="genero-btn" data-genero="medioambiente">Medio Ambiente</button>
+      <button class="genero-btn" data-genero="medioambiente"><span data-es>Medio Ambiente</span><span data-en>Environment</span></button>
     </div>
   </div>
   <div class="generos-content">
@@ -1597,11 +1609,11 @@
 </script>
 
 <section id="habilidades">
-  <p class="section-label reveal">Habilidades</p>
+  <p class="section-label reveal"><span data-es>Habilidades</span><span data-en>Skills</span></p>
   <div class="hab-layout">
     <div class="hab-left">
-      <h2 class="reveal">Herramientas al servicio<br>de la <em>historia</em></h2>
-      <p class="reveal">Dominio técnico y sensibilidad narrativa no son opuestos: son la misma cosa. Cada herramienta es un instrumento al servicio del relato.</p>
+      <h2 class="reveal"><span data-es>Herramientas al servicio</span><span data-en>Tools in service</span> <br><span data-es>de la</span><span data-en>of the</span> <em><span data-es>historia</span><span data-en>story</span></em></h2>
+      <p class="reveal"><span data-es>Dominio técnico y sensibilidad narrativa no son opuestos: son la misma cosa. Cada herramienta es un instrumento al servicio del relato.</span><span data-en>Technical mastery and narrative sensibility are not opposites — they are the same thing. Every tool is an instrument in service of the story.</span></p>
       <div class="software-list reveal">
         <div class="software-item">
           <div class="software-header"><span class="software-name">Avid Media Composer</span><span class="software-pct">85%</span></div>
@@ -1621,61 +1633,61 @@
         </div>
       </div>
       <div class="comp-group reveal" style="margin-top:40px;">
-        <div class="comp-group-title">Especialidades narrativas</div>
+        <div class="comp-group-title"><span data-es>Especialidades narrativas</span><span data-en>Narrative Specialities</span></div>
         <div class="comp-tags">
-          <span class="comp-tag">Montaje documental</span>
-          <span class="comp-tag">Estructuración narrativa</span>
-          <span class="comp-tag">Edición de archivo</span>
-          <span class="comp-tag">Ritmo y tempo</span>
-          <span class="comp-tag">Mezcla de sonido</span>
-          <span class="comp-tag">Color grading</span>
-          <span class="comp-tag">Motion graphics</span>
-          <span class="comp-tag">Gestión de proyecto</span>
+          <span class="comp-tag"><span data-es>Montaje documental</span><span data-en>Documentary editing</span></span>
+          <span class="comp-tag"><span data-es>Estructuración narrativa</span><span data-en>Narrative structuring</span></span>
+          <span class="comp-tag"><span data-es>Edición de archivo</span><span data-en>Archive editing</span></span>
+          <span class="comp-tag"><span data-es>Ritmo y tempo</span><span data-en>Rhythm and tempo</span></span>
+          <span class="comp-tag"><span data-es>Mezcla de sonido</span><span data-en>Sound mixing</span></span>
+          <span class="comp-tag"><span data-es>Color grading</span><span data-en>Color grading</span></span>
+          <span class="comp-tag"><span data-es>Motion graphics</span><span data-en>Motion graphics</span></span>
+          <span class="comp-tag"><span data-es>Gestión de proyecto</span><span data-en>Project management</span></span>
         </div>
       </div>
     </div>
     <div class="hab-right">
       <div class="timeline reveal" id="premios">
-        <div class="timeline-title">Premios y Reconocimientos</div>
+        <div class="timeline-title"><span data-es>Premios y Reconocimientos</span><span data-en>Awards & Recognition</span></div>
         <div class="tl-item">
           <div class="tl-year">2026</div>
-          <div class="tl-body"><div class="tl-role">Selección oficial — Tribeca Film Festival, Nueva York</div><div class="tl-company">"Cuando nadie me ve"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Selección oficial — Tribeca Film Festival, Nueva York</span><span data-en>Official Selection — Tribeca Film Festival, New York</span></div><div class="tl-company">"Cuando nadie me ve"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2021</div>
-          <div class="tl-body"><div class="tl-role">Finalista Premios Gabo</div><div class="tl-company">"Palomares"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Finalista Premios Gabo</span><span data-en>Finalist Premio Gabo</span></div><div class="tl-company">"Palomares"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2021</div>
-          <div class="tl-body"><div class="tl-role">Mejor Documental — Festival de Cine y TV de León</div><div class="tl-company">"Manoliño Nguema"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Mejor Documental — Festival de Cine y TV de León</span><span data-en>Best Documentary — León Film & TV Festival</span></div><div class="tl-company">"Manoliño Nguema"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2021</div>
-          <div class="tl-body"><div class="tl-role">Premio Iris del Jurado - La Academia de las Ciencias y las Artes de Televisión de España</div><div class="tl-company">"Palomares"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Premio Iris del Jurado - La Academia de las Ciencias y las Artes de Televisión de España</span><span data-en>Iris Jury Award — Academy of Television Arts and Sciences of Spain</span></div><div class="tl-company">"Palomares"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2021</div>
-          <div class="tl-body"><div class="tl-role">Nominación Iris — Mejor programa producido para canal temático</div><div class="tl-company">"Al Andalus, el legado"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Nominación Iris — Mejor programa producido para canal temático</span><span data-en>Iris Nomination — Best Programme for Thematic Channel</span></div><div class="tl-company">"Al Andalus, el legado"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2020</div>
-          <div class="tl-body"><div class="tl-role">Mejor documental - Premios Maestre Mateo - Academia Galega do Audiovisual</div><div class="tl-company">"Manoliño Nguema"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Mejor documental - Premios Maestre Mateo - Academia Galega do Audiovisual</span><span data-en>Best Documentary — Premios Maestre Mateo, Galician Academy of Audiovisual</span></div><div class="tl-company">"Manoliño Nguema"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2020</div>
-          <div class="tl-body"><div class="tl-role">Premio del Público — Miradas Doc</div><div class="tl-company">"Manoliño Nguema"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Premio del Público — Miradas Doc</span><span data-en>Audience Award — Miradas Doc</span></div><div class="tl-company">"Manoliño Nguema"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2016</div>
-          <div class="tl-body"><div class="tl-role">Premio Iris del Jurado - La Academia de las Ciencias y las Artes de Televisión de España</div><div class="tl-company">"Clandestino"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Premio Iris del Jurado - La Academia de las Ciencias y las Artes de Televisión de España</span><span data-en>Iris Jury Award — Academy of Television Arts and Sciences of Spain</span></div><div class="tl-company">"Clandestino"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2014</div>
-          <div class="tl-body"><div class="tl-role">Gran Premio del Jurado — Sunny Side of the Doc</div><div class="tl-company">"La Vida en Llamas"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Gran Premio del Jurado — Sunny Side of the Doc</span><span data-en>Grand Jury Prize — Sunny Side of the Doc</span></div><div class="tl-company">"La Vida en Llamas"</div></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2013</div>
-          <div class="tl-body"><div class="tl-role">Premio "Estela Solidaria" - Academia Galega do Audiovisual</div><div class="tl-company">"Caminos de Paz"</div></div>
+          <div class="tl-body"><div class="tl-role"><span data-es>Premio "Estela Solidaria" - Academia Galega do Audiovisual</span><span data-en>"Estela Solidaria" Award — Galician Academy of Audiovisual</span></div><div class="tl-company">"Caminos de Paz"</div></div>
         </div>
       </div>
     </div>
@@ -1683,38 +1695,38 @@
 </section>
 
 <section id="referencias">
-  <p class="section-label reveal">Referencias</p>
+  <p class="section-label reveal"><span data-es>Referencias</span><span data-en>References</span></p>
   <div class="ref-intro reveal">
-    <h2>Lo que dicen quienes <em>confían</em></h2>
+    <h2><span data-es>Lo que dicen quienes</span><span data-en>What those who</span> <em><span data-es>confían</span><span data-en>trust</span></em> <span data-es></span><span data-en>say</span></h2>
   </div>
   <div class="ref-grid reveal">
     <div class="ref-card">
-      <div class="ref-text-wrap"><p class="ref-text">«Álvaro demostró una evolución profesional excepcional en muy poco tiempo, destacando por su creatividad, sensibilidad visual y capacidad de aprendizaje. Su actitud entusiasta contribuyó al crecimiento y mejora del proyecto. Volvería a trabajar con él, incluso con los ojos cerrados, para cualquier proyecto audiovisual al máximo nivel de exigencia.»</p></div>
-      <div class="ref-author"><div class="ref-name">Alain Uceda</div><div class="ref-role">Director</div><div class="ref-project">Fahrenheit · Canal 9</div></div>
+      <div class="ref-text-wrap"><p class="ref-text"><span data-es>«Álvaro demostró una evolución profesional excepcional en muy poco tiempo, destacando por su creatividad, sensibilidad visual y capacidad de aprendizaje. Su actitud entusiasta contribuyó al crecimiento y mejora del proyecto. Volvería a trabajar con él, incluso con los ojos cerrados, para cualquier proyecto audiovisual al máximo nivel de exigencia.»</span><span data-en>«Álvaro demonstrated exceptional professional growth in a very short time, standing out for his creativity, visual sensitivity and eagerness to learn. His enthusiastic attitude contributed to the growth and improvement of the project. I would work with him again, eyes closed, on any audiovisual project at the highest level of demand.»</span></p></div>
+      <div class="ref-author"><div class="ref-name">Alain Uceda</div><div class="ref-role"><span data-es>Director</span><span data-en>Director</span></div><div class="ref-project">Fahrenheit · Canal 9</div></div>
     </div>
     <div class="ref-card">
-      <div class="ref-text-wrap"><p class="ref-text">«Álvaro es un profesional talentoso y apasionado por su trabajo, con un nivel de dedicación difícil de superar. Destaca por su gran sentido de la narrativa, su gusto por la poesía visual. Su desempeño es impecable y garantiza un trabajo de la más alta calidad. Trabajar con él fue extraordinario.»</p></div>
-      <div class="ref-author"><div class="ref-name">David Beriain</div><div class="ref-role">Director</div><div class="ref-project">Clandestino · DMAX</div></div>
+      <div class="ref-text-wrap"><p class="ref-text"><span data-es>«Álvaro es un profesional talentoso y apasionado por su trabajo, con un nivel de dedicación difícil de superar. Destaca por su gran sentido de la narrativa, su gusto por la poesía visual. Su desempeño es impecable y garantiza un trabajo de la más alta calidad. Trabajar con él fue extraordinario.»</span><span data-en>«Álvaro is a talented professional, passionate about his work, with a level of dedication that is hard to match. He stands out for his strong sense of narrative and his taste for visual poetry. His performance is impeccable and guarantees the highest quality work. Working with him was extraordinary.»</span></p></div>
+      <div class="ref-author"><div class="ref-name">David Beriain</div><div class="ref-role"><span data-es>Director</span><span data-en>Director</span></div><div class="ref-project">Clandestino · DMAX</div></div>
     </div>
     <div class="ref-card">
-      <div class="ref-text-wrap"><p class="ref-text">«Álvaro es un editor con gran creatividad, criterio visual y una sólida capacidad técnica, capaz de aportar calidad y personalidad a cualquier proyecto. Su profesionalidad, compromiso y responsabilidad lo convierten en un colaborador de total confianza. Seguirá aportando valor e inspiración en cada reto audiovisual que emprenda.»</p></div>
-      <div class="ref-author"><div class="ref-name">Antonio Grunfeld</div><div class="ref-role">Director</div><div class="ref-project">MANOLIÑO NGUEMA</div></div>
+      <div class="ref-text-wrap"><p class="ref-text"><span data-es>«Álvaro es un editor con gran creatividad, criterio visual y una sólida capacidad técnica, capaz de aportar calidad y personalidad a cualquier proyecto. Su profesionalidad, compromiso y responsabilidad lo convierten en un colaborador de total confianza. Seguirá aportando valor e inspiración en cada reto audiovisual que emprenda.»</span><span data-en>«Álvaro is an editor with great creativity, visual judgement and solid technical ability, capable of bringing quality and personality to any project. His professionalism, commitment and accountability make him a completely reliable collaborator. He will continue to add value and inspiration to every audiovisual challenge he takes on.»</span></p></div>
+      <div class="ref-author"><div class="ref-name">Antonio Grunfeld</div><div class="ref-role"><span data-es>Director</span><span data-en>Director</span></div><div class="ref-project">MANOLIÑO NGUEMA</div></div>
     </div>
     <div class="ref-card">
-      <div class="ref-text-wrap"><p class="ref-text">«La edición documental exige mucho más que técnica: requiere encontrar una narrativa clara entre horas de material, perspectivas diversas y decisiones complejas. Álvaro destaca precisamente en ese desafío, comprendiendo la visión del director mientras aporta el criterio necesario para fortalecer la historia. Su sensibilidad narrativa, capacidad de análisis y talento creativo lo convierten en un editor excepcional para proyectos documentales de alta exigencia.»</p></div>
-      <div class="ref-author"><div class="ref-name">Fernando Ureña</div><div class="ref-role">Director</div><div class="ref-project">11 Tiros · HBO</div></div>
+      <div class="ref-text-wrap"><p class="ref-text"><span data-es>«La edición documental exige mucho más que técnica: requiere encontrar una narrativa clara entre horas de material, perspectivas diversas y decisiones complejas. Álvaro destaca precisamente en ese desafío, comprendiendo la visión del director mientras aporta el criterio necesario para fortalecer la historia. Su sensibilidad narrativa, capacidad de análisis y talento creativo lo convierten en un editor excepcional para proyectos documentales de alta exigencia.»</span><span data-en>«Documentary editing demands far more than technique: it requires finding a clear narrative from hours of footage, multiple perspectives and complex decisions. Álvaro excels precisely at that challenge, understanding the director's vision while providing the judgement needed to strengthen the story. His narrative sensitivity, analytical capacity and creative talent make him an exceptional editor for demanding documentary projects.»</span></p></div>
+      <div class="ref-author"><div class="ref-name">Fernando Ureña</div><div class="ref-role"><span data-es>Director</span><span data-en>Director</span></div><div class="ref-project">11 Tiros · HBO</div></div>
     </div>
     <div class="ref-card">
-      <div class="ref-text-wrap"><p class="ref-text">«Como guionista, pocas veces he encontrado un editor con la capacidad de Álvaro para descubrir y potenciar la esencia de una historia. Su sensibilidad narrativa transforma el material documental en un relato coherente, emocionante y auténtico. Es un colaborador imprescindible para convertir una buena idea en una gran película.»</p></div>
-      <div class="ref-author"><div class="ref-name">Jorge Arroyo</div><div class="ref-role">Guionista</div><div class="ref-project">La vida en llamas · DMAX</div></div>
+      <div class="ref-text-wrap"><p class="ref-text"><span data-es>«Como guionista, pocas veces he encontrado un editor con la capacidad de Álvaro para descubrir y potenciar la esencia de una historia. Su sensibilidad narrativa transforma el material documental en un relato coherente, emocionante y auténtico. Es un colaborador imprescindible para convertir una buena idea en una gran película.»</span><span data-en>«As a screenwriter, I have rarely found an editor with Álvaro's ability to uncover and amplify the essence of a story. His narrative sensitivity transforms documentary material into a coherent, moving and authentic piece. He is an indispensable collaborator for turning a good idea into a great film.»</span></p></div>
+      <div class="ref-author"><div class="ref-name">Jorge Arroyo</div><div class="ref-role"><span data-es>Guionista</span><span data-en>Screenwriter</span></div><div class="ref-project">La vida en llamas · DMAX</div></div>
     </div>
     <div class="ref-card">
-      <div class="ref-text-wrap"><p class="ref-text">«Como editor, valoro especialmente en Álvaro una cualidad poco común: su capacidad para encontrar la historia dentro del material y darle ritmo, claridad y emoción sin perder autenticidad. Su criterio narrativo y su sensibilidad para el documental elevan cada proyecto más allá de lo esperado. Es un profesional con el que cualquier editor desearía compartir sala de montaje.»</p></div>
-      <div class="ref-author"><div class="ref-name">José Garrido</div><div class="ref-role">Editor</div><div class="ref-project">Cuando Nadie me ve · Movistar +</div></div>
+      <div class="ref-text-wrap"><p class="ref-text"><span data-es>«Como editor, valoro especialmente en Álvaro una cualidad poco común: su capacidad para encontrar la historia dentro del material y darle ritmo, claridad y emoción sin perder autenticidad. Su criterio narrativo y su sensibilidad para el documental elevan cada proyecto más allá de lo esperado. Es un profesional con el que cualquier editor desearía compartir sala de montaje.»</span><span data-en>«As an editor, I particularly value in Álvaro an uncommon quality: his ability to find the story within the material and give it rhythm, clarity and emotion without losing authenticity. His narrative judgement and sensitivity for documentary lift every project beyond what is expected. He is a professional any editor would wish to share a cutting room with.»</span></p></div>
+      <div class="ref-author"><div class="ref-name">José Garrido</div><div class="ref-role"><span data-es>Editor</span><span data-en>Editor</span></div><div class="ref-project">Cuando Nadie me ve · Movistar +</div></div>
     </div>
   </div>
   <div class="ref-clients reveal">
-    <p class="ref-clients-label">Ha trabajado con</p>
+    <p class="ref-clients-label"><span data-es>Ha trabajado con</span><span data-en>Has worked with</span></p>
     <div class="clients-row">
       <div class="client-item"><span class="client-name">MOVISTAR +</span></div>
       <div class="client-item"><span class="client-name">HBOMAX</span></div>
@@ -1729,42 +1741,42 @@
 <section id="contactos">
   <div class="contact-layout">
     <div class="contact-left">
-      <p class="section-label reveal">Contactos</p>
-      <h2 class="reveal">¿Tienes un proyecto <em>pendiente?</em></h2>
-      <p class="reveal">Disponible para nuevos proyectos. Si tienes material que necesita ser montado o simplemente quieres hablar de tu idea, escríbeme.</p>
+      <p class="section-label reveal"><span data-es>Contactos</span><span data-en>Contact</span></p>
+      <h2 class="reveal"><span data-es>¿Tienes un proyecto</span><span data-en>Got a project</span> <em><span data-es>pendiente?</span><span data-en>pending?</span></em></h2>
+      <p class="reveal"><span data-es>Disponible para nuevos proyectos. Si tienes material que necesita ser montado o simplemente quieres hablar de tu idea, escríbeme.</span><span data-en>Available for new projects. If you have footage that needs editing or simply want to talk through an idea, get in touch.</span></p>
       <div class="contact-links reveal">
         <a href="mailto:alvarodante@gmail.com" class="contact-link-row">
           <div><div class="cl-label">Email</div><div class="cl-value">alvarodante@gmail.com</div></div>
           <span class="cl-arrow">→</span>
         </a>
         <a href="https://www.linkedin.com/in/alvaroeditor" target="_blank" rel="noopener" class="contact-link-row">
-          <div><div class="cl-label">Red profesional</div><div class="cl-value">LinkedIn</div></div>
+          <div><div class="cl-label"><span data-es>Red profesional</span><span data-en>Professional network</span></div><div class="cl-value">LinkedIn</div></div>
           <span class="cl-arrow">→</span>
         </a>
         <a href="https://www.instagram.com" target="_blank" rel="noopener" class="contact-link-row">
-          <div><div class="cl-label">Redes</div><div class="cl-value">Instagram</div></div>
+          <div><div class="cl-label"><span data-es>Redes</span><span data-en>Social</span></div><div class="cl-value">Instagram</div></div>
           <span class="cl-arrow">→</span>
         </a>
         <a href="https://www.imdb.com/es-es/name/nm9783507/" target="_blank" rel="noopener" class="contact-link-row">
-          <div><div class="cl-label">Redes</div><div class="cl-value">IMDB</div></div>
+          <div><div class="cl-label"><span data-es>Redes</span><span data-en>Social</span></div><div class="cl-value">IMDB</div></div>
           <span class="cl-arrow">→</span>
         </a>
         <a href="https://www.filmaffinity.com/es/name.php?name-id=256796368" target="_blank" rel="noopener" class="contact-link-row">
-          <div><div class="cl-label">Redes</div><div class="cl-value">Filmaffinity</div></div>
+          <div><div class="cl-label"><span data-es>Redes</span><span data-en>Social</span></div><div class="cl-value">Filmaffinity</div></div>
           <span class="cl-arrow">→</span>
         </a>
       </div>
     </div>
     <div class="contact-right reveal">
       <div class="avail-card">
-        <div class="avail-status"><div class="avail-dot"></div><span class="avail-text">Disponible para proyectos</span></div>
-        <div class="avail-title">Abierto a nuevos encargos en 2026</div>
+        <div class="avail-status"><div class="avail-dot"></div><span class="avail-text"><span data-es>Disponible para proyectos</span><span data-en>Available for projects</span></span></div>
+        <div class="avail-title"><span data-es>Abierto a nuevos encargos en 2026</span><span data-en>Open to new commissions in 2026</span></div>
 
         <div class="services-list">
-          <div class="service-item">Montaje documental completo</div>
-          <div class="service-item">Edición de material de archivo</div>
-          <div class="service-item">Consultoría de estructura narrativa</div>
-          <div class="service-item">Supervisión de post-producción</div>
+          <div class="service-item"><span data-es>Montaje documental completo</span><span data-en>Full documentary editing</span></div>
+          <div class="service-item"><span data-es>Edición de material de archivo</span><span data-en>Archive footage editing</span></div>
+          <div class="service-item"><span data-es>Consultoría de estructura narrativa</span><span data-en>Narrative structure consultancy</span></div>
+          <div class="service-item"><span data-es>Supervisión de post-producción</span><span data-en>Post-production supervision</span></div>
         </div>
       </div>
     </div>
@@ -1772,8 +1784,8 @@
 </section>
 
 <footer>
-  <p class="footer-copy">© 2026 Álvaro Ayala Entrena. Todos los derechos reservados.</p>
-  <p class="footer-name">Editor de documentales — Madrid</p>
+  <p class="footer-copy"><span data-es>© 2026 Álvaro Ayala Entrena. Todos los derechos reservados.</span><span data-en>© 2026 Álvaro Ayala Entrena. All rights reserved.</span></p>
+  <p class="footer-name"><span data-es>Editor de documentales — Madrid</span><span data-en>Documentary Editor — Madrid</span></p>
 </footer>
 
 <script>
@@ -1900,6 +1912,16 @@
       img.src = url;
     });
   })();
+</script>
+
+<script>
+  function switchLang() {
+    const html = document.documentElement;
+    const isEn = html.dataset.lang === 'en';
+    html.dataset.lang = isEn ? 'es' : 'en';
+    html.lang = isEn ? 'es' : 'en';
+    document.getElementById('lang-btn').textContent = isEn ? 'English' : 'Español';
+  }
 </script>
 </body>
 </html>
