@@ -476,6 +476,7 @@
 [data-lang="en"] .lang-btn { color: var(--accent); border-color: var(--accent); }
 [data-lang="es"] .lang-btn { color: var(--text-muted); border-color: transparent; }
 [data-lang="en"] [data-es], [data-lang="es"] [data-en] { display: none !important; }
+[data-lang="en"] .genero-title, [data-lang="en"] .work-title { font-size: 11px; letter-spacing: -0.01em; }
 </style>
 </head>
 <body>
@@ -485,7 +486,7 @@
   <button class="menu-toggle" id="menu-btn" aria-label="Abrir menú">☰</button>
   <ul class="nav-links" id="nav-menu">
     <li><a href="#inicio"><span data-es>Inicio</span><span data-en>Home</span></a></li>
-    <li><a href="#trabajos"><span data-es>Trabajos</span><span data-en>Works</span></a></li>
+    <li><a href="#trabajos"><span data-es>Trabajos</span><span data-en>Projects</span></a></li>
     <li><a href="#generos"><span data-es>Géneros</span><span data-en>Genres</span></a></li>
     <li><a href="#habilidades"><span data-es>Habilidades</span><span data-en>Skills</span></a></li>
     <li><a href="#premios"><span data-es>Premios</span><span data-en>Awards</span></a></li>
@@ -520,13 +521,13 @@
   <div class="hero-content">
     <p class="hero-eyebrow"><span data-es>Editor de Documentales</span><span data-en>Documentary Editor</span></p>
     <h1 class="hero-title"><span data-es>La imagen como</span><span data-en>The image as</span> <em><span data-es>verdad</span><span data-en>truth</span></em></h1>
-    <p class="hero-sub"><span data-es>Más de quince años montando realidades que importan, transformando pequeñas historias en relatos universales. Para mí, la narrativa visual, el cuidado por el detalle y la organización son elementos clave. Soy un profesional comprometido con el equipo y habituado a rendir con éxito bajo presión.</span><span data-en>Over fifteen years editing realities that matter, transforming small stories into universal narratives. For me, visual storytelling, attention to detail and organisation are key. I am a committed team player, consistently delivering under pressure.</span></p>
+    <p class="hero-sub"><span data-es>Más de quince años editando realidades que importan, transformando pequeñas historias en relatos universales. Para mí, la narrativa visual, el cuidado por el detalle y la organización son elementos clave. Soy un profesional comprometido con el equipo y habituado a rendir con éxito bajo presión.</span><span data-en>Over fifteen years editing realities that matter, transforming small stories into universal narratives. For me, visual storytelling, attention to detail and organisation are key. I am a committed team player, consistently delivering under pressure.</span></p>
     
-    <a href="https://www.linkedin.com/in/alvaroeditor" target="_blank" class="reel-btn" id="reel-trigger">
+    <a href="https://www.linkedin.com/in/alvaroeditor" target="_blank" class="reel-btn" id="reel-trigger" data-href-es="https://www.linkedin.com/in/alvaroeditor" data-href-en="https://www.linkedin.com/in/alvaroeditor/?locale=en-US">
       <span class="reel-icon">
         <svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg>
       </span>
-      Ver LinkedIn
+      <span data-es>Mi LinkedIn</span><span data-en>My LinkedIn profile</span>
     </a>
   </div>
 </section>
@@ -539,7 +540,7 @@
     </div>
     <div class="works-filter">
       <button class="filter-btn active" data-tab="destacados"><span data-es>Destacados</span><span data-en>Featured</span></button>
-      <button class="filter-btn" data-tab="plataformas"><span data-es>Plataformas</span><span data-en>Platforms</span></button>
+      <button class="filter-btn" data-tab="plataformas"><span data-es>Plataformas</span><span data-en>Streaming</span></button>
       <button class="filter-btn" data-tab="television"><span data-es>Televisión</span><span data-en>Television</span></button>
       <button class="filter-btn" data-tab="social">Social</button>
     </div>
@@ -553,7 +554,7 @@
       <div class="work-label-always" style="z-index:3;">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Alejandro Sanz "Cuando nadie me ve"</p>
+          <p class="work-title"><span data-es>Alejandro Sanz "Cuando nadie me ve"</span><span data-en>Alejandro Sanz "When Nobody Sees Me"</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2026 — 3 Episodios — Movistar+</p>
@@ -567,7 +568,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">11 tiros</p>
+          <p class="work-title"><span data-es>11 tiros</span><span data-en>11 Shots</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2022 — 11 Episodios — HBO</p>
@@ -579,7 +580,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Palomares</p>
+          <p class="work-title"><span data-es>Palomares</span><span data-en>Palomares</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2020 — 3 Episodios — Movistar+</p>
@@ -591,7 +592,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Clandestino con David Beriain</p>
+          <p class="work-title"><span data-es>Clandestino con David Beriain</span><span data-en>Clandestine with David Beriain</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">3 Temporadas (2016-2019) DMAX</p>
@@ -603,7 +604,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">La vida en llamas</p>
+          <p class="work-title"><span data-es>La vida en llamas</span><span data-en>Life in Flames</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2015 — 3 Episodios — DMAX</p>
@@ -735,7 +736,7 @@
       <div class="work-label-always" style="z-index:3;pointer-events:none;">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Alejandro Sanz "Cuando nadie me ve"</p>
+          <p class="work-title"><span data-es>Alejandro Sanz "Cuando nadie me ve"</span><span data-en>Alejandro Sanz "When Nobody Sees Me"</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2026 — 3 Episodios — Movistar+</p>
@@ -749,7 +750,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">El Rey Puma</p>
+          <p class="work-title"><span data-es>El Rey Puma</span><span data-en>The Puma King</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2024 — MOVISTAR +</p>
@@ -763,7 +764,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">11 tiros</p>
+          <p class="work-title"><span data-es>11 tiros</span><span data-en>11 Shots</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2022 — 11 Episodios — HBO</p>
@@ -777,7 +778,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Palomares</p>
+          <p class="work-title"><span data-es>Palomares</span><span data-en>Palomares</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2020 — 3 Episodios — Movistar+</p>
@@ -818,7 +819,7 @@
       <div class="work-label-always" style="z-index:3;pointer-events:none;">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Clandestino con David Beriain</p>
+          <p class="work-title"><span data-es>Clandestino con David Beriain</span><span data-en>Clandestine with David Beriain</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">3 Temporadas (2016-2019) DMAX</p>
@@ -830,7 +831,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Fuera de Cobertura</p>
+          <p class="work-title"><span data-es>Fuera de Cobertura</span><span data-en>Out of Coverage</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">Temporada 4 — 2023 — Cuatro</p>
@@ -842,7 +843,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">La vida en llamas</p>
+          <p class="work-title"><span data-es>La vida en llamas</span><span data-en>Life in Flames</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2015 — 3 Episodios — DMAX</p>
@@ -854,7 +855,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Al Andalus, el legado</p>
+          <p class="work-title"><span data-es>Al Andalus, el legado</span><span data-en>Al Andalus, the Legacy</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2021 — 6 Episodios — Canal Historia</p>
@@ -866,7 +867,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Amazonas Clandestino</p>
+          <p class="work-title"><span data-es>Amazonas Clandestino</span><span data-en>Clandestine Amazon</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2015 — 6 Episodios — DMAX</p>
@@ -878,7 +879,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Yasuní</p>
+          <p class="work-title"><span data-es>Yasuní</span><span data-en>Yasuní</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2014 — Documental — DMAX</p>
@@ -889,7 +890,7 @@
       <div class="work-overlay">
         <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
         <span class="proj-tooltip-trigger">
-          <p class="work-title">Clandestino España con David Beriain</p>
+          <p class="work-title"><span data-es>Clandestino España con David Beriain</span><span data-en>Clandestine Spain with David Beriain</span></p>
           <div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc">Escribe aquí la descripción del proyecto.</p></div>
         </span>
         <p class="work-year">2019 — 8 Episodios — DMAX</p>
@@ -1112,7 +1113,7 @@
           </div>
         </div>
         <div class="social-stack-info" style="text-align:center;">
-          <p class="social-stack-title">KARONGHEN</p>
+          <p class="social-stack-title"><span data-es>KARONGHEN</span><span data-en>KARONGHEN / KARONGHEN</span></p>
           <p class="social-stack-desc"><span data-es>Documental</span><span data-en>Documentary</span></p>
           <p class="social-stack-year">2022 — 60 min — Manos Unidas</p>
           <p class="social-stack-synopsis"><span data-es>En el sur de Senegal, el programa Karonghen ha marcado un antes y un después durante sus cuatro años de convenio. Este proyecto no solo promueve la estabilidad en una zona históricamente castigada por el conflicto, sino que impulsa el empoderamiento de las mujeres locales en todos los ámbitos de su vida.</span><span data-en>In southern Senegal, the Karonghen programme has been a turning point over its four years of operation. This project not only promotes stability in a region historically scarred by conflict, but drives the empowerment of local women across all areas of their lives.</span></p>
@@ -1131,7 +1132,7 @@
           </div>
         </div>
         <div class="social-stack-info" style="text-align:center;">
-          <p class="social-stack-title">Serêkaniyê</p>
+          <p class="social-stack-title"><span data-es>Serêkaniyê</span><span data-en>Serêkaniyê / Serêkaniyê</span></p>
           <p class="social-stack-desc"><span data-es>Documental</span><span data-en>Documentary</span></p>
           <p class="social-stack-year">2025 — 59 min</p>
           <p class="social-stack-synopsis"><span data-es>"Serêkaniyê" es una mirada íntima a la guerra, a través de la vida cotidiana de tres mujeres kurdas. Entre alegría, dolor y resistencia, descubrimos que, además del caos y la destrucción, también nacen formas extremas de ternura, solidaridad y comunidad.</span><span data-en>"Serêkaniyê" is an intimate look at war through the daily lives of three Kurdish women. Amid joy, pain and resistance, we discover that alongside chaos and destruction, extreme forms of tenderness, solidarity and community also emerge.</span></p>
@@ -1150,7 +1151,7 @@
           </div>
         </div>
         <div class="social-stack-info" style="text-align:center;">
-          <p class="social-stack-title">Manoliño Nguema</p>
+          <p class="social-stack-title"><span data-es>Manoliño Nguema</span><span data-en>Manoliño Nguema / Manoliño Nguema</span></p>
           <p class="social-stack-desc"><span data-es>Documental</span><span data-en>Documentary</span></p>
           <p class="social-stack-year">2017 — 59 min</p>
           <p class="social-stack-synopsis"><span data-es>Marcelo Ndong, un artista africano ecuatoguineano formado en España, que ahora regenta una pequeña guardería en Malabo, recibe una inesperada propuesta. Como en tantas otras ocasiones deberá montar una obra de teatro, pero esta vez, el argumento será él. Su propia vida.</span><span data-en>Marcelo Ndong, an Equatoguinean African artist trained in Spain, now running a small nursery in Malabo, receives an unexpected proposal. As on so many other occasions, he must stage a play — but this time, the subject will be himself. His own life.</span></p>
@@ -1169,7 +1170,7 @@
           </div>
         </div>
         <div class="social-stack-info" style="text-align:center;">
-          <p class="social-stack-title">El Secreto del Bosque</p>
+          <p class="social-stack-title"><span data-es>El Secreto del Bosque</span><span data-en>El Secreto del Bosque / The Secret of the Forest</span></p>
           <p class="social-stack-desc"><span data-es>Documental</span><span data-en>Documentary</span></p>
           <p class="social-stack-year">2025 — 46 min</p>
           <p class="social-stack-synopsis"><span data-es>El bosque tropical de Guinea Ecuatorial constituye uno de los últimos grandes refugios de selva virgen del mundo. Remoto, desconocido y escasamente explorado, esconde innumerables secretos bajo la inmensa riqueza de vida que cubre su territorio.</span><span data-en>The tropical forest of Equatorial Guinea is one of the last great refuges of virgin rainforest in the world. Remote, unknown and barely explored, it hides countless secrets beneath the immense richness of life that covers its territory.</span></p>
@@ -1187,7 +1188,7 @@
           </div>
         </div>
         <div class="social-stack-info" style="text-align:center;">
-          <p class="social-stack-title">El que ama</p>
+          <p class="social-stack-title"><span data-es>El que ama</span><span data-en>El que ama / The One Who Loves</span></p>
           <p class="social-stack-desc"><span data-es>Corto documental</span><span data-en>Short documentary</span></p>
           <p class="social-stack-year">2013 — 17 min — 93 metros / News of Corporation</p>
         </div>
@@ -1204,7 +1205,7 @@
           </div>
         </div>
         <div class="social-stack-info" style="text-align:center;">
-          <p class="social-stack-title">Ricardo Cavolo</p>
+          <p class="social-stack-title"><span data-es>Ricardo Cavolo</span><span data-en>Ricardo Cavolo / Ricardo Cavolo</span></p>
           <p class="social-stack-desc"><span data-es>Corto documental</span><span data-en>Short documentary</span></p>
           <p class="social-stack-year">2012 — 3 min</p>
         </div>
@@ -1224,7 +1225,7 @@
     </div>
     <div class="generos-tabs">
       <button class="genero-btn active" data-genero="truecrime">True Crime</button>
-      <button class="genero-btn" data-genero="periodismo"><span data-es>Investigación</span><span data-en>Investigation</span></button>
+      <button class="genero-btn" data-genero="periodismo"><span data-es>Investigación</span><span data-en>Investigative</span></button>
       <button class="genero-btn" data-genero="deportes"><span data-es>Deportes</span><span data-en>Sports</span></button>
       <button class="genero-btn" data-genero="arte"><span data-es>Cultura</span><span data-en>Culture</span></button>
       <button class="genero-btn" data-genero="ddhh">Social</button>
@@ -1238,21 +1239,21 @@
           <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/7a8de90b058a35c248315f26ec5cd301.jpeg')"></div>
           <div onclick="openWistiaModal('d4u12hhux2')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Un día en Sinaloa</p>
+            <p class="genero-title"><span data-es>Un día más en Sinaloa</span><span data-en>One More Day in Sinaloa</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/Y4aV3xNRfyI/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','Y4aV3xNRfyI')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Muerte en Sao Paulo</p>
+            <p class="genero-title"><span data-es>Muerte en Sao Paulo</span><span data-en>Death in São Paulo</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/d0b0f84100c013fea6905340c29908b3.jpeg')"></div>
           <div onclick="openWistiaModal('lc9mxfu62v')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Forense en El Salvador</p>
+            <p class="genero-title"><span data-es>Forense en El Salvador</span><span data-en>Forensic in El Salvador</span></p>
           </div>
         </div>
 
@@ -1260,7 +1261,7 @@
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/MRyV2tNbHYw/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','MRyV2tNbHYw')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">El pitido final</p>
+            <p class="genero-title"><span data-es>El pitido final</span><span data-en>The Final Whistle</span></p>
           </div>
         </div>
 
@@ -1268,7 +1269,7 @@
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/PrHrn6RDz6k/maxresdefault.jpg')"></div>
           <div onclick="openWistiaModal('911igu6auq')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Objetivo: Las Maras</p>
+            <p class="genero-title"><span data-es>Objetivo: Las Maras</span><span data-en>Target: Las Maras</span></p>
           </div>
         </div>
       </div>
@@ -1279,42 +1280,42 @@
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/FRIqPPiyS6s/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','FRIqPPiyS6s')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">La banda del buco</p>
+            <p class="genero-title"><span data-es>La banda del buco</span><span data-en>The Buco Gang</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/JPmlMTK9Alk/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','JPmlMTK9Alk')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">El Robo del Balón de Oro</p>
+            <p class="genero-title"><span data-es>El Robo del Balón de Oro</span><span data-en>The Theft of the Golden Ball</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/bf8135ef62d57e57a0049dcedc02177f.jpeg')"></div>
           <div onclick="openWistiaModal('v07vvbu70g')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Infravivir en España</p>
+            <p class="genero-title"><span data-es>Infravivir en España</span><span data-en>Struggling to Live in Spain</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/jMGZdaylm50/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','jMGZdaylm50')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">La maldición de la Huaca</p>
+            <p class="genero-title"><span data-es>La maldición de la Huaca</span><span data-en>The Curse of the Huaca</span></p>
           </div>
         </div>
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/4558fd1010b01ca9782c4a06b2c1528d.jpeg')"></div>
+          <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/574c1e5483408e45bc16e3ec866a702d.jpeg')"></div>
           <div onclick="openWistiaModal('k9htvxsbh1')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Caso Castroverde</p>
+            <p class="genero-title"><span data-es>El caso Castroverde</span><span data-en>The Castroverde Case</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/1532a70f57eec095a3641293cd542381.jpeg')"></div>
           <div onclick="openWistiaModal('ulxkuxvlud')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Los Burreros del Cartel</p>
+            <p class="genero-title"><span data-es>Los Burreros del Cartel</span><span data-en>The Cartel Mules</span></p>
           </div>
         </div>
       </div>
@@ -1325,21 +1326,21 @@
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/32TAZrD0wnc/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','32TAZrD0wnc')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Quini: la Leyenda</p>
+            <p class="genero-title"><span data-es>Quini, la leyenda</span><span data-en>Quini, the Legend</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/1B93pKptctY/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','1B93pKptctY')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Primer Scudetto</p>
+            <p class="genero-title"><span data-es>Maradona, primer Scudetto</span><span data-en>Maradona, First Scudetto</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/dykbSy3t3tw/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','dykbSy3t3tw')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">El que ama</p>
+            <p class="genero-title"><span data-es>El que ama</span><span data-en>The One Who Loves</span></p>
           </div>
         </div>
 
@@ -1351,28 +1352,28 @@
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/Xjtj1g-Pqmw/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','Xjtj1g-Pqmw')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Miami by Alejandro Sanz</p>
+            <p class="genero-title"><span data-es>Miami by Alejandro Sanz</span><span data-en>Miami by Alejandro Sanz</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/cB95rfUlwBQ/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','cB95rfUlwBQ')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Azaquiel, el primer astrónomo</p>
+            <p class="genero-title"><span data-es>Azaquiel, el primer astrónomo</span><span data-en>Azaquiel, the First Astronomer</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/ch8qbFkxX7U/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','ch8qbFkxX7U')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">El precio del éxito</p>
+            <p class="genero-title"><span data-es>El precio del éxito</span><span data-en>The Price of Success</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/Zw5FowSrBBA/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','Zw5FowSrBBA')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">El primer vuelo</p>
+            <p class="genero-title"><span data-es>El primer vuelo</span><span data-en>The First Flight</span></p>
           </div>
         </div>
       </div>
@@ -1380,52 +1381,52 @@
     <div class="genero-panel" id="gp-ddhh">
       <div class="generos-grid">
         <div class="genero-item">
-          <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/d133b12b87bd252f2721c97311cd206a.jpeg')"></div>
+          <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/49e638fe04b101f4fe3375998bac57d7.jpeg')"></div>
           <div onclick="openWistiaModal('bl3bsrn7fr')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Vida y muerte en el Mediterraneo</p>
+            <p class="genero-title"><span data-es>Vida y muerte en el Mediterraneo</span><span data-en>Life and Death in the Mediterranean</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/703QmRHbJ6A/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','703QmRHbJ6A')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Auténtico</p>
+            <p class="genero-title"><span data-es>Auténtico</span><span data-en>Authentic</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/vpijupNDEhI/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','vpijupNDEhI')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Perdón al asesino</p>
+            <p class="genero-title"><span data-es>Perdón al asesino</span><span data-en>Forgiveness for the Killer</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/8cdf140e243e2a7a96c2a343ecbdd1e6.jpeg')"></div>
           <div onclick="openWistiaModal('bt91q8i4pj')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Gabriel y Nieves</p>
+            <p class="genero-title"><span data-es>Gabriel y Nieves</span><span data-en>Gabriel and Nieves</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/TCumQJxgD_g/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','TCumQJxgD_g')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Karonghen</p>
+            <p class="genero-title"><span data-es>Karonghen</span><span data-en>Karonghen</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/qVT-5RRnAg0/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','qVT-5RRnAg0')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Victimas del Rino</p>
+            <p class="genero-title"><span data-es>Victimas del Rino</span><span data-en>Victims of the Rhino</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/8b837ab4b4856b0edc9b37d1b4ecac3b.jpeg')"></div>
           <div onclick="openWistiaModal('8zi4z40owf')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Amas de Casa</p>
+            <p class="genero-title"><span data-es>Camareros</span><span data-en>Waiters</span></p>
           </div>
         </div>
       </div>
@@ -1436,21 +1437,21 @@
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/uGqcHEP_BOs/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','uGqcHEP_BOs')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Muerte al amanecer</p>
+            <p class="genero-title"><span data-es>Muerte al amanecer</span><span data-en>Death at Dawn</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/s7rkMSaMa7A/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','s7rkMSaMa7A')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Abarca contra el fuego</p>
+            <p class="genero-title"><span data-es>Abarca contra el fuego</span><span data-en>Abarca Against the Fire</span></p>
           </div>
         </div>
         <div class="genero-item">
           <div class="genero-thumb" style="background-image:url('https://embed-ssl.wistia.com/deliveries/22880f0ada28f0a3afd67065c3543809.jpeg')"></div>
           <div onclick="openWistiaModal('resqlzrp9t')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">El llanto de la jungla</p>
+            <p class="genero-title"><span data-es>El llanto de la jungla</span><span data-en>The Cry of the Jungle</span></p>
           </div>
         </div>
 
@@ -1458,7 +1459,7 @@
           <div class="genero-thumb" style="background-image:url('https://img.youtube.com/vi/3JJi2c9AvaI/maxresdefault.jpg')"></div>
           <div onclick="openSocialModal('yt','3JJi2c9AvaI')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
           <div class="genero-label">
-            <p class="genero-title">Minería ilegal</p>
+            <p class="genero-title"><span data-es>Minería ilegal</span><span data-en>Illegal Mining</span></p>
           </div>
         </div>
       </div>
@@ -1713,7 +1714,7 @@
       <div class="ref-author"><div class="ref-name">Antonio Grunfeld</div><div class="ref-role"><span data-es>Director</span><span data-en>Director</span></div><div class="ref-project">MANOLIÑO NGUEMA</div></div>
     </div>
     <div class="ref-card">
-      <div class="ref-text-wrap"><p class="ref-text"><span data-es>«La edición documental exige mucho más que técnica: requiere encontrar una narrativa clara entre horas de material, perspectivas diversas y decisiones complejas. Álvaro destaca precisamente en ese desafío, comprendiendo la visión del director mientras aporta el criterio necesario para fortalecer la historia. Su sensibilidad narrativa, capacidad de análisis y talento creativo lo convierten en un editor excepcional para proyectos documentales de alta exigencia.»</span><span data-en>«Documentary editing demands far more than technique: it requires finding a clear narrative from hours of footage, multiple perspectives and complex decisions. Álvaro excels precisely at that challenge, understanding the director's vision while providing the judgement needed to strengthen the story. His narrative sensitivity, analytical capacity and creative talent make him an exceptional editor for demanding documentary projects.»</span></p></div>
+      <div class="ref-text-wrap"><p class="ref-text" style="text-align:center;"><span data-es>«La edición documental exige mucho más que técnica: requiere encontrar una narrativa clara entre horas de material y múltiples perspectivas. Álvaro destaca precisamente en ese desafío, comprendiendo la visión del director mientras aporta el criterio necesario para fortalecer la historia. Su sensibilidad narrativa, capacidad de análisis y talento creativo lo convierten en un editor excepcional para proyectos documentales exigentes.»</span><span data-en>«Documentary editing demands far more than technique: it requires finding a clear narrative from hours of footage and multiple perspectives. Álvaro excels precisely at that challenge, understanding the director's vision while providing the judgement needed to strengthen the story. His narrative sensitivity, analytical capacity and creative talent make him an exceptional editor for demanding documentary projects.»</span></p></div>
       <div class="ref-author"><div class="ref-name">Fernando Ureña</div><div class="ref-role"><span data-es>Director</span><span data-en>Director</span></div><div class="ref-project">11 Tiros · HBO</div></div>
     </div>
     <div class="ref-card">
@@ -1749,20 +1750,23 @@
           <div><div class="cl-label">Email</div><div class="cl-value">alvarodante@gmail.com</div></div>
           <span class="cl-arrow">→</span>
         </a>
+        <a href="tel:+34606439210" class="contact-link-row">
+          <div><div class="cl-label"><span data-es>Móvil</span><span data-en>Mobile</span></div><div class="cl-value">+34 606 43 92 10 <span style="font-size:10px;opacity:0.5;">(Spain)</span></div></div>
+          <span class="cl-arrow">→</span>
+        </a>
         <a href="https://www.linkedin.com/in/alvaroeditor" target="_blank" rel="noopener" class="contact-link-row">
           <div><div class="cl-label"><span data-es>Red profesional</span><span data-en>Professional network</span></div><div class="cl-value">LinkedIn</div></div>
           <span class="cl-arrow">→</span>
         </a>
+        <div class="contact-link-row" style="cursor:default;">
+          <div><div class="cl-label"><span data-es>Filmografía</span><span data-en>Filmography</span></div><div class="cl-value" style="display:flex;gap:8px;align-items:center;">
+            <a href="https://www.imdb.com/es-es/name/nm9783507/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;transition:color 0.3s;" onmouseenter="this.style.color='var(--accent)'" onmouseleave="this.style.color='inherit'">IMDB</a>
+            <span style="opacity:0.3;">|</span>
+            <a href="https://www.filmaffinity.com/es/name.php?name-id=256796368" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;transition:color 0.3s;" onmouseenter="this.style.color='var(--accent)'" onmouseleave="this.style.color='inherit'">Filmaffinity</a>
+          </div></div>
+        </div>
         <a href="https://www.instagram.com" target="_blank" rel="noopener" class="contact-link-row">
           <div><div class="cl-label"><span data-es>Redes</span><span data-en>Social</span></div><div class="cl-value">Instagram</div></div>
-          <span class="cl-arrow">→</span>
-        </a>
-        <a href="https://www.imdb.com/es-es/name/nm9783507/" target="_blank" rel="noopener" class="contact-link-row">
-          <div><div class="cl-label"><span data-es>Redes</span><span data-en>Social</span></div><div class="cl-value">IMDB</div></div>
-          <span class="cl-arrow">→</span>
-        </a>
-        <a href="https://www.filmaffinity.com/es/name.php?name-id=256796368" target="_blank" rel="noopener" class="contact-link-row">
-          <div><div class="cl-label"><span data-es>Redes</span><span data-en>Social</span></div><div class="cl-value">Filmaffinity</div></div>
           <span class="cl-arrow">→</span>
         </a>
       </div>
@@ -1920,7 +1924,9 @@
     const isEn = html.dataset.lang === 'en';
     html.dataset.lang = isEn ? 'es' : 'en';
     html.lang = isEn ? 'es' : 'en';
-    document.getElementById('lang-btn').textContent = isEn ? 'English' : 'Español';
+    document.getElementById('lang-btn').textContent = isEn ? 'English' : 'Castellano';
+    const li = document.getElementById('reel-trigger');
+    if (li) li.href = isEn ? li.dataset.hrefEs : li.dataset.hrefEn;
   }
 </script>
 </body>
