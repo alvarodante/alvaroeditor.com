@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CV — Álvaro Ayala Entrena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #0a0a0a;
+  --bg2:      #111111;
+  --surface:  #161616;
+  --border:   #1f1f1f;
+  --text:     #e8e0d4;
+  --muted:    #6a6560;
+  --accent:   #c8a97e;
+  --accent2:  rgba(200,169,126,0.10);
+  --ff-sans:  'Inter', sans-serif;
+  --ff-serif: 'EB Garamond', Georgia, serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-sans);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.025em;
+  line-height: 1.7;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── WRAPPER ── */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 0 20px;
+}
+
+/* ── HEADER ── */
+header {
+  position: relative;
+  padding: 72px 64px 16px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(200,169,126,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* Film-frame decoration */
+header::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%);
+  opacity: 0.6;
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header-eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+
+.header-name {
+  font-family: var(--ff-serif);
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.header-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.header-role {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+.header-bio {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #9a9490;
+  max-width: 100%;
+  line-height: 1.75;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Filas únicas que obligan a los elementos a estar distribuidos de margen a margen en una sola línea */
+/* ── LINKS ROW ── */
+.links-row-centered {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.link-item-full {
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  white-space: nowrap;
+}
+.link-item-full a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.link-item-full a:hover { color: var(--text); }
+
+/* ── CONTACT ROW ── */
+.contact-row-centered {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.contact-chip-full {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.contact-chip-full a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.contact-chip-full a:hover { color: var(--text); }
+
+.contact-sep-mid {
+  color: var(--border);
+  font-size: 16px;
+  padding-bottom: 2px;
+  align-self: flex-end;
+}
+
+.contact-label-inline {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-weight: 300;
+  text-transform: none;
+  margin-right: 0;
+}
+
+/* ── BIO + CONTACT TWO-COL ── */
+.bio-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 32px;
+  align-items: start;
+  margin-top: 0;
+}
+.bio-col {}
+.contact-col {
+  border-left: 1px solid var(--border);
+  padding-left: 24px;
+  padding-top: 4px;
+}
+.contact-col-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-col-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.contact-col-value {
+  font-size: 12.5px;
+  color: var(--accent);
+  font-weight: 300;
+  text-decoration: none;
+}
+.contact-col-value:hover { color: var(--text); }
+
+/* ── LAYOUT ── */
+.body-grid {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0;
+}
+
+/* ── SIDEBAR TIMELINE ── */
+.sidebar {
+  position: relative;
+  padding-top: 64px;
+}
+.sidebar-line {
+  position: absolute;
+  top: 64px; bottom: 0;
+  left: 27px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--border) 0%, transparent 100%);
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  padding: 16px 64px 0 40px;
+  border-left: 1px solid var(--border);
+}
+
+/* ── SECTION ── */
+.section {
+  margin-bottom: 18px;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 8px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── TIMELINE DOT ── */
+.tl-dot {
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--accent);
+  background: var(--bg);
+  border-radius: 50%;
+  position: absolute;
+  left: 24px;
+  transform: translateY(4px);
+}
+.tl-dot.filled {
+  background: var(--accent);
+}
+
+/* ── JOB BLOCK ── */
+.job {
+  position: relative;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.job:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.job-title {
+  font-family: var(--ff-serif);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.job-period {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  white-space: nowrap;
+  font-weight: 400;
+  padding-top: 3px;
+}
+
+.job-org {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+
+.job-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.job-items li {
+  font-size: 12.5px;
+  color: #8a8480;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.6;
+}
+.job-items li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  opacity: 0.5;
+  font-size: 10px;
+  top: 2px;
+}
+.job-items li strong {
+  color: var(--text);
+  font-weight: 400;
+}
+
+/* Estilo para las sublistas anidadas con guiones */
+.job-sublist {
+  list-style: none;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.job-sublist li {
+  padding-left: 16px;
+  font-size: 12px;
+  color: #8a8480;
+}
+.job-sublist li::before {
+  content: '-';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.job-subtext {
+  display: block;
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Modificación de tamaño y brillo para las Funciones clave */
+.job-note-highlight {
+  margin-top: 18px;
+  font-size: 12.5px;
+  color: #bfaea0;
+  font-style: italic;
+  padding-left: 20px;
+  border-left: 1px solid var(--accent);
+  line-height: 1.6;
+}
+
+/* ── AWARDS ── */
+.awards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+}
+.award-item {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.award-item:last-child { border-bottom: none; }
+
+.award-year {
+  font-size: 10px;
+  color: var(--accent);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.award-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 6px;
+}
+
+.award-film {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  font-style: normal;
+  color: #8a8480;
+  font-weight: 300;
+  line-height: 1.55;
+}
+.award-film em {
+  font-family: var(--ff-serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+}
+.award-prize {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 300;
+}
+.award-subtext {
+  display: block;
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 48px;
+}
+.skill-group-label {
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.skill-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.skill-list li {
+  font-size: 12px;
+  color: #8a8480;
+  padding-left: 14px;
+  position: relative;
+}
+.skill-list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+/* ── EDUCATION ── */
+.edu-item {
+  margin-bottom: 8px;
+}
+.edu-title {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 300;
+  margin-bottom: 3px;
+}
+.edu-meta {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* ── LANGUAGES ── */
+.lang-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.lang-row:last-child { border-bottom: none; }
+.lang-name {
+  font-size: 12px;
+  color: var(--text);
+  min-width: 80px;
+  font-weight: 300;
+}
+.lang-level {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+.lang-dots {
+  display: flex;
+  gap: 5px;
+  margin-left: auto;
+}
+.lang-dot {
+  width: 18px;
+  height: 2px;
+  background: var(--border);
+  transition: background 0.2s;
+}
+.lang-dot.on { background: var(--accent); }
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 40px;
+  padding: 24px 64px 24px 120px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-name {
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.footer-strip {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.strip-hole {
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+.strip-frame {
+  width: 20px;
+  height: 14px;
+  border: 1px solid var(--muted);
+  opacity: 0.2;
+}
+
+/* ── PRINT ── */
+@media print {
+  body { background: #0a0a0a !important; color: #e8e0d4 !important; }
+  .page { max-width: 100%; }
+  header::after { display: none; }
+}
+
+@media (max-width: 680px) {
+  header { padding: 48px 28px 40px; }
+  .header-inner { grid-template-columns: 1fr; }
+  .bio-contact-grid { grid-template-columns: 1fr; }
+  .contact-col { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 16px; margin-top: 16px; }
+  .body-grid { grid-template-columns: 32px 1fr; }
+  .sidebar-line { left: 15px; }
+  .tl-dot { left: 12px; }
+  .main { padding: 48px 24px 0 24px; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .links-row-centered, .contact-row-centered { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="header-inner">
+      <div>
+        <div class="header-eyebrow">Editor &nbsp;·&nbsp; Curriculum Vitae</div>
+        <h1 class="header-name">Álvaro Ayala <em>Entrena</em></h1>
+        <div class="header-role">Documentary Editor &nbsp;·&nbsp; Post-Production Supervisor</div>
+        <!-- BIO full width -->
+        <p class="header-bio" style="text-align:center; margin-bottom:10px;">Documentary editor with over 15 years of experience in the industry. Specialist in visual storytelling, script structure, attention to detail and organisation, dedicated to shaping universal stories from a local perspective. A committed, versatile professional, comfortable working in teams and under the pressure of demanding deadlines on major projects for broadcasters such as HBO, Movistar+, DMAX, Cuatro, and others.</p>
+
+        <!-- SINGLE ROW: móvil · email · web · LinkedIn · IMDb -->
+        <div style="display:flex; align-items:center; gap:18px; flex-wrap:nowrap; padding-top:8px; border-top:1px solid var(--border); margin-top:6px;">
+          <span style="font-size:12px; color:var(--accent); white-space:nowrap;">+34 606 43 92 10</span>
+          <span style="color:var(--border);">·</span>
+          <a href="mailto:alvarodante@gmail.com" style="font-size:12px; color:var(--accent); text-decoration:none; white-space:nowrap;">alvarodante@gmail.com</a>
+          <span style="color:var(--border);">·</span>
+          <a href="https://alvarodante.github.io/alvaroeditor.com/" style="font-size:12px; color:var(--accent); text-decoration:none; white-space:nowrap;">www.alvaroeditor.com</a>
+          <span style="color:var(--border);">·</span>
+          <a href="https://www.linkedin.com/in/alvaroeditor" style="font-size:12px; color:var(--accent); text-decoration:none; white-space:nowrap;">LinkedIn</a>
+          <span style="color:var(--border);">·</span>
+          <a href="https://www.imdb.com/es-es/name/nm9783507/" style="font-size:12px; color:var(--accent); text-decoration:none; white-space:nowrap;">IMDb</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="body-grid">
+
+    <div class="sidebar">
+      <div class="sidebar-line"></div>
+    </div>
+
+    <div class="main">
+
+      <div class="section">
+        <div class="section-label">Experience</div>
+
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Documentary Editor &amp; Co-Editor</div>
+            <div class="job-period">2014 — Present</div>
+          </div>
+          <div class="job-org">Movistar Plus+ &nbsp;·&nbsp; HBO &nbsp;·&nbsp; DMAX &nbsp;·&nbsp; Cuatro</div>
+          <ul class="job-items">
+            <li>
+              <strong>Movistar Plus+ (2025)</strong> — Co-editor on Alejandro Sanz docuseries <em>"Cuando nadie me ve"</em>.
+              <span class="job-subtext">3 Episodes. Official Selection Tribeca 2026.</span>
+            </li>
+            <li>
+              <strong>Movistar Plus+ (2024)</strong> — Co-editor of <em>"El Rey Puma"</em>.
+              <span class="job-subtext">Feature documentary, 89 min.</span>
+            </li>
+            <li>
+              <strong>Cuatro / Onza Entertainment (2023)</strong> — Co-editor on <em>"Fuera de Cobertura"</em> S4.
+              <span class="job-subtext">6 social investigation episodes.</span>
+            </li>
+            <li>
+              <strong>HBO / BetaSpain (2022–2023)</strong> — Co-editor on docuseries <em>"11 Tiros"</em>.
+              <span class="job-subtext">11 episodes on crimes in the world of football.</span>
+            </li>
+            <li>
+              <strong>Movistar Plus+ / 93 Metros (2020–2021)</strong> — Co-editor of <em>"Palomares"</em>.
+              <span class="job-subtext">Episode 4. Iris Jury Award.</span>
+            </li>
+            <li>
+              <strong>Canal Historia / 93 Metros (2020–2021)</strong> — Editor and post-production supervisor.<br>
+              <em>"Al Ándalus, el legado"</em>. <span class="job-subtext">6 episodes.</span>
+            </li>
+            <li>
+              <strong>DMAX / 93 Metros (2014–2019)</strong> — Editor and post-production supervisor on 25 episodes of <em>"Amazonas Clandestino"</em>, <em>"Clandestino"</em>, <em>"Vida en Llamas"</em> and <em>"Yasuní"</em>.
+            </li>
+          </ul>
+          <p class="job-note-highlight">Key responsibilities across all projects: pre-editing and narrative structure, editing through Picture Lock, technical supervision of colour grading and sound mixing.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Social Projects</div>
+            <div class="job-period">2015 — 2025</div>
+          </div>
+          <div class="job-org">Freelance &nbsp;·&nbsp; Manos Unidas &nbsp;·&nbsp; Waka Films</div>
+          <ul class="job-items">
+            <li>
+              <strong>Freelance (2025)</strong> — Editor of the documentary <em>"Serêkaniyê"</em>.
+            </li>
+            <li>
+              <strong>Manos Unidas (2022)</strong> — Shooting and editing of <em>"KARONGHEN"</em>.
+            </li>
+            <li style="margin-top:12px;">
+              <strong>Waka Films (2015–2018)</strong> — Co-editor on <em>"Manoliño Nguema"</em> and editor of <em>"El Secreto del Bosque"</em>.
+            </li>
+            <li>
+              <strong>Agareso (2012)</strong> — Editor of the documentary <em>"Caminos de Paz"</em>.
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="section">
+        <div class="section-label">Awards &amp; Recognition</div>
+        <div class="awards-grid">
+          <div class="award-item">
+            <div class="award-year">2026</div>
+            <div class="award-text"><div class="award-film"><em>"Cuando nadie me ve"</em> — Official Selection · Tribeca Film Festival, New York</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2021</div>
+            <div class="award-text"><div class="award-film"><em>"Palomares"</em> — Iris Jury Award</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2021</div>
+            <div class="award-text"><div class="award-film"><em>"Palomares"</em> — Finalist · GABO Awards</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2021</div>
+            <div class="award-text"><div class="award-film"><em>"Al Ándalus, el legado"</em> — Iris Award Nomination · Best Thematic Channel Programme</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2021</div>
+            <div class="award-text"><div class="award-film"><em>"Manoliño Nguema"</em> — Best Documentary · León Film &amp; TV Festival</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2021</div>
+            <div class="award-text"><div class="award-film"><em>"Manoliño Nguema"</em> — Audience Award · MiradasDoc</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2020</div>
+            <div class="award-text"><div class="award-film"><em>"Manoliño Nguema"</em> — Best Documentary Film · Mestre Mateo Awards</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2017</div>
+            <div class="award-text"><div class="award-film"><em>"Clandestino"</em> — Iris Award Nomination · Best Direction</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2016</div>
+            <div class="award-text"><div class="award-film"><em>"Clandestino"</em> — Iris Jury Award</div></div>
+          </div>
+          <div class="award-item">
+            <div class="award-year">2014</div>
+            <div class="award-text"><div class="award-film"><em>"La Vida en Llamas"</em> — Grand Jury Prize · Sunny Side of the Doc</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Skills</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 200px; gap:32px 48px; align-items:start;">
+          <div>
+            <div class="skill-group-label">Software</div>
+            <ul class="skill-list">
+              <li>Avid Media Composer</li>
+              <li>Adobe Premiere Pro</li>
+              <li>Adobe After Effects</li>
+              <li>Final Cut Pro</li>
+              <li>Adobe Photoshop</li>
+            </ul>
+          </div>
+          <div>
+            <div class="skill-group-label">Storytelling &amp; Post-Production</div>
+            <ul class="skill-list">
+              <li>Script structure</li>
+              <li>Pre-editing and final cut</li>
+              <li>Sound mix supervision</li>
+              <li>Colour grading supervision</li>
+            </ul>
+          </div>
+          <div style="border-left:1px solid var(--border); padding-left:20px;">
+            <div class="skill-group-label">Languages</div>
+            <div class="lang-row" style="gap:8px; padding:8px 0;">
+              <span class="lang-name" style="min-width:50px; font-size:11px;">Spanish</span>
+              <span class="lang-level" style="font-size:9px;">Native</span>
+              <div class="lang-dots" style="margin-left:auto;">
+                <div class="lang-dot on"></div>
+                <div class="lang-dot on"></div>
+                <div class="lang-dot on"></div>
+                <div class="lang-dot on"></div>
+                <div class="lang-dot on"></div>
+              </div>
+            </div>
+            <div class="lang-row" style="gap:8px; padding:8px 0;">
+              <span class="lang-name" style="min-width:50px; font-size:11px;">English</span>
+              <span class="lang-level" style="font-size:9px;">Professional</span>
+              <div class="lang-dots" style="margin-left:auto;">
+                <div class="lang-dot on"></div>
+                <div class="lang-dot on"></div>
+                <div class="lang-dot on"></div>
+                <div class="lang-dot on"></div>
+                <div class="lang-dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="grid-column:1 / 4;">
+            <div class="skill-group-label" style="margin-top:4px;">Education</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 32px; text-align:center;">
+              <div class="edu-item">
+                <div class="edu-title" style="font-size:12.5px; white-space:nowrap;">B.A. in Audiovisual Communication</div>
+                <div class="edu-meta">Univ. Francisco de Vitoria &nbsp;·&nbsp; 1997 – 2002</div>
+              </div>
+              <div class="edu-item">
+                <div class="edu-title" style="font-size:12.5px;">Adobe After Effects Course</div>
+                <div class="edu-meta">EIMA &nbsp;·&nbsp; 2010</div>
+              </div>
+              <div class="edu-item">
+                <div class="edu-title" style="font-size:12.5px;">Documentary Resources Course</div>
+                <div class="edu-meta">Ondas Formación &nbsp;·&nbsp; 2009</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div></div>
+
+</div><script>
+// Place timeline dots next to each section/job
+document.addEventListener('DOMContentLoaded', () => {
+  const sidebar = document.querySelector('.sidebar');
+  const mainEl = document.querySelector('.main');
+  const sidebarRect = sidebar.getBoundingClientRect();
+
+  // Dot for each job block
+  document.querySelectorAll('.job, .section').forEach((el, i) => {
+    const rect = el.getBoundingClientRect();
+    const top = rect.top - sidebarRect.top + window.scrollY;
+    const dot = document.createElement('div');
+    dot.className = 'tl-dot' + (i === 0 ? ' filled' : '');
+    dot.style.top = top + 'px';
+    sidebar.appendChild(dot);
+  });
+});
+</script>
+</body>
+</html>
