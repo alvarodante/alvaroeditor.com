@@ -780,7 +780,7 @@
 </div>
 </div>
 <div class="works-grid reveal" id="grid-destacados">
-<div class="work-item" style="position:relative;overflow:hidden;">
+<div class="work-item" style="position:relative;">
 <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/eqrxAnAMBuM/maxresdefault.jpg')"></div>
 <div onclick="openSocialModal('yt','eqrxAnAMBuM')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
 <div class="work-label-always" style="z-index:3;">
@@ -841,7 +841,14 @@
 </div>
 </div>
 </div>
-<style>.proj-tooltip-trigger{position:relative;display:inline-block;cursor:default;pointer-events:auto;}.proj-tooltip-trigger .proj-tooltip{visibility:hidden;opacity:0;position:absolute;top:50%;left:calc(100%+14px);transform:translateX(-6px) translateY(-50%);width:300px;background:#161616;border:1px solid #2a2a2a;padding:20px 22px 22px;pointer-events:none;transition:opacity 0.25s ease,transform 0.25s ease;z-index:200;box-shadow:0 12px 40px rgba(0,0,0,0.75);}.proj-tooltip-trigger:hover .proj-tooltip{visibility:visible;opacity:1;transform:translateX(0) translateY(-50%);}.proj-tooltip::before{content:'';position:absolute;top:50%;right:100%;transform:translateY(-50%);border:5px solid transparent;border-right-color:#2a2a2a;}.proj-tooltip::after{content:'';position:absolute;top:50%;right:100%;transform:translateY(-50%);margin-right:-1px;border:4px solid transparent;border-right-color:#161616;}.proj-tooltip-desc{font-family:var(--ff);font-size:11px;font-weight:300;line-height:1.75;letter-spacing:0.02em;color:#9a9490;}.proj-tooltip-line{width:20px;height:1px;background:var(--accent);margin-bottom:10px;opacity:0.6;}</style>
+<style>.proj-tooltip-trigger{position:relative;display:inline-block;cursor:default;pointer-events:auto;}.proj-tooltip-trigger .proj-tooltip{visibility:hidden;opacity:0;position:absolute;top:0;left:calc(100%+14px);transform:translateX(-6px);width:300px;background:#161616;border:1px solid #2a2a2a;padding:20px 22px 22px;pointer-events:none;transition:opacity 0.25s ease,transform 0.25s ease;z-index:200;box-shadow:0 12px 40px rgba(0,0,0,0.75);}.proj-tooltip-trigger:hover .proj-tooltip{visibility:visible;opacity:1;transform:translateX(0);}.proj-tooltip::before{content:'';position:absolute;top:50%;right:100%;transform:translateY(-50%);border:5px solid transparent;border-right-color:#2a2a2a;}.proj-tooltip::after{content:'';position:absolute;top:50%;right:100%;transform:translateY(-50%);margin-right:-1px;border:4px solid transparent;border-right-color:#161616;}.proj-tooltip-desc{font-family:var(--ff);font-size:11px;font-weight:300;line-height:1.75;letter-spacing:0.02em;color:#9a9490;text-align:center;}.proj-tooltip-line{display:none;}
+#grid-television,#grid-plataformas{overflow:visible;}
+#grid-television .work-item,#grid-plataformas .work-item{overflow:visible !important;}
+#grid-television .work-item:hover,#grid-plataformas .work-item:hover{z-index:9999 !important;}
+#grid-television .work-item:hover .proj-tooltip,#grid-plataformas .work-item:hover .proj-tooltip{z-index:9999 !important;}
+#grid-television .work-item .work-thumb,#grid-plataformas .work-item .work-thumb{border-radius:inherit;}
+#grid-television .work-item:hover .work-thumb,#grid-plataformas .work-item:hover .work-thumb{transform:none !important;}
+@media (min-width:961px){#grid-television .work-item:nth-child(4n) .proj-tooltip,#grid-plataformas .work-item:nth-child(4n) .proj-tooltip,#grid-television .work-item:last-child .proj-tooltip,#grid-plataformas .work-item:last-child .proj-tooltip{left:auto !important;right:calc(100% + 14px) !important;}#grid-television .work-item:hover,#grid-plataformas .work-item:hover{z-index:9999 !important;}#grid-television .work-item:hover .work-overlay,#grid-television .work-item:hover .work-label-always,#grid-plataformas .work-item:hover .work-overlay{overflow:visible !important;z-index:9999 !important;}}</style>
 <style>.vid-modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(5,5,5,0.88);backdrop-filter:blur(6px);align-items:center;justify-content:center;}.vid-modal-overlay.open{display:flex;}.vid-modal{position:relative;width:min(860px,90vw);background:#111;border:1px solid #2a2a2a;box-shadow:0 32px 80px rgba(0,0,0,0.8);}.vid-modal-ratio{position:relative;padding-top:56.25%;}.vid-modal-ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}.vid-modal-close{position:absolute;top:-40px;right:0;font-family:var(--ff);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-muted);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;transition:color 0.2s;}.vid-modal-close:hover{color:var(--accent);}.vid-modal-close svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5;}@media screen and (orientation:landscape) and (max-height:500px){.vid-modal-overlay{background:#000;backdrop-filter:none;}.vid-modal{width:100vw;height:100vh;border:none;background:#000;display:flex;flex-direction:column;}.vid-modal-ratio{padding-top:0;flex:1;height:100%;}.vid-modal-ratio iframe{position:absolute;width:100%;height:100%;top:0;left:0;}.vid-modal-close{position:fixed;top:10px;right:10px;z-index:1100;background:rgba(0,0,0,0.75);padding:6px 12px;border-radius:4px;}}</style>
 <div class="vid-modal-overlay" id="vidModal" onclick="closeVidModal(event)">
 <div class="vid-modal">
@@ -859,26 +866,26 @@ function closeVidModalBtn(){document.getElementById('vidModalFrame').src='';docu
 function closeVidModal(e){if(e.target===document.getElementById('vidModal'))closeVidModalBtn();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();});</script>
 <div class="works-grid" id="grid-plataformas" style="display:none;opacity:0;transition:opacity 0.4s;">
-<div class="work-item" style="position:relative;overflow:hidden;">
+<div class="work-item" style="position:relative;">
 <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/eqrxAnAMBuM/maxresdefault.jpg')"></div>
 <div onclick="openSocialModal('yt','eqrxAnAMBuM')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
 <div class="work-label-always" style="z-index:3;pointer-events:none;">
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>Alejandro Sanz "Cuando nadie me ve"</span><span data-en>Alejandro Sanz "When No One Sees Me"</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Serie documental de Movistar Plus+ sobre el viaje íntimo de Alejandro Sanz, que explora la dualidad entre su figura pública y su vida privada a lo largo de tres décadas de éxito, con la presencia de Rosalía, Shakira y Juanes. Montaje y edición de los tres episodios.</span><span data-en>Movistar Plus+ documentary series about Alejandro Sanz's intimate journey, exploring the duality between his public figure and private life across three decades of success, featuring Rosalía, Shakira and Juanes. Editing of all three episodes.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Retrato íntimo de Alejandro Sanz en tres episodios para Movistar Plus+ (Sony Music Vision). Entre su archivo personal, entrevistas y momentos cercanos, damos forma a la historia honesta del artista.</span><span data-en>An intimate portrait of Alejandro Sanz in three episodes for Movistar Plus+ (Sony Music Vision). Through his personal archive, interviews and close moments, we shape the honest story of the artist.</span></p></div>
 </span>
 <p class="work-year">2026 — 3 Episodios — Movistar+</p>
 </div>
 </div>
-<div class="work-item" style="position:relative;overflow:hidden;">
+<div class="work-item" style="position:relative;">
 <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/aW5I3BdO8tI/maxresdefault.jpg')"></div>
 <div onclick="openSocialModal('yt','aW5I3BdO8tI')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
 <div class="work-overlay">
 <p class="work-cat"><span data-es>Documental</span><span data-en>Documentary</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>El Rey Puma</span><span data-en>The Puma King</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Documental de Movistar+ sobre Hans Henningsen, el visionario que unió publicidad y fútbol junto a figuras como Pelé y Maradona. Una crónica de los inicios de la guerra comercial del fútbol y del hombre en las sombras que convirtió a los futbolistas en iconos de marca. Montaje. Dirigido por Fernando Ureña.</span><span data-en>Movistar+ documentary about Hans Henningsen, the visionary who merged advertising and football alongside figures like Pelé and Maradona. A chronicle of the origins of football's commercial war and the man behind the scenes who turned players into brand icons. Editing. Directed by Fernando Ureña.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>La historia de Hans Henningsen, el tinerfeño que convirtió las botas de Pelé y Maradona en uno de los negocios publicitarios más influyentes del fútbol. Dirigido por Fernando Ureña y Jorge Arroyo.</span><span data-en>The story of Hans Henningsen, the man from Tenerife who turned Pelé and Maradona's boots into one of football's most influential advertising businesses. Directed by Fernando Ureña and Jorge Arroyo.</span></p></div>
 </span>
 <p class="work-year">2024 — MOVISTAR +</p>
 </div>
@@ -890,7 +897,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>11 tiros</span><span data-en>11 Shots</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Serie documental true crime de HBO sobre la cara oculta del fútbol profesional: el choque entre el lujo y la fama del deporte rey y los crímenes, secuestros y tragedias que ocurren tras los focos. Montaje de los once episodios. Dirigida por Fernando Ureña.</span><span data-en>HBO true-crime documentary series on the hidden side of professional football: the clash between the sport's glamour and fame and the crimes, kidnappings and tragedies behind the spotlight. Editing of all eleven episodes. Directed by Fernando Ureña.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Docuserie de Beta Spain para HBO Max, el primer true crime del fútbol: asesinatos, secuestros y mafias en casos reales (Maradona, Cruyff, Aitor Zabaleta). Docuficción que une testimonios, archivo y recreaciones.</span><span data-en>Beta Spain docuseries for HBO Max, football's first true crime: murders, kidnappings and mafias in real cases (Maradona, Cruyff, Aitor Zabaleta). Docufiction blending testimony, archive and reenactments.</span></p></div>
 </span>
 <p class="work-year">2022 — 11 Episodios — HBO</p>
 </div>
@@ -902,7 +909,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>Palomares</span><span data-en>Palomares</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Thriller documental de Movistar+ que reconstruye el accidente nuclear de 1966 en Almería, cuando cayeron cuatro bombas atómicas estadounidenses. Desvela la verdad censurada tras el icónico baño de Manuel Fraga y la tensión geopolítica del caso. Montaje de los tres episodios. Dirigido por Álvaro Ron.</span><span data-en>Movistar+ documentary thriller reconstructing the 1966 nuclear accident in Almería, when four US atomic bombs fell. It uncovers the censored truth behind Manuel Fraga's iconic swim and the geopolitical tension of the case. Editing of all three episodes. Directed by Álvaro Ron.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Miniserie documental de 93 Metros para Movistar+ sobre el accidente nuclear de Palomares (1966): cuatro bombas termonucleares sobre Almería. Thriller con documentación desclasificada y testimonios.</span><span data-en>93 Metros documentary miniseries for Movistar+ on the 1966 Palomares nuclear accident: four thermonuclear bombs over Almería. A thriller with declassified documents and testimony.</span></p></div>
 </span>
 <p class="work-year">2020 — 3 Episodios — Movistar+</p>
 </div>
@@ -910,14 +917,14 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 </div>
 <style>@media (min-width:961px){#grid-plataformas{grid-template-columns:repeat(4,1fr);gap:2px;}#grid-plataformas .work-item{grid-column:span 1 !important;aspect-ratio:16/10 !important;}#grid-television{grid-template-columns:repeat(4,1fr);gap:2px;}#grid-television .work-item{grid-column:span 1 !important;aspect-ratio:16/10 !important;}}@media (max-width:960px){#grid-plataformas,#grid-television{grid-template-columns:1fr !important;gap:16px !important;}#grid-plataformas .work-item,#grid-television .work-item{grid-column:span 1 !important;aspect-ratio:16/9 !important;width:100% !important;}#grid-plataformas .work-item>div[onclick],#grid-television .work-item>div[onclick]{opacity:1 !important;background:linear-gradient(to top,rgba(10,10,10,0.7) 0%,rgba(10,10,10,0.05) 50%,rgba(10,10,10,0.2) 100%) !important;}}</style>
 <div class="works-grid" id="grid-television" style="display:none;opacity:0;transition:opacity 0.4s;">
-<div class="work-item" style="position:relative;overflow:hidden;">
+<div class="work-item" style="position:relative;">
 <div class="work-thumb" style="background-image:url('https://img.youtube.com/vi/mY2DaT6_ofU/maxresdefault.jpg')"></div>
 <div onclick="openSocialModal('yt','qVT-5RRnAg0')" class="play-ol"><span class="play-ic"><svg viewBox="0 0 12 14" width="18" height="18" style="fill:var(--accent);margin-left:3px;"><polygon points="0,0 12,7 0,14"/></svg></span></div>
 <div class="work-label-always" style="z-index:3;pointer-events:none;">
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>Clandestino con David Beriain</span><span data-en>Clandestine with David Beriain</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Serie de periodismo de inmersión extremo de DMAX que se adentra en el corazón de los cárteles del narcotráfico, las mafias y el crimen organizado más peligrosos del planeta. Montaje a lo largo de tres temporadas. Dirigida por David Beriáin y Fernando Ureña.</span><span data-en>DMAX extreme immersion-journalism series that ventures into the heart of the world's most dangerous drug cartels, mafias and organised crime. Editing across three seasons. Directed by David Beriáin and Fernando Ureña.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>El arranque de la saga Clandestino: serie documental de periodismo inmersivo de DMAX. David Beriáin se infiltra en el crimen organizado, desde el expolio arqueológico hasta el Cártel de Sinaloa y las Maras.</span><span data-en>The start of the Clandestine saga: DMAX immersive-journalism documentary series. David Beriáin infiltrates organised crime, from archaeological looting to the Sinaloa Cartel and the Maras.</span></p></div>
 </span>
 <p class="work-year">3 Temporadas (2016-2019) DMAX</p>
 </div>
@@ -929,7 +936,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>Fuera de Cobertura</span><span data-en>Out of Coverage</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Programa documental de Cuatro presentado por Alejandra Andrade que ofrece una radiografía de las crisis sociales más urgentes de España, desde el fentanilo y las agresiones sexuales juveniles hasta la precariedad laboral y habitacional. Montaje de la cuarta temporada. Dirigido por Alejandra Andrade.</span><span data-en>Cuatro documentary programme hosted by Alejandra Andrade offering a portrait of Spain's most pressing social crises, from fentanyl and youth sexual assaults to job and housing precarity. Editing of the fourth season. Directed by Alejandra Andrade.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Periodismo de investigación en Cuatro presentada por Alejandra Andrade: una radiografía de las crisis más urgentes de España, del fentanilo a la precariedad laboral y habitacional.</span><span data-en>Investigative journalism on Cuatro hosted by Alejandra Andrade: a portrait of Spain's most pressing crises, from fentanyl to job and housing precarity.</span></p></div>
 </span>
 <p class="work-year">Temporada 4 — 2023 — Cuatro</p>
 </div>
@@ -941,7 +948,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>La vida en llamas</span><span data-en>Life in Flames</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Serie documental de DMAX que muestra la lucha extrema de la brigada de élite BRICA contra los incendios forestales y el drama humano de quienes arriesgan su vida para salvar la naturaleza. Montaje de los tres episodios. Dirigida por David Beriáin y Fernando Ureña.</span><span data-en>DMAX documentary series following the elite BRICA brigade's extreme fight against forest fires and the human drama of those who risk their lives to save nature. Editing of all three episodes. Directed by David Beriáin and Fernando Ureña.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Serie documental de DMAX sobre la brigada de élite BRICA y su lucha extrema contra los incendios forestales, y el drama humano de quienes arriesgan su vida por la naturaleza.</span><span data-en>DMAX documentary series on the elite BRICA brigade's extreme fight against forest fires and the human drama behind it.</span></p></div>
 </span>
 <p class="work-year">2015 — 3 Episodios — DMAX</p>
 </div>
@@ -953,7 +960,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>Al Andalus, el legado</span><span data-en>Al Andalus, the Legacy</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Documental de Canal Historia que redescubre el esplendor cultural, científico y arquitectónico de Al-Ándalus y cómo su herencia sigue viva en la identidad y la sociedad actual. Montaje de los seis episodios. Dirigido por Aitor Antepara.</span><span data-en>Canal Historia documentary rediscovering the cultural, scientific and architectural splendour of Al-Andalus and how its legacy lives on in today's identity and society. Editing of all six episodes. Directed by Aitor Antepara.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Miniserie documental histórica de Canal Historia que recorre la herencia científica y cultural de Al-Ándalus —astronomía, arquitectura, medicina— y su huella ocho siglos después.</span><span data-en>Canal Historia historical documentary miniseries tracing the scientific and cultural legacy of Al-Andalus —astronomy, architecture, medicine— and its mark eight centuries on.</span></p></div>
 </span>
 <p class="work-year">2021 — 6 Episodios — Canal Historia</p>
 </div>
@@ -965,7 +972,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>Amazonas Clandestino</span><span data-en>Clandestine Amazon</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Documental de DMAX que se adentra de alto riesgo en la guerra oculta por los recursos del Amazonas, desvelando el mundo de los traficantes, las FARC, la minería ilegal de oro y los conflictos sociales que destruyen el pulmón del planeta. Montaje de los seis episodios. Dirigido por David Beriáin y Fernando Ureña.</span><span data-en>DMAX documentary that plunges into the high-risk hidden war over the Amazon's resources, revealing the world of traffickers, the FARC, illegal gold mining and the social conflicts destroying the planet's lungs. Editing of all six episodes. Directed by David Beriáin and Fernando Ureña.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Docuserie de periodismo de investigación en DMAX sobre la guerra oculta por los recursos del Amazonas: traficantes, FARC y minería ilegal de oro.</span><span data-en>DMAX investigative-journalism docuseries on the hidden war over the Amazon's resources: traffickers, FARC and illegal gold mining.</span></p></div>
 </span>
 <p class="work-year">2015 — 6 Episodios — DMAX</p>
 </div>
@@ -977,7 +984,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>Yasuní</span><span data-en>Yasuní</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Documental de DMAX («Yasuní: genocidio en la selva») que investiga la matanza de indígenas aislados en el Amazonas y la guerra entre los pueblos huaorani y taromenane impulsada por la fiebre del petróleo y la tala ilegal. Montaje. Dirigido por David Beriáin.</span><span data-en>DMAX documentary ("Yasuní: Genocide in the Jungle") investigating the killing of isolated Indigenous peoples in the Amazon and the war between the Huaorani and Taromenane peoples driven by the oil rush and illegal logging. Editing. Directed by David Beriáin.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Documental de periodismo inmersivo en DMAX sobre la matanza de indígenas aislados del Amazonas y la guerra entre huaorani y taromenane por el petróleo.</span><span data-en>DMAX immersive-journalism documentary on the killing of isolated Amazonian peoples and the war between the Huaorani and Taromenane over oil.</span></p></div>
 </span>
 <p class="work-year">2014 — Documental — DMAX</p>
 </div>
@@ -988,7 +995,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <p class="work-cat"><span data-es>Serie Documental</span><span data-en>Documentary Series</span></p>
 <span class="proj-tooltip-trigger">
 <h3 class="work-title"><span data-es>Clandestino España con David Beriain</span><span data-en>Clandestine Spain with David Beriain</span></h3>
-<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Serie documental de DMAX de ocho episodios que ofrece una radiografía sin precedentes del crimen organizado en España, destapando las redes del narcotráfico, el tráfico de armas, la prostitución y el negocio de la camorra en suelo nacional. Montaje de los ocho episodios. Dirigida por David Beriáin y Fernando Ureña.</span><span data-en>Eight-episode DMAX documentary series offering an unprecedented portrait of organised crime in Spain, exposing drug-trafficking networks, arms trafficking, prostitution and the camorra's business on home soil. Editing of all eight episodes. Directed by David Beriáin and Fernando Ureña.</span></p></div>
+<div class="proj-tooltip"><div class="proj-tooltip-line"></div><p class="proj-tooltip-desc"><span data-es>Serie documental de investigación de DMAX, ocho episodios de una radiografía sin precedentes sobre crimen organizado en España: narcotráfico, armas, prostitución y camorra.</span><span data-en>DMAX investigative documentary series, eight episodes giving an unprecedented portrait of organised crime in Spain.</span></p></div>
 </span>
 <p class="work-year">2019 — 8 Episodios — DMAX</p>
 </div>
