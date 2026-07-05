@@ -725,6 +725,7 @@
 <li><a href="#inicio"><span data-es>Inicio</span><span data-en>Home</span></a></li>
 <li><a href="#trabajos"><span data-es>Trabajos</span><span data-en>Projects</span></a></li>
 <li><a href="/servicios/"><span data-es>Servicios</span><span data-en>Services</span></a></li>
+<li><a href="/servicios/#como-trabajo"><span data-es>Cómo trabajo</span><span data-en>How I work</span></a></li>
 <li><a href="#premios"><span data-es>Premios</span><span data-en>Awards</span></a></li>
 <li><a href="#referencias"><span data-es>Referencias</span><span data-en>References</span></a></li>
 <li><a href="#contactos"><span data-es>Contacto</span><span data-en>Contact</span></a></li>
@@ -869,7 +870,7 @@
 </div>
 </div>
 </div>
-<script>function openWistiaModal(mediaId){const frame=document.getElementById('vidModalFrame');frame.removeAttribute('referrerpolicy');frame.src='https://fast.wistia.net/embed/iframe/'+mediaId+'?autoPlay=true&fitStrategy=fill';document.getElementById('vidModal').classList.add('open');document.body.style.overflow='hidden';}
+<script>function openWistiaModal(mediaId){const frame=document.getElementById('vidModalFrame');frame.removeAttribute('referrerpolicy');frame.src='https://fast.wistia.net/embed/iframe/'+mediaId+'?autoPlay=true&silentAutoPlay=false&volume=1&fitStrategy=fill&controlsVisibleOnLoad=true';document.getElementById('vidModal').classList.add('open');document.body.style.overflow='hidden';}
 function closeVidModalBtn(){document.getElementById('vidModalFrame').src='';document.getElementById('vidModal').classList.remove('open');document.body.style.overflow='';}
 function closeVidModal(e){if(e.target===document.getElementById('vidModal'))closeVidModalBtn();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();});</script>
@@ -1023,7 +1024,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVidModalBtn();}
 <video id="socialModalVideo" controls playsinline controlsList="nodownload"
       preload="none" webkit-playsinline></video>
 </div>
-<script>function openSocialModal(type,src){const frame=document.getElementById('socialModalFrame');const vid=document.getElementById('socialModalVideo');const bar=document.querySelector('.social-modal-topbar');vid.pause();vid.src='';vid.classList.remove('active');if(type==='yt'){frame.src='https://www.youtube-nocookie.com/embed/'+src+'?autoplay=1&rel=0&modestbranding=1';}else{const barH=bar?bar.offsetHeight:44;frame.style.height=(window.innerHeight-barH)+'px';frame.src=src;}frame.classList.add('active');document.getElementById('socialModal').classList.add('open');document.body.style.overflow='hidden';}
+<script>function openSocialModal(type,src){const frame=document.getElementById('socialModalFrame');const vid=document.getElementById('socialModalVideo');const bar=document.querySelector('.social-modal-topbar');vid.pause();vid.src='';vid.classList.remove('active');if(type==='yt'){frame.src='https://www.youtube-nocookie.com/embed/'+src+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';}else{const barH=bar?bar.offsetHeight:44;frame.style.height=(window.innerHeight-barH)+'px';frame.src=src;}frame.classList.add('active');document.getElementById('socialModal').classList.add('open');document.body.style.overflow='hidden';}
 function closeSocialModalBtn(){const frame=document.getElementById('socialModalFrame');const vid=document.getElementById('socialModalVideo');frame.src='';frame.classList.remove('active');frame.style.height='';vid.pause();vid.src='';vid.classList.remove('active');document.getElementById('socialModal').classList.remove('open');document.body.style.overflow='';}
 function closeSocialModal(e){if(e.target===document.getElementById('socialModal'))closeSocialModalBtn();}
 window.addEventListener('resize',()=>{const frame=document.getElementById('socialModalFrame');const bar=document.querySelector('.social-modal-topbar');if(frame.classList.contains('active')&&frame.src.includes('drive.google')){const barH=bar?bar.offsetHeight:44;frame.style.height=(window.innerHeight-barH)+'px';}});
